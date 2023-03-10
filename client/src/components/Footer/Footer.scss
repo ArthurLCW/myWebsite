@@ -1,0 +1,15 @@
+$unimelbBlue: #094183;
+footer{
+  color: white;
+  margin-top: 10px;
+	padding: 20px;
+	background-color: $unimelbBlue;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+  img{
+    border-radius: 50%;
+    height: 50px;
+  }
+}
