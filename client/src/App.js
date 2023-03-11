@@ -11,13 +11,16 @@ import "./style.scss"
 
 const Layout = () => {
   return (
-    <>
-      <NavBar/>
+    <div className="root">
       <div className="main">
-        <Outlet/>
+        <NavBar/>
+        <div className="content">
+          <Outlet/>
+        </div>
       </div>
+      
       <Footer/>
-    </>
+    </div>
   )
 }
 

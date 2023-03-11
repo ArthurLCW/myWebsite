@@ -16,8 +16,11 @@ const NavBar = () => {
       <div className="logo">
 					<img src={Logo}/>
           <span>
-            Changwen Li's Website  
+            Changwen Li's Website
           </span>
+          {/* <span>
+            Website
+          </span> */}
 			</div>
 
       <div className="links">
