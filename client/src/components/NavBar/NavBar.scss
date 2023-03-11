@@ -79,13 +79,18 @@ $unimelbBlue: #094183;
   .navbar{
     flex-direction: column;
     // float: left;
-    height: 90vh;
-    max-width: 20vh;
+    min-height: 90vh;
+    height: auto;
+    min-width: 20vh;
     align-items:start;
+    justify-content:start;
+
     .logo{
       flex-direction: column;
       align-items:start;
       padding-left: 5px;
+      margin-bottom: 20px;
+
     }
     .links{
       flex-direction: column;
