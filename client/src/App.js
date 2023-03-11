@@ -5,6 +5,7 @@ import {
   Outlet,
 } from "react-router-dom";
 import Home from "./pages/Home/Home"
+import AboutMe from "./pages/AboutMe/AboutMe"
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import "./style.scss"
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Home/>
+      },
+      {
+        path:"/aboutme",
+        element:<AboutMe/>
       },
       
     ]

@@ -24,10 +24,18 @@ const Home = () => {
             present some of my hobbies, thoughts, study records, etc. 
           </p>
           <br/>
+
           <p>
             You can find my self-introduction, blogs in this website. 
+          </p>
+          <br/>
+
+          <p>
             You can create an account and log in if you are willing to do so.
-            
+          </p>
+          <br/>
+
+          <p>
             You are welcome to comment on my post and give me some feedback about this website. 
             If you have an account, then you may comment/feedback with your username. 
             Otherwise, the username of your comment/feedback will be marked as "anonymous". 
@@ -38,6 +46,7 @@ const Home = () => {
       <div className="block">
         <h3>Technical details of my websites:</h3>
         <p style={{display:"inline"}}> Please refer to my </p> <a href="https://github.com/ArthurLCW/myWebsite">GitHub repo</a>
+        <h2 style={{marginTop:"10px"}}>WELCOME HACKING!</h2>
       </div>
 
     </div>
