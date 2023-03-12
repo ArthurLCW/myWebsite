@@ -36,7 +36,6 @@ const AboutMe = () => {
 
       <div className="life">
         <h3>My hobbies: </h3>
-
           <div className="row_life">
             <div className="word_life">
                 <h4>Classic Music: </h4>
@@ -56,15 +55,12 @@ const AboutMe = () => {
                 I hope AS Roma can triumph in the Champions League. Forza Roma!!!
               </p>
             </div>
-            
+
             <div className="photo_life">
               <img src={JSM} style={{width:"100%", height:"100%"}}/>
             </div>
           </div>
 
-          <div className="block_life">
-            
-          </div>
       </div>
     </div>
     

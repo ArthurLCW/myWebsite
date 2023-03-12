@@ -1,0 +1,28 @@
+.catTitle{
+  background-color: #f5f5f5;
+  border: 1px solid #c7cdd1;
+  margin-top: 20px;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+	// justify-content: center;
+  padding: 10px;
+}
+
+.catContent{
+  background-color: white;
+  border: 1px solid #c7cdd1;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+	// justify-content: center;
+  padding: 10px;
+
+  h4{
+    margin-left: 10px;
+  }
+}

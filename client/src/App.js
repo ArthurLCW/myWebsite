@@ -6,6 +6,11 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home/Home"
 import AboutMe from "./pages/AboutMe/AboutMe"
+import Blogs from "./pages/Blogs/Blogs"
+import Deployment from "./pages/Blogs/blogContent/technology/deployment/Deployment"
+import Sibelius from "./pages/Blogs/blogContent/music/Sibelius/Sibelius"
+import VicPride from "./pages/Blogs/blogContent/others/vicpride/VicPride"
+
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import "./style.scss"
@@ -38,7 +43,36 @@ const router = createBrowserRouter([
         path:"/aboutme",
         element:<AboutMe/>
       },
-      
+      {
+        path:"/blogs",
+        element:<Blogs/>
+      },
+      {
+        path:"/blogs/technology",
+        element:<Blogs/>
+      },
+      {
+        path:"/blogs/music",
+        element:<Blogs/>
+      },
+      {
+        path:"/blogs/others",
+        element:<Blogs/>
+      },
+
+      {
+        path:"/blogs/technology/deployment",
+        element:<Deployment/>
+      },
+      {
+        path:"/blogs/music/sibelius",
+        element:<Sibelius/>
+      },
+      {
+        path:"/blogs/others/vicpride",
+        element:<VicPride/>
+      },
+
     ]
   },
   // {
