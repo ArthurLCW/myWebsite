@@ -16,6 +16,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
+  width: 100%;
   img{
     width: 100%;
   }
@@ -25,6 +26,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
+  width: 100%;
   video{
     width: 100%;
   }
@@ -33,5 +35,29 @@
 @media only screen and (max-width:500px) {
   .figuresGrid{
     grid-template-columns: 1fr;
+    width: 90%;
+  }
+  .videos{
+    width: 90%;
+    video{
+      width: 100%;
+    }
   }
 }
+
+
+// @media only screen and (max-width:500px) {
+//   .vicpride{
+//     display: flex;
+//     flex-direction: column;
+//   }
+//   .figuresGrid{
+//     display: flex;
+//   }
+//   .videos{
+//     width: 100%;
+//     video{
+//       width: 100%;
+//     }
+//   }
+// }

@@ -13,7 +13,7 @@ import Vid2 from "../../../../../static/figure/vic_pride/vid2.mp4"
 
 const VicPride = () => {
   return (
-    <div>
+    <div className="vicpride">
       <h1>VicPride</h1>
       <div className="audio">
         <caption style={{display:"inline"}}><i>My BGM for you:</i>&nbsp;&nbsp;&nbsp;</caption>
