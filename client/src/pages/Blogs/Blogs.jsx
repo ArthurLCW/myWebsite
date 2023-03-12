@@ -1,6 +1,5 @@
 import React from "react";
 import BlogCat from "../../components/BlogCat/BlogCat";
-import { Link } from "react-router-dom";
 import "./Blogs.scss"
 
 const Blogs = () => {

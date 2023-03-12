@@ -1,0 +1,37 @@
+.audio{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display:flex;
+  align-items: center;
+	// justify-content: center;
+}
+
+.figures{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.figuresGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  img{
+    width: 100%;
+  }
+}
+
+.videos{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  video{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width:500px) {
+  .figuresGrid{
+    grid-template-columns: 1fr;
+  }
+}
