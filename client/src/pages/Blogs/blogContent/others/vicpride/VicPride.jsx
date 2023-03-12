@@ -14,17 +14,21 @@ import Vid2 from "../../../../../static/figure/vic_pride/vid2.mp4"
 const VicPride = () => {
   return (
     <div className="vicpride">
-      <h1>VicPride</h1>
-      <div className="audio">
-        <caption style={{display:"inline"}}><i>My BGM for you:</i>&nbsp;&nbsp;&nbsp;</caption>
-        <audio src={FailedAttempt} controls preload="auto" class="inline"></audio>
+      <div className="greeting">
+        <h1>VicPride</h1>
       </div>
 
-      <p></p>
+      <div className="audio">
+        <caption style={{display:"inline"}}><i>My BGM for you:</i>&nbsp;&nbsp;&nbsp;</caption>
+        <audio style={{width:"50%"}} src={FailedAttempt} controls preload="auto" class="inline"></audio>
+      </div>
       
       <div className="figures">
-        <p>This website aims to show some figures/videos taken by me when I visit Vic Proud.</p>
-        <h2>Figures: </h2>
+        <div className="figuresWord">
+          <p>This website aims to show some figures/videos taken by me when I visit Vic Proud.</p>
+          <h2>Figures: </h2>
+        </div>
+        
         <div className="figuresGrid">
           <div className="figure"><img src={Fig1}/></div>
           <div className="figure"><img src={Fig2}/></div>
@@ -36,9 +40,16 @@ const VicPride = () => {
       </div>
 
       <div className="videos">
-        <h2>Videos: </h2>
-        <video src={Vid1} controls/>
-        <video src={Vid2} controls/>
+        <div className="videoWord">
+          <h2>Videos: </h2>
+        </div>
+
+        {/* <div className="videoContent">
+          <video src={Vid1} controls/>
+          <video src={Vid2} controls/>
+        </div> */}
+        
+        
       </div>
 
     </div>
