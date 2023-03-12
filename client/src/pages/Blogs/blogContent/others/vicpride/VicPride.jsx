@@ -44,10 +44,10 @@ const VicPride = () => {
           <h2>Videos: </h2>
         </div>
 
-        {/* <div className="videoContent">
+        <div className="videoContent">
           <video src={Vid1} controls/>
           <video src={Vid2} controls/>
-        </div> */}
+        </div>
         
         
       </div>
