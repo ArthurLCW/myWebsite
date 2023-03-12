@@ -3,6 +3,7 @@
   margin-bottom: 10px;
   display:flex;
   align-items: center;
+  width: 100%;
 	// justify-content: center;
 }
 
@@ -22,6 +23,10 @@
   }
 }
 
+.figure{
+
+}
+
 .videos{
   margin-top: 10px;
   margin-bottom: 10px;
@@ -32,32 +37,42 @@
   }
 }
 
+// @media only screen and (max-width:500px) {
+//   .figuresGrid{
+//     grid-template-columns: 1fr;
+//     width: 90;
+//   }
+//   .videos{
+//     width: 90%;
+//     video{
+//       width: 100%;
+//     }
+//   }
+// }
+
+
 @media only screen and (max-width:500px) {
+  .vicpride{
+    display: flex;
+    flex-direction: column;
+  }
   .figuresGrid{
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     width: 90%;
   }
+  .figure{
+    width: 100%;
+  }
+
   .videos{
     width: 90%;
     video{
       width: 100%;
     }
   }
+
+  .audio{
+    width: 80%;
+  }
 }
-
-
-// @media only screen and (max-width:500px) {
-//   .vicpride{
-//     display: flex;
-//     flex-direction: column;
-//   }
-//   .figuresGrid{
-//     display: flex;
-//   }
-//   .videos{
-//     width: 100%;
-//     video{
-//       width: 100%;
-//     }
-//   }
-// }

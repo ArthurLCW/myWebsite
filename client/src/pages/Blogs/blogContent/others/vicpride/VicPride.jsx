@@ -26,12 +26,12 @@ const VicPride = () => {
         <p>This website aims to show some figures/videos taken by me when I visit Vic Proud.</p>
         <h2>Figures: </h2>
         <div className="figuresGrid">
-          <img src={Fig1}/>
-          <img src={Fig2}/>
-          <img src={Fig3}/>
-          <img src={Fig4}/>
-          <img src={Fig5}/>
-          <img src={Fig6}/>
+          <div className="figure"><img src={Fig1}/></div>
+          <div className="figure"><img src={Fig2}/></div>
+          <div className="figure"><img src={Fig3}/></div>
+          <div className="figure"><img src={Fig4}/></div>
+          <div className="figure"><img src={Fig5}/></div>
+          <div className="figure"><img src={Fig6}/></div>
         </div>
       </div>
 
