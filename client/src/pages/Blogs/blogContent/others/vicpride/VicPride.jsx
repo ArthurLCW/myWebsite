@@ -1,6 +1,5 @@
 import React from "react";
 import "./VicPride.scss"
-
 import FailedAttempt from "../../../../../static/music/failedAttempt.mp3"
 import Fig1 from "../../../../../static/figure/vic_pride/fig1.jpg"
 import Fig2 from "../../../../../static/figure/vic_pride/fig2.jpg"
@@ -10,6 +9,7 @@ import Fig5 from "../../../../../static/figure/vic_pride/fig5.jpg"
 import Fig6 from "../../../../../static/figure/vic_pride/fig6.jpg"
 import Vid1 from "../../../../../static/figure/vic_pride/vid1.mp4"
 import Vid2 from "../../../../../static/figure/vic_pride/vid2.mp4"
+import CommentInput from "../../../../../components/Comment/CommentInput";
 
 const VicPride = () => {
   return (
@@ -51,6 +51,7 @@ const VicPride = () => {
         
         
       </div>
+      <CommentInput blogName={"VicPride"} commentType={"Comments: "}/>
 
     </div>
   )

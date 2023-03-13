@@ -1,5 +1,7 @@
 import React from "react";
+import CommentInput from "../../../../../components/Comment/CommentInput";
 import "./Deployment.scss"
+
 
 const Deployment = () => {
   return (
@@ -12,6 +14,9 @@ const Deployment = () => {
       <p>
         I will rebuild this page when with code block implemented by slate.js in the future.
       </p>
+
+      <CommentInput blogName={"Website deployment procedures"} commentType={"Comments: "}/>
+
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Comment from "../../../../../components/Comment/CommentInput";
 import "./Sibelius.scss"
 
 const Sibelius = () => {
@@ -7,7 +8,7 @@ const Sibelius = () => {
       <h1>Sibelius: Violin Concerto in D Minor</h1>
 
       <div className="youtube">
-        <iframe id="myiframe" className="frame_video" src="https://www.youtube.com/embed/R0xpXJrbtNk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe id="myiframe" className="frame_video" src="https://www.youtube.com/embed/R0xpXJrbtNk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
       </div>
 
       <div className="comments">
@@ -34,13 +35,13 @@ const Sibelius = () => {
           但是这样的最终章才更符合现实。True ending从来都未必是happy ending，
           有些人、有些事注定求之而不得。
           黑夜之终焉或许仍是黑夜，寒冬的尽头可能还是寒冬。
-          但漫漫长夜亦不可掩盖星海的璀璨，凛凛寒冬终不能抹煞雪花的纯洁。
-          
-          我想到了西贝柳斯和英雄的芬兰民族。
-          虽然他们最终被迫将第二大城市维堡和从来不属于斯拉夫人的南卡累利阿让给了苏修，
-          但是他们的勇敢顽强让他们赢得了所有人的尊重。结果虽然糟糕，但是过程中美好辉煌的瞬间让然不应该被忘记。
+          但漫漫长夜亦不可掩盖星海的璀璨，凛凛寒冬终不能抹煞雪花的洁白。
+          结果或许糟糕，但是过程中美好辉煌的瞬间让然不应该被忘记。
         </p>
       </div>
+
+      <Comment/>
+
     </div>
   )
 }
