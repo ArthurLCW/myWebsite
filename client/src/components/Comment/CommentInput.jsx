@@ -29,8 +29,8 @@ const CommentInput = ({blogName, commentType}) => {
 
     try {
       console.log("try: ", post);
-      // await axios.post("http://localhost:8800/api/comment", post); ///////////////////////////////
-      await axios.post("https://changwenli.com:8801/api/comment", post);
+      await axios.post("http://localhost:8800/api/comment", post); ///////////////////////////////
+      // await axios.post("https://changwenli.com:8801/api/comment", post);
       // navigate("/");
       // document.getElementById("myTextarea").value = "";
 
