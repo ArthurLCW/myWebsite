@@ -7,11 +7,11 @@ import https from "https";
 
 const app = express();
 
-// setting of https
-// var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.pem');
-// var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
-// var credentials = {key: privateKey, cert: certificate};
-// var httpsServer = https.createServer(credentials, app);
+// setting of https ////////////////////
+var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.pem');
+var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
 
 var httpServer = http.createServer(app);
 
@@ -22,7 +22,7 @@ app.use(express.json());
 function getDB() {
   return mysql.createConnection({
   host: "localhost",
-  // host: "3.88.51.187", /////////////////////////
+  host: "3.88.51.187", /////////////////////////
   user: "root",
   password: "password",
   database: "mywebsite",
@@ -50,18 +50,26 @@ app.get("/api/comment/:postname", (req, res) => {
 });
 
 app.post("/api/comment", (req, res) => {
-  console.log("post start.")
+  console.log("post start...")
   const q = "INSERT INTO comments(`username`, `postname`, `comment`, `time`) VALUES (?)";
+
+  const myDate = new Date();
+  var mytime=myDate.toLocaleString(); 
+  mytime = mytime.trim();
+  mytime = mytime.replace(/,/g, "");
+  const time = mytime.split(" ")[1];
+  const year = mytime.split(" ")[0].split("/")[2];
+  const month = mytime.split(" ")[0].split("/")[1];
+  const day = mytime.split(" ")[0].split("/")[0];
+  mytime = year+"-"+month+"-"+day+" "+time;
+  console.log("my time backend: ", mytime);
+
 
   const values = [
     req.body.username,
     req.body.postname,
     req.body.comment,
-    req.body.time,
-    // "Anonymous", 
-    // "Website deployment procedures",
-    // "test comment 0",
-    // "2023-03-14 02:05:11"
+    mytime,
   ];
 
   getDB().query(q, [values], (err, data) => {
@@ -76,9 +84,11 @@ app.post("/api/comment", (req, res) => {
 
 
 
+
 httpServer.listen(8800, () => {
   console.log("Connected to backend 8800.");
 });
-// httpsServer.listen(8801, () => {
-//   console.log("Connected to backend 8801.");
-// });
+///////////////////
+httpsServer.listen(8801, () => {
+  console.log("Connected to backend 8801.");
+});

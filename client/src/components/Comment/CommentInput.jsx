@@ -12,7 +12,6 @@ const CommentInput = ({blogName, commentType}) => {
     username: "Anonymous",
     postname: blogName,
     comment: "",
-    time: "2023-03-14 02:05:11",
   });
   const [error, setError] = useState(false)
 
@@ -29,14 +28,9 @@ const CommentInput = ({blogName, commentType}) => {
     }
 
     try {
-      var myDate = new Date();
-      var mytime=myDate.toLocaleString(); 
-      mytime = mytime.trim();
-      mytime = mytime.replace(/,/g, "");
-      setPost((prev) => ({ ...prev, ["time"]: mytime }));
       console.log("try: ", post);
-      await axios.post("http://localhost:8800/api/comment", post);
-      // await axios.post("https://changwenli.com:8801/books", book);
+      // await axios.post("http://localhost:8800/api/comment", post); ///////////////////////////////
+      await axios.post("https://changwenli.com:8801/api/comment", post);
       // navigate("/");
       // document.getElementById("myTextarea").value = "";
 

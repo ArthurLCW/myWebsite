@@ -6,10 +6,9 @@ import Logo from "../../static/figure/logo.png"
 import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-
 const NavBar = () => {
-  const [curUser, setCurUser] = useState("Anonymous")
-  const [loginState, setLoginState] = useState(false)
+  const [curUser, setCurUser] = useState("Anonymous");
+  const [loginState, setLoginState] = useState(false);
 
 	return (
 		<div className="navbar">
@@ -18,9 +17,6 @@ const NavBar = () => {
           <span>
             Changwen Li's Website
           </span>
-          {/* <span>
-            Website
-          </span> */}
 			</div>
 
       <div className="links">
