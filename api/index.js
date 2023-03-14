@@ -8,10 +8,10 @@ import https from "https";
 const app = express();
 
 // setting of https ////////////////////
-// var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.pem');
-// var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
-// var credentials = {key: privateKey, cert: certificate};
-// var httpsServer = https.createServer(credentials, app);
+var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.pem');
+var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
 
 var httpServer = http.createServer(app);
 
@@ -22,8 +22,8 @@ app.use(express.json());
 function getDB() {
   return mysql.createConnection({
   host: "localhost",
-  // host: "3.88.51.187", /////////////////////////
-  user: "root",
+  host: "3.88.51.187", /////////////////////////
+  // user: "root",
   password: "password",
   database: "mywebsite",
 });
@@ -110,6 +110,6 @@ httpServer.listen(8800, () => {
   console.log("Connected to backend 8800.");
 });
 ///////////////////
-// httpsServer.listen(8801, () => {
-//   console.log("Connected to backend 8801.");
-// });
+httpsServer.listen(8801, () => {
+  console.log("Connected to backend 8801.");
+});
