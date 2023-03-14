@@ -21,9 +21,9 @@ app.use(express.json());
 // getCon return db
 function getDB() {
   return mysql.createConnection({
-  host: "localhost",
+  // host: "localhost",
   host: "3.88.51.187", /////////////////////////
-  // user: "root",
+  user: "root",
   password: "password",
   database: "mywebsite",
 });
