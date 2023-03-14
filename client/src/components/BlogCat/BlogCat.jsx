@@ -13,21 +13,16 @@ const BlogCat = ({catName, catContent}) => {
 
   const expandHandler = () => {
     setExpandState(!expandState);
-    console.log("expand state: ", expandState)
   }
 
   const CatMain = (catContent) => {
-    console.log("cat content0: ", catContent);
-    console.log("cat content1: ", catContent.catContent);
     if (catContent.catContent.length==0){
-      console.log("inside")
       return (
         <div className="catContent">
           <h4>There is no blog at present. </h4>
         </div>
       )
     };
-    console.log("cat content2: ", catContent.catContent);
     return (
       catContent.catContent.map(content => (
         <div className="catContent">

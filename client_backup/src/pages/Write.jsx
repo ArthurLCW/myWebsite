@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css"
 
 const Write = () => {
   const [value, setValue] = useState("");
-  console.log(value);
 
   return (
     <div className="add">

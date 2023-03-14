@@ -18,7 +18,6 @@ const CommentInput = ({blogName, commentType}) => {
 
   const handleChange = (e) => {
     setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log("set post",post);
   };
 
   const handleClick = async (e) => {
@@ -34,7 +33,6 @@ const CommentInput = ({blogName, commentType}) => {
       var mytime=myDate.toLocaleString(); 
       mytime = mytime.trim();
       mytime = mytime.replace(/,/g, "");
-      console.log("cur time:",mytime);
       setPost((prev) => ({ ...prev, ["time"]: mytime }));
       console.log("try: ", post);
       await axios.post("http://localhost:8800/api/comment", post);
