@@ -12,7 +12,7 @@ var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.
 var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
 var credentials = {key: privateKey, cert: certificate};
 var httpsServer = https.createServer(credentials, app);
-a
+
 var httpServer = http.createServer(app);
 
 app.use(cors());
