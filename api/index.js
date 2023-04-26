@@ -31,8 +31,8 @@ function getDB() {
 
 
 app.get("/api", (req, res) => {
-  console.log("hello")
-  // res.json("hello");
+  // console.log("hello")
+  res.json("hello");
 });
 
 app.get("/api/comment/:postname", (req, res) => {
