@@ -7,7 +7,9 @@ import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
+
 const CommentInput = ({blogName, commentType}) => {
+  let url = process.env.REACT_APP_PROTOCOL+"://"+process.env.REACT_APP_IP+":"+process.env.REACT_APP_BACKEND_PORT;
   const [post, setPost] = useState({
     username: "Anonymous",
     postname: blogName,
@@ -30,7 +32,9 @@ const CommentInput = ({blogName, commentType}) => {
     try {
       console.log("try: ", post);
       // await axios.post("http://localhost:8800/api/comment", post); ///////////////////////////////
-      await axios.post("https://changwenli.com:8801/api/comment", post);
+      // await axios.post("https://changwenli.com:8801/api/comment", post);
+      console.log("frontend connected to url: ", url+"/api/comment");
+      await axios.post(url+"/api/comment", post);
       // navigate("/");
       // document.getElementById("myTextarea").value = "";
 

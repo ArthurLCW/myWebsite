@@ -4,16 +4,22 @@ import cors from "cors";
 import fs from "fs";
 import http from "http";
 import https from "https";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
+var server;
 
-// setting of https ////////////////////
-// var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.pem');
-// var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
-// var credentials = {key: privateKey, cert: certificate};
-// var httpsServer = https.createServer(credentials, app);
+if (process.env.PROTOCOL==="http"){
+  server = http.createServer(app);
+}
+else if (process.env.PROTOCOL==="https"){
+  var privateKey  = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/privkey.pem');
+  var certificate = fs.readFileSync('/etc/letsencrypt/live/changwenli.com/cert.pem');
+  var credentials = {key: privateKey, cert: certificate};
+  server = https.createServer(credentials, app);
+}
 
-var httpServer = http.createServer(app);
 
 app.use(cors());
 app.use(express.json());
@@ -21,10 +27,10 @@ app.use(express.json());
 // getCon return db
 function getDB() {
   return mysql.createConnection({
-  host: "localhost",
+  host: process.env.DB_IP,
   // host: "3.88.51.187", /////////////////////////
-  user: "root",
-  password: "password",
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   database: "mywebsite",
 });
 }
@@ -106,8 +112,8 @@ app.post("/api/comment", (req, res) => {
 
 
 
-httpServer.listen(8800, () => {
-  console.log("Connected to backend 8800.");
+server.listen(process.env.BACKEND_PORT, () => {
+  console.log("Connected to backend ", process.env.BACKEND_PORT);
 });
 ///////////////////
 // httpsServer.listen(8801, () => {
