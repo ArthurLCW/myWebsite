@@ -27,12 +27,11 @@ app.use(express.json());
 // getCon return db
 function getDB() {
   return mysql.createConnection({
-  host: process.env.DB_IP,
-  // host: "3.88.51.187", /////////////////////////
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: "mywebsite",
-});
+    host: process.env.DB_IP,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: "mywebsite",
+  });
 }
 
 
@@ -59,30 +58,30 @@ app.post("/api/comment", (req, res) => {
   console.log("post start...")
   const q = "INSERT INTO comments(`username`, `postname`, `comment`, `time`) VALUES (?)";
 
-  // const myDate = new Date();
-  // var mytime=myDate.toLocaleString(); 
-  // mytime = mytime.trim();
-  // mytime = mytime.replace(/,/g, "");
-  // const time = mytime.split(" ")[1];
-
-
-  // const year = mytime.split(" ")[0].split("/")[2];
-  // const month = mytime.split(" ")[0].split("/")[1];
-  // const day = mytime.split(" ")[0].split("/")[0];
-  // mytime = year+"-"+month+"-"+day+" "+time;
-  // console.log("my time backend: ", mytime);
-
   const now = new Date();
+  const options = {
+    timeZone: "Australia/Melbourne",
+    hour12: false, 
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  };
+  const formatter = new Intl.DateTimeFormat([], options);
+  const melbourneTime = formatter.format(now);
+
 
   // Extract the year, month, and day components
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
+  const year = melbourneTime.getFullYear();
+  const month = String(melbourneTime.getMonth() + 1).padStart(2, '0');
+  const day = String(melbourneTime.getDate()).padStart(2, '0');
 
   // Extract the hour, minute, and second components
-  const hour = String(now.getHours()).padStart(2, '0');
-  const minute = String(now.getMinutes()).padStart(2, '0');
-  const second = String(now.getSeconds()).padStart(2, '0');
+  const hour = String(melbourneTime.getHours()).padStart(2, '0');
+  const minute = String(melbourneTime.getMinutes()).padStart(2, '0');
+  const second = String(melbourneTime.getSeconds()).padStart(2, '0');
 
   // Concatenate the components into the desired format
   const localTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
@@ -115,7 +114,3 @@ app.post("/api/comment", (req, res) => {
 server.listen(process.env.BACKEND_PORT, () => {
   console.log("Connected to backend ", process.env.BACKEND_PORT);
 });
-///////////////////
-// httpsServer.listen(8801, () => {
-//   console.log("Connected to backend 8801.");
-// });
