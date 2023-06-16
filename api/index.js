@@ -58,38 +58,27 @@ app.post("/api/comment", (req, res) => {
   console.log("post start...")
   const q = "INSERT INTO comments(`username`, `postname`, `comment`, `time`) VALUES (?)";
 
-  const now = new Date();
-  const options = {
-    timeZone: "Australia/Melbourne",
-    hour12: false, 
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
+  let date = new Date();
+  let options = { 
+    timeZone: 'Australia/Melbourne', 
+    year: 'numeric', 
+    month: '2-digit', 
+    day: '2-digit', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit' 
   };
-  const formatter = new Intl.DateTimeFormat([], options);
-  const melbourneTime = formatter.format(now);
 
+  let melbourneTime = new Intl.DateTimeFormat('en-GB', options).format(date);
 
-  // Extract the year, month, and day components
-  const year = melbourneTime.getFullYear();
-  const month = String(melbourneTime.getMonth() + 1).padStart(2, '0');
-  const day = String(melbourneTime.getDate()).padStart(2, '0');
+  // Convert the date to the desired format
+  let parts = melbourneTime.split(", ");
+  let datePart = parts[0].split("/").reverse().join("-");
+  let timePart = parts[1];
+  let formattedMelbourneTime = `${datePart} ${timePart}`;
 
-  // Extract the hour, minute, and second components
-  const hour = String(melbourneTime.getHours()).padStart(2, '0');
-  const minute = String(melbourneTime.getMinutes()).padStart(2, '0');
-  const second = String(melbourneTime.getSeconds()).padStart(2, '0');
-
-  // Concatenate the components into the desired format
-  const localTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-
-  // Output the local time to the console
-  console.log(localTime);
-  const mytime = localTime;
-
+  console.log("melb time", formattedMelbourneTime);
+  const mytime = formattedMelbourneTime;
 
   const values = [
     req.body.username,
@@ -107,7 +96,6 @@ app.post("/api/comment", (req, res) => {
     return res.json(data);
   });
 });
-
 
 
 
