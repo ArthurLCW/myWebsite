@@ -45,7 +45,7 @@ const CommentInput = ({blogName, commentType}) => {
 
 
   return(
-    <div>
+    <div className="comment-container">
       <br/>
       <h3>{commentType}</h3>
       <textarea id="comment" className="comment" rows={5} 

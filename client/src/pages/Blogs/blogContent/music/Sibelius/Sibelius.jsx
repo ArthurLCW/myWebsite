@@ -1,10 +1,13 @@
 import React from "react";
 import Comment from "../../../../../components/Comment/CommentInput";
+import Footer from "../../../../../components/Footer/Footer";
+import NavBar from "../../../../../components/NavBar/NavBar";
 import "./Sibelius.scss"
 
 const Sibelius = () => {
   return (
     <div>
+      <NavBar/>
       <h1>Sibelius: Violin Concerto in D Minor</h1>
 
       <div className="youtube">
@@ -41,7 +44,7 @@ const Sibelius = () => {
       </div>
 
       <Comment/>
-
+      <Footer/>
     </div>
   )
 }

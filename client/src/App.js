@@ -18,14 +18,18 @@ import "./style.scss"
 const Layout = () => {
   return (
     <div className="root">
-      <div className="main">
+      {/* <div className="main">
         <NavBar/>
         <div className="content">
           <Outlet/>
         </div>
       </div>
       
-      <Footer/>
+      <Footer/> */}
+        
+      {/* <NavBar/> */}
+      <Outlet/>    
+      {/* <Footer/> */}
     </div>
   )
 }

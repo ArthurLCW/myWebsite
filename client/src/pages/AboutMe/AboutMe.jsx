@@ -1,4 +1,6 @@
 import React from "react";
+import Footer from "../../components/Footer/Footer";
+import NavBar from "../../components/NavBar/NavBar";
 import CuhkszLogo from "../../static/figure/cuhksz_logo.png"
 import UnimelbLogo from "../../static/figure/unimelb_logo.png"
 import Resume from "../../static/李昌文个人简历_2021_12.pdf"
@@ -10,6 +12,7 @@ import "./AboutMe.scss"
 const AboutMe = () => {
   return (
     <div>
+      <NavBar/>
       <div className="profession">
         <div className="professionWord">
           <h3>About my profession: </h3>
@@ -62,6 +65,7 @@ const AboutMe = () => {
           </div>
 
       </div>
+    <Footer/>
     </div>
     
   )
