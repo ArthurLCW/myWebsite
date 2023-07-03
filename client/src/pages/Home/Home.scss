@@ -1,25 +1,26 @@
 $unimelbBlue: #094183;
 
-.greeting_r{
-  font-family:cursive;
-  display: inline;
-  color: red;
-}
-.greeting_g{
-  font-family:cursive;
-  display: inline;
-  color: green;
-}
-.greeting_b{
-  font-family:cursive;
-  display: inline;
-  color: blue;
+.ground_top{
+  width: 100%;
+  height: 90%;
 }
 
-.block{
-  // background-color: lightskyblue;
-  border: 2px solid #094183;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 1pc;
+.ground_bot{
+  width: 100%;
+  height: 10%;
+  background-color: $unimelbBlue;
+}
+
+@media only screen and (max-width:500px) {
+	/* For mobile phones: */
+  .ground_top{
+    width: 100%;
+    height: 80%;
+  }
+  
+  .ground_bot{
+    width: 100%;
+    height: 20%;
+    background-color: $unimelbBlue;
+  }
 }

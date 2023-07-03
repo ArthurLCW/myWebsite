@@ -30,15 +30,17 @@ const Home = () => {
   //       </div>
   //     </ParallaxLayer>
 
-  //     <ParallaxLayer offset={2} speed={-0.5}>
+  //     <ParallaxLayer offset={2} speed={0.5}>
   //       <div style={{backgroundColor: 'green', width: '100%', height:'100%'}}>
   //         <h1>2</h1>
   //       </div>
   //     </ParallaxLayer>
 
   //     <ParallaxLayer offset={3} >
-  //       <h1>3</h1>
-  //       <Footer/>
+  //       <div style={{backgroundColor: 'blue', width: '100%', height:'100%'}}>
+  //         <h1>3</h1>
+  //         <Footer/>
+  //       </div>
   //     </ParallaxLayer>
   //   </Parallax>
   // )
@@ -47,7 +49,7 @@ const Home = () => {
 
   return (
     <div>
-      <Parallax pages={1.45}>
+      <Parallax pages={1.45} ref={ref}>
         <ParallaxLayer
           offset={0}
           speed={0.5}
@@ -58,17 +60,11 @@ const Home = () => {
             backgroundPosition: 'center'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <Swing down>
-              <h1 style={{color:'wheat'}}>Welcome to Changwen's Website</h1>
-            </Swing>
-          </div>
-          
         </ParallaxLayer>
 
         <ParallaxLayer
-          offset={0}
-          speed={0.8}
+          offset={0.1}
+          speed={0.85}
           factor={2}
           style={{
             backgroundImage: `url(${stars})`,
@@ -76,6 +72,19 @@ const Home = () => {
             backgroundPosition: 'center'
           }}
         >
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={0}
+          speed={0.5}
+          factor={2}
+        >
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <Swing down>
+              <h1 style={{color:'wheat'}}>Welcome to Changwen's Website</h1>
+            </Swing>
+          </div>
+          
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -124,7 +133,7 @@ const Home = () => {
 
         </ParallaxLayer>
 
-        <ParallaxLayer
+        {/* <ParallaxLayer
           offset={0.88}
           speed={1}
           factor={1}
@@ -133,12 +142,31 @@ const Home = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
-        ></ParallaxLayer>
+        ></ParallaxLayer> */}
+
+        <ParallaxLayer
+          offset={0.88}
+          speed={1}
+          factor={1}
+        >
+          <div style={{width: '100%', height:'100%'}}>
+            <div className="ground_top">
+
+            </div>
+
+            <div className="ground_bot">
+            </div>
+          </div>
+        </ParallaxLayer>
         
         <ParallaxLayer
           offset={0}
           speed={0.5}
           factor={2}
+          onClick={() => {
+            console.log("current ref: ", {ref});
+            ref.current.scrollTo(1);
+          }}
         >
           <NavBar/>
         </ParallaxLayer>
@@ -147,6 +175,10 @@ const Home = () => {
           offset={0.45}
           speed={0}
           factor={1}
+          onClick={() => {
+            console.log("current ref: ", {ref});
+            ref.current.scrollTo(0);
+          }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100vh' }}>
             <div style={{ marginTop: 'auto' }}>
@@ -155,8 +187,6 @@ const Home = () => {
           </div>
           <Footer/>
         </ParallaxLayer>
-
-
 
       </Parallax>
     </div>
