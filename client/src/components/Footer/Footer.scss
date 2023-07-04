@@ -10,7 +10,21 @@ footer{
 	justify-content: space-between;
 
   img{
-    border-radius: 50%;
-    height: 50px;
+    // border-radius: 50%;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  footer {
+    height: 20vh;
+    flex-direction: row;
+  }
+  .icons-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    // gap: 20px; // adjust as needed for space between items
   }
 }

@@ -46,10 +46,10 @@ const Home = () => {
   // )
 
   const ref = useRef();
-
   return (
     <div>
       <Parallax pages={1.45} ref={ref}>
+        {/* land */}
         <ParallaxLayer
           offset={0}
           speed={0.5}
@@ -62,6 +62,7 @@ const Home = () => {
         >
         </ParallaxLayer>
 
+        {/* stars */}
         <ParallaxLayer
           offset={0.1}
           speed={0.85}
@@ -74,6 +75,7 @@ const Home = () => {
         >
         </ParallaxLayer>
 
+        {/* info */}
         <ParallaxLayer
           offset={0}
           speed={0.5}
@@ -81,12 +83,13 @@ const Home = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <Swing down>
-              <h1 style={{color:'wheat'}}>Welcome to Changwen's Website</h1>
+              <h1 style={{color:'wheat', margin:'10px'}}>Welcome to Changwen's Website</h1>
             </Swing>
           </div>
           
         </ParallaxLayer>
 
+        {/* wood3 */}
         <ParallaxLayer
           offset={0.9999}
           speed={1.5}
@@ -98,6 +101,7 @@ const Home = () => {
           }}
         ></ParallaxLayer>
 
+        {/* wood1 */}
         <ParallaxLayer
           offset={0.9999}
           speed={3}
@@ -109,6 +113,7 @@ const Home = () => {
           }}
         ></ParallaxLayer>
 
+        {/* wood2 */}
         <ParallaxLayer
           offset={0}
           speed={2}
@@ -120,6 +125,7 @@ const Home = () => {
           }}
         ></ParallaxLayer>
 
+        {/* grass */}
         <ParallaxLayer
           offset={0.87}
           speed={1}
@@ -144,6 +150,7 @@ const Home = () => {
           }}
         ></ParallaxLayer> */}
 
+        {/* blue ground */}
         <ParallaxLayer
           offset={0.88}
           speed={1}
@@ -159,8 +166,18 @@ const Home = () => {
           </div>
         </ParallaxLayer>
         
+        {/* navbar */}
         <ParallaxLayer
           offset={0}
+          speed={0.5}
+          factor={2}
+        >
+          <NavBar/>
+        </ParallaxLayer>
+
+        {/* add clicking layer, avoid collapse with navbar */}
+        <ParallaxLayer
+          offset={0.1}
           speed={0.5}
           factor={2}
           onClick={() => {
@@ -168,17 +185,17 @@ const Home = () => {
             ref.current.scrollTo(1);
           }}
         >
-          <NavBar/>
         </ParallaxLayer>
 
+        {/* footer */}
         <ParallaxLayer
           offset={0.45}
           speed={0}
           factor={1}
-          onClick={() => {
-            console.log("current ref: ", {ref});
-            ref.current.scrollTo(0);
-          }}
+          // onClick={() => {
+          //   console.log("current ref: ", {ref});
+          //   ref.current.scrollTo(0);
+          // }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100vh' }}>
             <div style={{ marginTop: 'auto' }}>
