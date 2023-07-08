@@ -1,52 +1,40 @@
-.profession{
+.aboutme-container{
+  min-height: calc(80vh - 10px) ;
+}
+.block{
+  border: 2px solid #094183;
+  border-radius: 1pc;
   display: flex;
   flex-direction: row;
-  margin-bottom: 20px;
+  
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  width: 80vw;
 }
-.professionWord{
-  width: 66.6%;
+.blockWord{
+  padding: 5px;
+  width: 50%;
   height: 100%;
 }
-.professionPhoto{
-  width: 33.3%;
+.blockPhoto{
+  padding: 5px;
+  width: 50%;
   height: 100%;
-}
-
-// .life{
-//   // display: flex;
-//   // flex-direction: row;
-// }
-.row_life{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-// .block_life{
-//   display: flex;
-//   flex-direction: row;
-//   width: 50%;
-//   margin: 5px;
-// }
-.word_life{
-  width: 25%;
-  height: 100%;
-}
-.photo_life{
-  width: 25%;
-  height: 100%;
-  margin-right: 20px;
 }
 
 @media only screen and (max-width:500px) {
   /* For mobile phones: */
-  .profession{
+  .block{
     flex-direction: column;
   }
-  .professionWord{
-    width: 100%;
+  .blockWord{
+    width: calc(100% - 10px);
   }
-  .professionPhoto{
-    width: 100%;
+  .blockPhoto{
+    width: calc(100% - 10px);
   }
 
   .row_life{

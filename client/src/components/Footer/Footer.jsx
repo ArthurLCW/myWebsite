@@ -1,12 +1,12 @@
 import React from "react";
 import "./Footer.scss"
 import { Link } from 'react-router-dom';
-import Logo from "../../static/figure/logo.png"
-import WechatIcon from "../../static/figure/wechat.png"
-import { SvgIcon } from '@material-ui/core'
+import WechatIcon from "../../static/figure/wechat.png";
+import { SvgIcon } from '@material-ui/core';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
+import GitHubIcon from '@material-ui/icons/GitHub';
 const handleClickWeChat = async () => {
   try {
     // Use the Clipboard API to write text
@@ -30,7 +30,6 @@ const handleClickEmail = async () => {
 const Footer = () => {
   return (
     <footer>
-      {/* <img src={Logo} alt=""/> */}
       <div>
         <div>&copy;<b>Changwen Li</b>: </div>
         <div>arthurlicw@gmail.com</div>
@@ -38,6 +37,10 @@ const Footer = () => {
       </div>
 
       <div className="icons-container">
+        <Link to='https://github.com/ArthurLCW'>
+          <SvgIcon component={GitHubIcon} style={{ color:'white',fontSize: 30 }}/>
+        </Link>
+
         <Link to='https://www.linkedin.com/in/arthur-li-048752242/'>
           <SvgIcon component={LinkedInIcon} style={{ color:'white',fontSize: 30 }}/>
         </Link>
@@ -45,8 +48,6 @@ const Footer = () => {
         <Link to='https://www.instagram.com/cogito_ergo_sum_lcw/'>
           <SvgIcon component={InstagramIcon} style={{ color:'white',fontSize: 30 }}/>
         </Link>
-
-        <SvgIcon component={EmailIcon} style={{ color:'white',fontSize: 30 }} onClick={handleClickEmail}/>
 
         <img src={WechatIcon} onClick={handleClickWeChat} alt=""/>
 

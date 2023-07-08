@@ -1,26 +1,12 @@
-$unimelbBlue: #094183;
-
-.ground_top{
-  width: 100%;
-  height: 90%;
+.info-container{
+  display: flex;
+  flex-direction: 'row';
+  align-items: center;
+  justify-content: center;
 }
 
-.ground_bot{
-  width: 100%;
-  height: 10%;
-  background-color: $unimelbBlue;
-}
-
-@media only screen and (max-width:500px) {
-	/* For mobile phones: */
-  .ground_top{
-    width: 100%;
-    height: 80%;
-  }
-  
-  .ground_bot{
-    width: 100%;
-    height: 20%;
-    background-color: $unimelbBlue;
-  }
+.info{
+  color: wheat;
+  font-size: 25px;
+  width: calc(100vw - 120px);
 }

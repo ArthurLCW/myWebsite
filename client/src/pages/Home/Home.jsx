@@ -1,212 +1,479 @@
 import React, {useRef, useState} from "react";
 import Swing from 'react-reveal/Swing';
-import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
+import Plx from "react-plx";
 import { Link } from "react-router-dom";
 import "./Home.scss"
-import floor from "../../static/figure/floor.png";
-import grass from "../../static/figure/grass.png";
-import wood1 from "../../static/figure/wood1.png";
-import wood2 from "../../static/figure/wood2.png";
-import wood3 from "../../static/figure/wood3.png";
-import stars from "../../static/figure/stars.png";
-import land from "../../static/figure/land_.png";
+
+import { SvgIcon } from "@material-ui/core";
+import MoonIcon from '@material-ui/icons/NightsStay';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import CloudIcon from '@material-ui/icons/Cloud';
+import CloudEmptyIcon from '@material-ui/icons/FilterDrama';
+import FlightIcon from '@material-ui/icons/Flight';
+import SunIcon from '@material-ui/icons/WbSunny';
 
 const Home = () => {
-  // return (
-  //   <Parallax pages={5}>
-  //     <ParallaxLayer offset={0} >
-  //       <div style={{backgroundColor: 'yellow', width: '100%', height:'100%'}}>
-  //         <NavBar/>
-  //         <h1>0</h1>
-  //       </div>
-        
-  //     </ParallaxLayer>
+  const browserHeight = window.innerHeight;
+  const browserWidth = window.innerWidth;
+  const startPos = 0.1 * browserHeight;
+  const endPos = browserHeight + 0.9 * browserHeight;
+  const length = startPos - endPos;
 
-  //     <ParallaxLayer offset={1} >
-  //       <div style={{backgroundColor: 'red', width: '100%', height:'100%'}}>
-  //         <h1>1</h1>
-  //       </div>
-  //     </ParallaxLayer>
+  const dataMoon = [
+    {
+      start: 0,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(browserHeight * 0.25 + 100),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
 
-  //     <ParallaxLayer offset={2} speed={0.5}>
-  //       <div style={{backgroundColor: 'green', width: '100%', height:'100%'}}>
-  //         <h1>2</h1>
-  //       </div>
-  //     </ParallaxLayer>
+  const dataStar0 = [
+    {
+      start: 1/8 * browserHeight,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(browserHeight * 0.25 + 25),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
 
-  //     <ParallaxLayer offset={3} >
-  //       <div style={{backgroundColor: 'blue', width: '100%', height:'100%'}}>
-  //         <h1>3</h1>
-  //         <Footer/>
-  //       </div>
-  //     </ParallaxLayer>
-  //   </Parallax>
-  // )
+  const dataStar1 = [
+    {
+      start: 1/8 * browserHeight,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(1/8 * browserHeight + 50),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
+
+  const dataStar2 = [
+    {
+      start: 1/8 * browserHeight,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(3/8 * browserHeight + 50),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
+
+  const dataStar3 = [
+    {
+      start: 1/8 * browserHeight,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(browserHeight * 0.25 + 25),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud0 = [
+    {
+      start: 0,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(1/4*browserWidth + 50),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud1 = [
+    {
+      start: 0,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(3/8*browserWidth + 100),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud2 = [
+    {
+      start: 0,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: +(3/8*browserWidth + 100),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud3 = [
+    {
+      start: 0,
+      end: browserHeight * 0.5,
+      properties: [
+        {
+          startValue: 0,
+          endValue: +(1/4*browserWidth + 50),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataPlane = [
+    {
+      start: 0,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(browserWidth ),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataSun = [
+    {
+      start: browserHeight * 0.5,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(3/4*browserHeight),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud4 = [
+    {
+      start: browserHeight * 0.5,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: (1/4*browserWidth - 50),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud5 = [
+    {
+      start: browserHeight * 0.5,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: (3/8*browserWidth - 100),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud6 = [
+    {
+      start: browserHeight * 0.5,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(3/8*browserWidth),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataCloud7 = [
+    {
+      start: browserHeight * 0.5,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(1/4*browserWidth),
+          property: 'translateX',
+        },
+      ],
+    },
+  ];
+
+  const dataBg = [
+    {
+      start: 0,
+      end: browserHeight,
+      properties: [
+        {
+          startValue: '#000000',
+          endValue: '#4FC3F7',
+          property: 'backgroundColor',
+        },
+      ],
+    },
+  ];
+
+  const dataScrollDown = [
+    {
+      start: 0,
+      end: 1/2*browserHeight,
+      properties: [
+        {
+          startValue: 0,
+          endValue: -(1/2*browserHeight+25),
+          property: 'translateY',
+        },
+      ],
+    },
+  ];
+
 
   const ref = useRef();
   return (
     <div>
-      <Parallax pages={1.45} ref={ref}>
-        {/* land */}
-        <ParallaxLayer
-          offset={0}
-          speed={0.5}
-          factor={2}
-          style={{
-            backgroundImage: `url(${land})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-        </ParallaxLayer>
+      <NavBar/>
+      <div style={{height: '180vh', width: '100%'}}>
 
-        {/* stars */}
-        <ParallaxLayer
-          offset={0.1}
-          speed={0.85}
-          factor={2}
-          style={{
-            backgroundImage: `url(${stars})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-        </ParallaxLayer>
+      </div>
+      <Footer/>
 
-        {/* info */}
-        <ParallaxLayer
-          offset={0}
-          speed={0.5}
-          factor={2}
-        >
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <Swing down>
-              <h1 style={{color:'wheat', margin:'10px'}}>Welcome to Changwen's Website</h1>
-            </Swing>
+      <Plx parallaxData={dataMoon} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 1/2 * browserWidth - 50,
+          top: 1/4 * browserHeight,
+        }}
+      >
+        <SvgIcon component={MoonIcon} style={{fontSize: '100px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataStar0} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 1/4 * browserWidth -12.5,
+          top: 1/4 * browserHeight,
+        }}
+      >
+        <SvgIcon component={StarIcon} style={{fontSize: '25px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataStar1} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 3/8 * browserWidth -25,
+          top: 1/8 * browserHeight,
+        }}
+      >
+        <SvgIcon component={StarBorderIcon} style={{fontSize: '50px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataStar2} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 5/8 * browserWidth - 25,
+          top: 3/8 * browserHeight,
+        }}
+      >
+        <SvgIcon component={StarIcon} style={{fontSize: '50px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataStar3} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 3/4 * browserWidth - 12.5,
+          top: 1/4 * browserHeight,
+        }}
+      >
+        <SvgIcon component={StarBorderIcon} style={{fontSize: '25px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataCloud0} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 1/4 * browserWidth - 12.5 - 12.5,
+          top: 1/4 * browserHeight - 12.5,
+        }}
+      >
+        <SvgIcon component={CloudIcon} style={{fontSize: '50px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataCloud1} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 3/8 * browserWidth - 25 - 25,
+          top: 1/8 * browserHeight - 25,
+        }}
+      >
+        <SvgIcon component={CloudIcon} style={{fontSize: '100px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataCloud2} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 5/8 * browserWidth - 25 - 25,
+          top: 3/8 * browserHeight - 25,
+        }}
+      >
+        <SvgIcon component={CloudIcon} style={{fontSize: '100px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataCloud3} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 3/4 * browserWidth - 12.5 - 12.5,
+          top: 1/4 * browserHeight - 12.5,
+        }}
+      >
+        <SvgIcon component={CloudIcon} style={{fontSize: '50px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataPlane} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: browserWidth,
+          top: 5/8 * browserHeight,
+        }}
+      >
+        <div className="info-container">
+          <SvgIcon component={FlightIcon} style={{fontSize: '100px', transform: "rotate(270deg)", color: 'white'}}/>
+          <div className="info">
+            <i><b>Welcome to Changwen's Website</b></i>
           </div>
-          
-        </ParallaxLayer>
+        </div>
 
-        {/* wood3 */}
-        <ParallaxLayer
-          offset={0.9999}
-          speed={1.5}
-          factor={1.1}
-          style={{
-            backgroundImage: `url(${wood3})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></ParallaxLayer>
-
-        {/* wood1 */}
-        <ParallaxLayer
-          offset={0.9999}
-          speed={3}
-          factor={2.1}
-          style={{
-            backgroundImage: `url(${wood1})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></ParallaxLayer>
-
-        {/* wood2 */}
-        <ParallaxLayer
-          offset={0}
-          speed={2}
-          factor={4}
-          style={{
-            backgroundImage: `url(${wood2})`,
-            backgroundSize: 'contain',
-            backgroundPosition: 'center'
-          }}
-        ></ParallaxLayer>
-
-        {/* grass */}
-        <ParallaxLayer
-          offset={0.87}
-          speed={1}
-          factor={1}
-          style={{
-            backgroundImage: `url(${grass})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-
-        </ParallaxLayer>
-
-        {/* <ParallaxLayer
-          offset={0.88}
-          speed={1}
-          factor={1}
-          style={{
-            backgroundImage: `url(${floor})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></ParallaxLayer> */}
-
-        {/* blue ground */}
-        <ParallaxLayer
-          offset={0.88}
-          speed={1}
-          factor={1}
-        >
-          <div style={{width: '100%', height:'100%'}}>
-            <div className="ground_top">
-
-            </div>
-
-            <div className="ground_bot">
-            </div>
-          </div>
-        </ParallaxLayer>
         
-        {/* navbar */}
-        <ParallaxLayer
-          offset={0}
-          speed={0.5}
-          factor={2}
-        >
-          <NavBar/>
-        </ParallaxLayer>
+      </Plx>
 
-        {/* add clicking layer, avoid collapse with navbar */}
-        <ParallaxLayer
-          offset={0.1}
-          speed={0.5}
-          factor={2}
-          onClick={() => {
-            console.log("current ref: ", {ref});
-            ref.current.scrollTo(1);
-          }}
-        >
-        </ParallaxLayer>
+      <Plx parallaxData={dataSun} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 1/2 * browserWidth -50,
+          top: (1) * browserHeight,
+        }}
+      >
+        <SvgIcon component={SunIcon} style={{fontSize: '100px', color: 'gold'}}/>
+      </Plx>
 
-        {/* footer */}
-        <ParallaxLayer
-          offset={0.45}
-          speed={0}
-          factor={1}
-          // onClick={() => {
-          //   console.log("current ref: ", {ref});
-          //   ref.current.scrollTo(0);
-          // }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100vh' }}>
-            <div style={{ marginTop: 'auto' }}>
-              <Footer/>
-            </div>
-          </div>
-          <Footer/>
-        </ParallaxLayer>
+      <Plx parallaxData={dataCloud4} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: -50,
+          top: 1/4 * browserHeight,
+        }}
+      >
+        <SvgIcon component={CloudIcon} style={{fontSize: '50px', color: 'white'}}/>
+      </Plx>
 
-      </Parallax>
+      <Plx parallaxData={dataCloud5} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: -100,
+          top: 1/8 * browserHeight,
+        }}
+      >
+        <SvgIcon component={CloudEmptyIcon} style={{fontSize: '100px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataCloud6} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 100+browserWidth,
+          top: 3/8 * browserHeight,
+        }}
+      >
+        <SvgIcon component={CloudEmptyIcon} style={{fontSize: '100px', color: 'white'}}/>
+      </Plx>
+
+      <Plx parallaxData={dataCloud7} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 50+browserWidth,
+          top: 1/4 * browserHeight,
+        }}
+      >
+        <SvgIcon component={CloudIcon} style={{fontSize: '50px', color: 'white'}}/>
+      </Plx>
+
+      <Plx
+        parallaxData={dataBg}
+        style={{
+          zIndex: -1500,
+          position:'fixed',
+          left: 0,
+          top: 0,
+          width: browserWidth,
+          height: browserHeight * 2,
+        }}
+      >
+      </Plx>
+
+      <Plx parallaxData={dataScrollDown} 
+        style={{
+          zIndex: -1000,
+          position:'fixed',
+          left: 0,
+          top: 1/2 * browserHeight,
+        }}
+      >
+        <div style={{width:'100vw', display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <b style={{fontSize:'20px', color:"white"}}>Please Scroll Down</b>
+        </div>
+      </Plx>
+
+      
+
+
+
     </div>
+    
   );
 
 }
