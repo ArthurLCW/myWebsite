@@ -1,9 +1,7 @@
 import React, {useRef, useState} from "react";
-import Swing from 'react-reveal/Swing';
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 import Plx from "react-plx";
-import { Link } from "react-router-dom";
 import "./Home.scss"
 
 import { SvgIcon } from "@material-ui/core";
@@ -18,9 +16,6 @@ import SunIcon from '@material-ui/icons/WbSunny';
 const Home = () => {
   const browserHeight = window.innerHeight;
   const browserWidth = window.innerWidth;
-  const startPos = 0.1 * browserHeight;
-  const endPos = browserHeight + 0.9 * browserHeight;
-  const length = startPos - endPos;
 
   const dataMoon = [
     {
@@ -468,16 +463,8 @@ const Home = () => {
         </div>
       </Plx>
 
-      
-
-
-
     </div>
-    
   );
-
 }
-
-
 
 export default Home
