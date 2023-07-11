@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 import CuhkszLogo from "../../static/figure/cuhksz_logo.png"
@@ -17,6 +17,10 @@ import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import "./AboutMe.scss"
 
 const AboutMe = () => {
+  useEffect(() => {
+    document.title = 'About Me';
+  }, []);
+
   const browserHeight = window.innerHeight;
   const webpageHeight = document.body.scrollHeight;
   console.log("height of browser: ", browserHeight);

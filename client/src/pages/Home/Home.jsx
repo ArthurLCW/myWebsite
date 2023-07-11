@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 import Plx from "react-plx";
@@ -16,6 +16,9 @@ import SunIcon from '@material-ui/icons/WbSunny';
 const Home = () => {
   const browserHeight = window.innerHeight;
   const browserWidth = window.innerWidth;
+  useEffect(() => {
+    document.title = 'Home';
+  }, []);
 
   const dataMoon = [
     {

@@ -15,9 +15,9 @@ const NavBar = () => {
   const node = useRef();
 
   const handleClickOutside = e => {
-    // if (node.current.contains(e.target)) {
-    //   return;
-    // }
+    if (node.current.contains(e.target)) {
+      return;
+    }
     setMenuVisible(false);
   };
 
