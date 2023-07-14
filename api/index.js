@@ -60,7 +60,7 @@ app.post("/api/comment", (req, res) => {
 
   let date = new Date();
   let options = { 
-    timeZone: 'Australia/Melbourne', 
+    timeZone: 'UTC', 
     year: 'numeric', 
     month: '2-digit', 
     day: '2-digit', 
@@ -69,16 +69,16 @@ app.post("/api/comment", (req, res) => {
     second: '2-digit' 
   };
 
-  let melbourneTime = new Intl.DateTimeFormat('en-GB', options).format(date);
+  let UTCTime = new Intl.DateTimeFormat('en-GB', options).format(date);
 
   // Convert the date to the desired format
-  let parts = melbourneTime.split(", ");
+  let parts = UTCTime.split(", ");
   let datePart = parts[0].split("/").reverse().join("-");
   let timePart = parts[1];
-  let formattedMelbourneTime = `${datePart} ${timePart}`;
+  let formattedUTCTime = `${datePart} ${timePart}`;
 
-  console.log("melb time", formattedMelbourneTime);
-  const mytime = formattedMelbourneTime;
+  console.log("melb time", formattedUTCTime);
+  const mytime = new Date(formattedUTCTime + 'Z');
 
   const values = [
     req.body.username,

@@ -1,0 +1,13 @@
+.blog-content-container{
+  min-height: calc(80vh - 10px) ;
+  margin-left: 10vw;
+  width: 80vw;
+}
+
+
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .blog-content-container{
+    min-height: calc(70vh - 10px) ;
+  }
+}

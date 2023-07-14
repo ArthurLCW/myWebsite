@@ -1,0 +1,25 @@
+.comment-container{
+  // width: 80vw;
+  // margin-left: 10vw;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.toolbar{
+  display: flex;
+  align-items: center;
+	justify-content: space-between;
+}
+
+.comment{
+  // display: block;
+  // width: 100%;
+  // overflow: hidden;
+  // resize: both;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  border: 2px solid #094183;
+  border-radius: 1pc;
+  padding: 10px;
+}
