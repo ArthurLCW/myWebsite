@@ -43,7 +43,7 @@ app.get("/api", (req, res) => {
 app.get("/api/comment/:postname", (req, res) => {
   const postname = req.params.postname;
 
-  const q = "SELECT * FROM comments WHERE `postname`=? GROUP BY time";
+  const q = "SELECT * FROM comments WHERE `postname`=? ORDER BY time";
   getDB().query(q, [postname], (err, data) => {
     if (err) {
       console.log(err);
