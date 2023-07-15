@@ -11,9 +11,11 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 
-
 import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 const CommentInput = ({postname, commentType, username, setVd, handleClick}) => {
@@ -91,6 +93,7 @@ const CommentList = ({ comments }) => {
 
 const Comments = ({postname, commentType}) => {
   let url = process.env.REACT_APP_PROTOCOL+"://"+process.env.REACT_APP_IP+":"+process.env.REACT_APP_BACKEND_PORT;
+  console.log('url: ', url);
   const markdownString = `
   # Header
   

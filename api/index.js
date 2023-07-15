@@ -77,7 +77,7 @@ app.post("/api/comment", (req, res) => {
   let timePart = parts[1];
   let formattedUTCTime = `${datePart} ${timePart}`;
 
-  console.log("melb time", formattedUTCTime);
+  console.log("utc time", formattedUTCTime);
   const mytime = new Date(formattedUTCTime + 'Z');
 
   const values = [
