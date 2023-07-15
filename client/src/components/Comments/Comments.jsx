@@ -14,9 +14,6 @@ import remarkGfm from 'remark-gfm';
 import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 
 const CommentInput = ({postname, commentType, username, setVd, handleClick}) => {
 
