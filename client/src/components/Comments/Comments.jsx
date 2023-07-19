@@ -14,8 +14,10 @@ import remarkGfm from 'remark-gfm';
 import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 
+// axios.defaults.withCredentials = true;
 
-const CommentInput = ({postname, commentType, username, setVd, handleClick}) => {
+
+const CommentInput = ({commentType, setVd, handleClick}) => {
 
   useEffect(() => {
     const vditor = new Vditor("vditor", {
@@ -91,18 +93,7 @@ const CommentList = ({ comments }) => {
 const Comments = ({postname, commentType}) => {
   let url = process.env.REACT_APP_PROTOCOL+"://"+process.env.REACT_APP_IP+":"+process.env.REACT_APP_BACKEND_PORT;
   console.log('url: ', url);
-  const markdownString = `
-  # Header
-  
-  Some text.
-  
-  \`\`\`js
-  const hello = 'Hello, world!';
-  console.log(hello);
-  \`\`\`
-      `;
   const [posts, setPosts] = useState([]);
-  const [username, setUsername] = useState('Visitor');
   const [vd, setVd] = useState(); 
 
   useEffect(() => {
@@ -130,13 +121,12 @@ const Comments = ({postname, commentType}) => {
 
     try {
       let post = {
-        username: username,
         postname: postname,
         comment: comment,
       }
       console.log("try: ", post);
       console.log("frontend connected to url: ", url+"/api/comment");
-      await axios.post(url+"/api/comment", post);
+      await axios.post(url+"/api/comment", post, { withCredentials: true });
       vd.setValue('');
 
       const updateRes = await axios.get(url+`/api/comment/${encodeURIComponent(postname)}`);
@@ -154,9 +144,7 @@ const Comments = ({postname, commentType}) => {
     <div className="comment-container">
       {posts.length > 0 && <CommentList comments={posts}/>}
       <CommentInput 
-        postname={postname} 
         commentType={commentType} 
-        username = {username} 
         setVd={setVd} 
         handleClick={handleClick}
       />

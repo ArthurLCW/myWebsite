@@ -10,13 +10,13 @@ export const AuthContextProvider = ({children}) => {
     JSON.parse(localStorage.getItem('lcw_user')) || {username: 'Visitor'});
   
   const login = async (inputs) => {
-    const res = await axios.post(url+'/api/login', inputs);
+    const res = await axios.post(url+'/api/login', inputs, { withCredentials: true });
     console.log('context login: ', res.data);
     setCurUser(res.data);
   };
 
   const logout = async (inputs) => {
-    await axios.post(url+'/api/logout');
+    await axios.post(url+'/api/logout', {}, { withCredentials: true });
     setCurUser({username: 'Visitor'});
   };
 

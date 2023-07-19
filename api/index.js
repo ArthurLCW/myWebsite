@@ -24,8 +24,13 @@ else if (process.env.PROTOCOL==="https"){
 }
 
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // replace with your frontend origin
+  credentials: true 
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 function hash(input) {
     return crypto.createHash('sha256').update(input).digest('hex');
@@ -65,6 +70,26 @@ app.get("/api/comment/:postname", (req, res) => {
 
 // Post comment. 
 app.post("/api/comment", (req, res) => {
+  // validate before post
+  let authenticatedName = "";
+  let token;  
+  if (!req.cookies.access_token) {
+    authenticatedName = "Visitor";
+    console.log('Not autenticated: ');
+  }else{
+    token = req.cookies.access_token;
+    jwt.verify(token, 'jwtkey', (err, decoded) => {
+      if (err){
+        console.log('autentication fail. token: ',token, 
+          " decoded: ", decoded);
+        return res.json('Authentication NOT valid!');
+      }
+      console.log('decoded: ', decoded);
+      authenticatedName = decoded.username;
+    })
+  }
+
+  
   const q = "INSERT INTO comments(`username`, `postname`, `comment`, `time`) VALUES (?)";
 
   let date = new Date();
@@ -90,7 +115,7 @@ app.post("/api/comment", (req, res) => {
   const mytime = new Date(formattedUTCTime + 'Z');
 
   const values = [
-    req.body.username,
+    authenticatedName,
     req.body.postname,
     req.body.comment,
     mytime,
@@ -151,16 +176,15 @@ app.post('/api/login', (req, res) => {
     }
     else {
       const token = jwt.sign({username: req.body.username}, 'jwtkey');
-      return res
-        .cookie('access_token', token, {
-          httpOnly: true
-        })
+      res
+        .cookie('access_token', token)
         .status(200)
         .json({username: req.body.username});
     }
   });
 });
 
+// Logout
 app.post('/api/logout', (req, res) => {
   res.clearCookie("access_token",{
     sameSite:"none",
