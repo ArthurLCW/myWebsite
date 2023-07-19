@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from 'react-responsive';
 import "./NavBar.scss"
 import Logo from "../../static/figure/logo.png";
-import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core';
+import { Avatar, Button, Icon, SvgIcon, colors } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ListIcon from '@material-ui/icons/List';
+import { AuthContext } from "../../context/authContext";
 
 const NavBar = () => {
-  const [curUser, setCurUser] = useState("Anonymous");
+  // const [curUser, setCurUser] = useState("Visitor");
   const [loginState, setLoginState] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const node = useRef();
+  const {curUser, logout} = useContext(AuthContext);
 
   const handleClickOutside = e => {
     if (node.current.contains(e.target)) {
@@ -93,16 +95,14 @@ const NavBar = () => {
             <h3>Feedback</h3>
           </Link>
           
-          <span>{curUser}</span>
-          {loginState ? 
-            <span>logout</span> : <span>login</span>
+          <span>{curUser?.username}</span>
+          {curUser.username === "Visitor" ? 
+            <Link to="/login" style={{color: 'white'}}>login</Link> 
+              : 
+            <span onClick={logout}>logout</span>
           }
 
           {!loginState && <SvgIcon component={AccountCircleIcon}/>}
-          
-          {/* <span className="write">
-            <Link classname="link" to="/write">Write</Link>
-          </span> */}
 
         </div>
       )}

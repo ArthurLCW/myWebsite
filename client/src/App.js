@@ -10,6 +10,8 @@ import Blogs from "./pages/Blogs/Blogs"
 import Deployment from "./pages/Blogs/blogContent/technology/deployment/Deployment"
 import Sibelius from "./pages/Blogs/blogContent/music/Sibelius/Sibelius"
 import VicPride from "./pages/Blogs/blogContent/others/vicpride/VicPride"
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
@@ -27,9 +29,7 @@ const Layout = () => {
       
       <Footer/> */}
         
-      {/* <NavBar/> */}
       <Outlet/>    
-      {/* <Footer/> */}
     </div>
   )
 }
@@ -76,17 +76,18 @@ const router = createBrowserRouter([
         path:"/blogs/others/vicpride",
         element:<VicPride/>
       },
+      {
+        path:"/login",
+        element:<Login/>
+      },
+      {
+        path:"/register",
+        element:<Register/>
+      },
+
 
     ]
   },
-  // {
-  //   path: "/register",
-  //   element: <Register/>,
-  // },
-  // {
-  //   path: "/login",
-  //   element: <Login/>,
-  // },
 ]);
 
 function App() {
