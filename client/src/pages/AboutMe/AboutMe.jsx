@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import {Link} from "react-router-dom"
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 import CuhkszLogo from "../../static/figure/cuhksz_logo.png"
@@ -107,10 +108,29 @@ const AboutMe = () => {
                     <li key={'projects'}>
                       <h4>Projects: </h4>
                       <ul>
-                        <li>Personal Website</li>
-                        <li>Tweeter and Mastodon Data Analysis</li>
-                        <li>Melbourne H1 Hopper (Android Game)</li>
-                        <li>Shared Whiteboard</li>
+                        <li>
+                          <Link to="https://github.com/ArthurLCW/myWebsite">
+                          Personal Website
+                          </Link>
+                        </li>
+
+                        <li>
+                          <Link to="https://github.com/ArthurLCW/Social-Media-Analysis-COMP90024-Project">
+                          Tweeter and Mastodon Data Analysis
+                          </Link>
+                        </li>
+
+                        <li>
+                          <Link to="https://github.com/ArthurLCW/Melbourne-H1-Hopper-Android-Game--COMP90018">
+                          Melbourne H1 Hopper (Android Game)
+                          </Link>
+                        </li>
+
+                        <li>
+                          <Link to="https://github.com/ArthurLCW/Shared-Whiteboard">
+                          Shared Whiteboard
+                          </Link>
+                        </li>
                       </ul>
                     </li>
                 </ul>
