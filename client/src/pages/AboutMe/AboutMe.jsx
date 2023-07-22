@@ -3,7 +3,8 @@ import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 import CuhkszLogo from "../../static/figure/cuhksz_logo.png"
 import UnimelbLogo from "../../static/figure/unimelb_logo.png"
-import Resume from "../../static/李昌文个人简历_2021_12.pdf"
+import ResumeChi from "../../static/李昌文个人简历_2021_12.pdf"
+import ResumeEng from "../../static/changwen_cv.pdf"
 import Violin from "../../static/figure/violin.png"
 import JSM from "../../static/figure/jsm.png"
 import Bg from "../../static/figure/aboutmeBg.png"
@@ -116,7 +117,12 @@ const AboutMe = () => {
                 
               </li>
             </ul>
-            <a href={Resume} download>My Resume</a>
+
+            <h4>My resume:</h4>
+            <a href={ResumeChi} download>Chinese Version</a>
+            <br/>
+            <a href={ResumeEng} download>English Version</a>
+
             <br/>
           </div>
 
