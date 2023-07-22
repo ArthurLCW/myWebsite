@@ -23,10 +23,10 @@ else if (process.env.PROTOCOL==="https"){
   server = https.createServer(credentials, app);
 }
 
-
+console.log('FRONTEND_ORIGIN:', process.env.FRONTEND_ORIGIN);
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:3000', // replace with your frontend origin
+  origin: process.env.FRONTEND_ORIGIN, // replace with your frontend origin
   credentials: true 
 }));
 app.use(express.json());
@@ -78,7 +78,7 @@ app.post("/api/comment", (req, res) => {
     console.log('Not autenticated: ');
   }else{
     token = req.cookies.access_token;
-    jwt.verify(token, 'jwtkey', (err, decoded) => {
+    jwt.verify(token, process.env.JWTKEY, (err, decoded) => {
       if (err){
         console.log('autentication fail. token: ',token, 
           " decoded: ", decoded);
@@ -175,7 +175,7 @@ app.post('/api/login', (req, res) => {
       return res.json('Username/password error.');
     }
     else {
-      const token = jwt.sign({username: req.body.username}, 'jwtkey');
+      const token = jwt.sign({username: req.body.username}, process.env.JWTKEY);
       res
         .cookie('access_token', token)
         .status(200)
