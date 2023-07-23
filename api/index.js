@@ -150,6 +150,10 @@ app.post('/api/register', (req, res) => {
         connection.release();
         return res.json('Username exists.');
       }
+      if (req.body.username==="Visitor"){
+        connection.release();
+        return res.json('You cannot name yourself Visitor');
+      }
 
       const pwdEncrypted = hash(req.body.password);
       const q = "INSERT INTO users(`username`, `password`) VALUES (?)";
@@ -189,7 +193,7 @@ app.post('/api/login', (req, res) => {
         return res.json('Username/password error.');
       } else {
         const token = jwt.sign({username: req.body.username}, process.env.JWTKEY);
-        res
+        return res
           .cookie('access_token', token)
           .status(200)
           .json({username: req.body.username});
@@ -199,7 +203,7 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/logout', (req, res) => {
-  res.clearCookie("access_token",{
+  return res.clearCookie("access_token",{
     sameSite:"none",
     secure:true
   }).status(200).json("User has been logged out.")

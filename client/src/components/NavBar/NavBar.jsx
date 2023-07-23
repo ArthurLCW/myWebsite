@@ -77,8 +77,18 @@ const NavBar = () => {
               Changwen Li's Website
             </span>
           )}
-          
 			</div>
+
+      {isMobile && (
+        <div style={{display:'flex', flexDirection:'column'}}>
+          <span>{curUser?.username}</span>
+          {curUser.username === "Visitor" ? 
+            <Link to="/login" style={{color: 'white'}}>login</Link> 
+              : 
+            <span onClick={logout} style={{textDecoration:'underline'}}>logout</span>
+          }
+        </div>
+      )}
 
       {!isMobile && (
         <div className="links">
@@ -90,9 +100,6 @@ const NavBar = () => {
           </Link>
           <Link className="link" to="/blogs">
             <h3>Blogs</h3>
-          </Link>
-          <Link className="link" to="#">
-            <h3>Feedback</h3>
           </Link>
           
           <span>{curUser?.username}</span>
