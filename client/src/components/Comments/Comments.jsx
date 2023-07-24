@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,12 +10,17 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
+import { AuthContext } from "../../context/authContext";
 
 import { Avatar, Button, Icon, SvgIcon } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
-
-// axios.defaults.withCredentials = true;
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const CommentInput = ({commentType, setVd, handleClick}) => {
 
@@ -64,26 +69,98 @@ const Markdown = ({ content }) => {
   )
 }
 
-const Comment = ({username, time, comment}) => {
+const Comment = ({commentId, username, time, comment, curUser, setPosts, postname}) => {
   const date = new Date(time);
   const localDateString = date.toLocaleString();
+  let url = process.env.REACT_APP_PROTOCOL+"://"+process.env.REACT_APP_IP+":"+process.env.REACT_APP_BACKEND_PORT;
+
+  const handleDelete = async () => {
+    try {
+      console.log('Clicked')
+      const post = {
+        commentId: commentId,
+        username: username,
+      };
+
+      await axios.delete(url+'/api/comment', { 
+        params: post, 
+        withCredentials: true 
+      });
+
+      // get updated comments
+      const updateRes = await axios.get(url+`/api/comment/${encodeURIComponent(postname)}`);
+      setPosts(updateRes.data);
+
+      console.log('delete success, id: ', commentId);
+    } catch (err) {
+      console.log(err);
+      alert('Error: '+err);
+    }
+  }
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
-    <div className="comment">
-      <h4>Posted by {username}, {localDateString}: </h4>
-      <Markdown content={comment}/>
+    <div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Delete Comment"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this comment?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleDelete} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <div className="comment">
+        <h4>Posted by {username}, {localDateString}: </h4>
+        <Markdown content={comment}/>
+      </div>
+      {(curUser?.username === username && curUser.username !== "Visitor") && (
+        <span onClick={handleClickOpen} style={{display:"inline-flex"}}>
+          <SvgIcon component={DeleteIcon}/> 
+          <h4>Delete</h4>
+          {/* <SvgIcon component={EditIcon}/> */}
+        </span>
+      )}
     </div>
   )
 }
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, curUser, setPosts, postname}) => {
   return (
     <div>
       {comments.map((commentObj, index) => 
         <Comment 
           key={index} 
+          commentId={commentObj.id} 
           username={commentObj.username} 
           time={commentObj.time} 
-          comment={commentObj.comment}
+          comment={commentObj.comment} 
+          curUser={curUser} 
+          setPosts={setPosts} 
+          postname={postname}
         />
       )}
     </div>
@@ -91,6 +168,8 @@ const CommentList = ({ comments }) => {
 };
 
 const Comments = ({postname, commentType}) => {
+  const {curUser, logout} = useContext(AuthContext);
+
   let url = process.env.REACT_APP_PROTOCOL+"://"+process.env.REACT_APP_IP+":"+process.env.REACT_APP_BACKEND_PORT;
   console.log('url: ', url);
   const [posts, setPosts] = useState([]);
@@ -142,7 +221,14 @@ const Comments = ({postname, commentType}) => {
 
   return(
     <div className="comment-container">
-      {posts.length > 0 && <CommentList comments={posts}/>}
+      {posts.length > 0 
+        && 
+      <CommentList 
+        comments={posts} 
+        curUser={curUser}
+        setPosts={setPosts}
+        postname={postname}
+      />}
       <CommentInput 
         commentType={commentType} 
         setVd={setVd} 

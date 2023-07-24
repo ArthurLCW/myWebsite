@@ -10,7 +10,6 @@ import ListIcon from '@material-ui/icons/List';
 import { AuthContext } from "../../context/authContext";
 
 const NavBar = () => {
-  // const [curUser, setCurUser] = useState("Visitor");
   const [loginState, setLoginState] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const node = useRef();

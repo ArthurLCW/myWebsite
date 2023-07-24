@@ -73,6 +73,7 @@ app.get("/api/comment/:postname", (req, res) => {
   });
 });
 
+// post comment
 app.post("/api/comment", (req, res) => {
   let authenticatedName = "";
   let token;  
@@ -132,6 +133,49 @@ app.post("/api/comment", (req, res) => {
     });
   });
 });
+
+// delete comment
+app.delete("/api/comment", (req, res) => {
+  console.log("Delete comment: ", req.query.commentId)
+  const username = req.query.username;
+  let authenticatedName = "";
+  let token;
+  if (!req.cookies.access_token) {
+    return res.json('Authentication NOT exist!');
+  } else {
+    token = req.cookies.access_token;
+    jwt.verify(token, process.env.JWTKEY, (err, decoded) => {
+      if (err) {
+        console.log('Authentication fail. token: ', token, " decoded: ", decoded);
+        return res.json('Authentication NOT valid!');
+      }
+      console.log('Decoded: ', decoded);
+      authenticatedName = decoded.username;
+    })
+  }
+
+  if (authenticatedName !== username) {
+    return res.json('DO NOT TRY TO DELETE OTHERS\' COMMENT!');
+  }
+
+  getDB().getConnection((err, connection) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+
+    connection.query("DELETE FROM comments WHERE `id`= ?", [req.query.commentId], (err, results) => {
+      connection.release();
+      if (err){
+        console.log("Delete post failure: ", err);
+        return res.status(500).json({ error: "Failed to delete post" });
+      };
+      console.log("Delete post successful: ", results);
+      return res.json({ success: true });
+    });
+  });
+});
+
 
 app.post('/api/register', (req, res) => {
   const qCheck = "SELECT * FROM users WHERE `username`=?";
