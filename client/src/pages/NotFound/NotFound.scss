@@ -1,0 +1,17 @@
+$unimelbBlue: #094183;
+.not-found-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $unimelbBlue;
+  min-height: 80vh;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+@media only screen and (max-width:500px) {
+  .not-found-content{
+    min-height: 70vh;
+  }
+}

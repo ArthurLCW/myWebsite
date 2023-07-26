@@ -13,7 +13,14 @@ const Blogs = () => {
     <div>
       <NavBar/>
       <div className="blog-category-list">
-        <BlogCat catName="Technology" catContent={[{"name":"Website deployment procedures", "url":"/blogs/technology/deployment"}]}/>
+        <BlogCat catName="Technology - Front End" 
+          catContent={[
+            {"name":"React", 
+            "url":"/blogs/technology/frontend/react"},
+            {"name":"Spring Parallax", 
+            "url":"/blogs/technology/frontend/react-parallax"}
+          ]}
+        />
         <BlogCat catName="Music" catContent={[{"name":"Sibelius Violin Concerto", "url":"/blogs/music/sibelius"}]}/>
         <BlogCat catName="Others" catContent={[{"name":"Victoria Pride", "url":"/blogs/others/vicpride"}]}/>
       </div>

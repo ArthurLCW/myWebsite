@@ -4,17 +4,17 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import Home from "./pages/Home/Home"
-import AboutMe from "./pages/AboutMe/AboutMe"
-import Blogs from "./pages/Blogs/Blogs"
-import Deployment from "./pages/Blogs/blogContent/technology/deployment/Deployment"
-import Sibelius from "./pages/Blogs/blogContent/music/Sibelius/Sibelius"
-import VicPride from "./pages/Blogs/blogContent/others/vicpride/VicPride"
+import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
+import AboutMe from "./pages/AboutMe/AboutMe";
+import Blogs from "./pages/Blogs/Blogs";
+import Sibelius from "./pages/Blogs/blogContent/music/Sibelius/Sibelius";
+import VicPride from "./pages/Blogs/blogContent/others/vicpride/VicPride";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import BlogReact from "./pages/Blogs/blogContent/technology/frontend/BlogReact";
+import BlogReactParallax from "./pages/Blogs/blogContent/technology/frontend/BlogReactParallax";
 
-import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 import "./style.scss"
 
 const Layout = () => {
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
         element:<Home/>
       },
       {
+        path:"*",
+        element:<NotFound/>
+      },
+      {
         path:"/aboutme",
         element:<AboutMe/>
       },
@@ -56,6 +60,10 @@ const router = createBrowserRouter([
         element:<Blogs/>
       },
       {
+        path:"/blogs/technology/frontend",
+        element:<Blogs/>
+      },
+      {
         path:"/blogs/music",
         element:<Blogs/>
       },
@@ -65,8 +73,12 @@ const router = createBrowserRouter([
       },
 
       {
-        path:"/blogs/technology/deployment",
-        element:<Deployment/>
+        path:"/blogs/technology/frontend/react",
+        element:<BlogReact/>
+      },
+      {
+        path:"/blogs/technology/frontend/react-parallax",
+        element:<BlogReactParallax/>
       },
       {
         path:"/blogs/music/sibelius",
