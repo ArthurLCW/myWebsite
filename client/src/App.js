@@ -14,7 +14,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import BlogReact from "./pages/Blogs/blogContent/technology/frontend/BlogReact";
 import BlogReactParallax from "./pages/Blogs/blogContent/technology/frontend/BlogReactParallax";
-
+import BlogJavaScript from "./pages/Blogs/blogContent/technology/frontend/BlogJavaScript";
 import "./style.scss"
 
 const Layout = () => {
@@ -81,6 +81,10 @@ const router = createBrowserRouter([
         element:<BlogReactParallax/>
       },
       {
+        path:"/blogs/technology/frontend/javascript",
+        element:<BlogJavaScript/>
+      },
+      {
         path:"/blogs/music/sibelius",
         element:<Sibelius/>
       },
@@ -96,8 +100,6 @@ const router = createBrowserRouter([
         path:"/register",
         element:<Register/>
       },
-
-
     ]
   },
 ]);

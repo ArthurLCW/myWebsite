@@ -15,6 +15,8 @@ const Blogs = () => {
       <div className="blog-category-list">
         <BlogCat catName="Technology - Front End" 
           catContent={[
+            {"name":"JavaScript", 
+            "url":"/blogs/technology/frontend/javascript"},
             {"name":"React", 
             "url":"/blogs/technology/frontend/react"},
             {"name":"Spring Parallax", 
