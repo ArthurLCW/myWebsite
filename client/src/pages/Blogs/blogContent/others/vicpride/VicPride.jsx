@@ -12,6 +12,8 @@ import Vid2 from "../../../../../static/figure/vic_pride/vid2.mp4"
 import Comments from "../../../../../components/Comments/Comments";
 import NavBar from "../../../../../components/NavBar/NavBar";
 import Footer from "../../../../../components/Footer/Footer";
+import LazyImage from "../../../../../components/LazyImage/LazyImage";
+import LazyVideo from "../../../../../components/LazyVideo/LazyVideo";
 import "../../BlogContent.scss"
 
 const VicPride = () => {
@@ -36,12 +38,18 @@ const VicPride = () => {
             </div>
             
             <div className="figuresGrid">
-              <div className="figure"><img src={Fig1}/></div>
-              <div className="figure"><img src={Fig2}/></div>
-              <div className="figure"><img src={Fig3}/></div>
-              <div className="figure"><img src={Fig4}/></div>
-              <div className="figure"><img src={Fig5}/></div>
-              <div className="figure"><img src={Fig6}/></div>
+              {/* <div ><img className="figure" src={Fig1}/></div>
+              <div ><img className="figure" src={Fig2}/></div>
+              <div ><img className="figure" src={Fig3}/></div>
+              <div ><img className="figure" src={Fig4}/></div>
+              <div ><img className="figure" src={Fig5}/></div>
+              <div ><img className="figure" src={Fig6}/></div> */}
+              <LazyImage className="figure" src={Fig1}/>
+              <LazyImage className="figure" src={Fig2}/>
+              <LazyImage className="figure" src={Fig3}/>
+              <LazyImage className="figure" src={Fig4}/>
+              <LazyImage className="figure" src={Fig5}/>
+              <LazyImage className="figure" src={Fig6}/>
             </div>
           </div>
 
@@ -51,8 +59,10 @@ const VicPride = () => {
             </div>
 
             <div className="videoContent">
-              <video src={Vid1} controls/>
-              <video src={Vid2} controls/>
+              {/* <video src={Vid1} controls/> */}
+              {/* <video src={Vid2} controls/> */}
+              <LazyVideo src={Vid1}/>
+              <LazyVideo src={Vid2}/>
             </div>
             
             

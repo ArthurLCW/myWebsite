@@ -16,14 +16,14 @@
 .figuresGrid{
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   grid-gap: 10px;
   width: 100%;
-  img{
-    width: 100%;
-  }
 }
 
 .figure{
+  width: 100%;
+  height: auto;
 }
 
 .greeting{
@@ -51,19 +51,6 @@
     width: 100%;
   }
 }
-
-// @media only screen and (max-width:500px) {
-//   .figuresGrid{
-//     grid-template-columns: 1fr;
-//     width: 90;
-//   }
-//   .videos{
-//     width: 90%;
-//     video{
-//       width: 100%;
-//     }
-//   }
-// }
 
 
 @media only screen and (max-width:500px) {

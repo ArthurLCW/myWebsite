@@ -4,18 +4,33 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import NotFound from "./pages/NotFound/NotFound";
-import AboutMe from "./pages/AboutMe/AboutMe";
-import Blogs from "./pages/Blogs/Blogs";
-import Sibelius from "./pages/Blogs/blogContent/music/Sibelius/Sibelius";
-import VicPride from "./pages/Blogs/blogContent/others/vicpride/VicPride";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import BlogReact from "./pages/Blogs/blogContent/technology/frontend/BlogReact";
-import BlogReactParallax from "./pages/Blogs/blogContent/technology/frontend/BlogReactParallax";
-import BlogJavaScript from "./pages/Blogs/blogContent/technology/frontend/BlogJavaScript";
-import "./style.scss"
+import { Suspense, lazy } from "react";
+import "./style.scss";
+
+// import Home from "./pages/Home/Home";
+// import NotFound from "./pages/NotFound/NotFound";
+// import AboutMe from "./pages/AboutMe/AboutMe";
+// import Blogs from "./pages/Blogs/Blogs";
+// import Sibelius from "./pages/Blogs/blogContent/music/Sibelius/Sibelius";
+// import VicPride from "./pages/Blogs/blogContent/others/vicpride/VicPride";
+// import Login from "./pages/Login/Login";
+// import Register from "./pages/Register/Register";
+// import BlogReact from "./pages/Blogs/blogContent/technology/frontend/BlogReact";
+// import BlogReactParallax from "./pages/Blogs/blogContent/technology/frontend/BlogReactParallax";
+// import BlogJavaScript from "./pages/Blogs/blogContent/technology/frontend/BlogJavaScript";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const AboutMe = lazy(() => import("./pages/AboutMe/AboutMe"));
+const Blogs = lazy(() => import("./pages/Blogs/Blogs"));
+const Sibelius = lazy(() => import("./pages/Blogs/blogContent/music/Sibelius/Sibelius"));
+const VicPride = lazy(() => import("./pages/Blogs/blogContent/others/vicpride/VicPride"));
+const Login = lazy(() => import("./pages/Login/Login"));
+const Register = lazy(() => import("./pages/Register/Register"));
+const BlogReact = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReact"));
+const BlogReactParallax = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReactParallax"));
+const BlogJavaScript = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogJavaScript"));
+
 
 const Layout = () => {
   return (
@@ -41,64 +56,109 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element:<Home/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home/>
+          </Suspense>
       },
       {
         path:"*",
-        element:<NotFound/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <NotFound/>
+          </Suspense>
       },
       {
         path:"/aboutme",
-        element:<AboutMe/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <AboutMe/>
+          </Suspense>
       },
       {
         path:"/blogs",
-        element:<Blogs/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Blogs/>
+          </Suspense>
       },
       {
         path:"/blogs/technology",
-        element:<Blogs/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Blogs/>
+          </Suspense>
       },
       {
         path:"/blogs/technology/frontend",
-        element:<Blogs/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Blogs/>
+          </Suspense>
       },
       {
         path:"/blogs/music",
-        element:<Blogs/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Blogs/>
+          </Suspense>
       },
       {
         path:"/blogs/others",
-        element:<Blogs/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Blogs/>
+          </Suspense>
       },
 
       {
         path:"/blogs/technology/frontend/react",
-        element:<BlogReact/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogReact/>
+          </Suspense>
       },
       {
         path:"/blogs/technology/frontend/react-parallax",
-        element:<BlogReactParallax/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogReactParallax/>
+          </Suspense>
       },
       {
         path:"/blogs/technology/frontend/javascript",
-        element:<BlogJavaScript/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogJavaScript/>
+          </Suspense>
       },
       {
         path:"/blogs/music/sibelius",
-        element:<Sibelius/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Sibelius/>
+          </Suspense>
       },
       {
         path:"/blogs/others/vicpride",
-        element:<VicPride/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <VicPride/>
+          </Suspense>
       },
       {
         path:"/login",
-        element:<Login/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Login/>
+          </Suspense>
       },
       {
         path:"/register",
-        element:<Register/>
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Register/>
+          </Suspense>
       },
     ]
   },
