@@ -54,4 +54,95 @@
    ```
 
    当节点从屏幕上移除时，React 将把 `current` 属性设回 `null`。
+   
+   
+
+## 3. 懒加载 Lazy Loading
+
+### 3.1. Router懒加载
+
+lazy(() => import(xxx)) + <Suspense fallback={}> <Home/></Suspense>
+
+<Suspense>内的fallback返回加载未完成时的内容。
+
+```javascript
+const Home = lazy(() => import("./pages/Home/Home"));
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout/>,
+    children: [
+      {
+        path:"/",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home/>
+          </Suspense>
+      },
+```
+
+
+
+### 3.2. 图片的懒加载
+
+IntersectionObserver
+
+Intersection Observer API 提供了一种异步检测目标元素与祖先元素或 [viewport](https://developer.mozilla.org/zh-CN/docs/Glossary/Viewport) 相交情况变化的方法。 
+
+声明IntersectionObserver，callback为发生intersect后（进入以及离开viewport）调用的回调函数，options允许您控制观察者的回调函数的被调用时的环境（根元素、根边距、覆盖比率）
+
+```javascript
+let observer = new IntersectionObserver(callback, options);
+```
+
+给定目标进行观察，可以用useRef的ref，ref.current，然后observe
+
+```javascript
+import React, {useRef, useEffect, useState} from "react";
+
+const LazyImage = (props) => {
+  const ref = useRef();
+  const [inView, setInView] = useState(false);
+
+  let callback = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setInView(true);
+        console.log("visible");
+        observer.unobserve(ref.current); // 重要！确保不会被反复观察
+      }
+    })
+  };
+
+  useEffect(() => {
+    let observer = new IntersectionObserver(callback);
+    if (ref?.current) observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    }
+  }, []);
+
+  return (
+    <div 
+      style={{position: 'relative', 
+        width: '100%', 
+        paddingBottom: '75%'
+      }}
+      ref={ref} 
+    >
+      <img 
+        src={inView? props.src:""}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%'
+        }} 
+      />
+    </div>
+  );
+}
+
+export default LazyImage
+```
 
