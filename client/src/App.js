@@ -30,7 +30,7 @@ const Register = lazy(() => import("./pages/Register/Register"));
 const BlogReact = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReact"));
 const BlogReactParallax = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReactParallax"));
 const BlogJavaScript = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogJavaScript"));
-
+const BlogNetwork = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogNetwork"));
 
 const Layout = () => {
   return (
@@ -132,6 +132,15 @@ const router = createBrowserRouter([
             <BlogJavaScript/>
           </Suspense>
       },
+
+      {
+        path:"/blogs/technology/basics/network",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogNetwork/>
+          </Suspense>
+      },
+
       {
         path:"/blogs/music/sibelius",
         element: 

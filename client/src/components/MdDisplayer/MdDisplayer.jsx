@@ -4,6 +4,17 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
+import network1 from '../../static/blogFiles/basics/network1.png';
+import network2 from '../../static/blogFiles/basics/network2.png';
+import javascript1 from '../../static/blogFiles/frontEnd/javascript1.png';
+
+// Map images
+const imageMap = {
+  "network1.png": network1,
+  "network2.png": network2,
+  "javascript1.png": javascript1,
+};
+
 const Markdown = ({ content }) => {
   return (
     <ReactMarkdown
@@ -17,6 +28,10 @@ const Markdown = ({ content }) => {
               {children}
             </code>
           )
+        },
+        img({node, ...props}) {
+          const newSrc = imageMap[props.src] || props.src;
+          return <img {...props} src={newSrc} style={{maxWidth: "100%"}}/>
         }
       }}
       remarkPlugins={[remarkGfm]}

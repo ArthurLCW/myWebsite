@@ -96,9 +96,24 @@ const list=[{myLove:'sq'}];
 const listCopy = JSON.parse(JSON.stringify(list))
 ```
 
+### 6. 闭包
 
+闭包=内层函数+引用外层函数的变量
 
+```javascript
+function outer(){
+	const a = 1;
+	function inner(){
+		console.log(a);
+	}
+	inner();
+}
+outer();
+```
 
+例子：统计某一函数发动了几次。
 
+意义：保证变量私有。
 
+![1690627984672](javascript1.png)
 

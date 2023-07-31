@@ -28,6 +28,45 @@ const CommentInput = ({commentType, setVd, handleClick}) => {
     const vditor = new Vditor("vditor", {
       height: '50vh',
       width: '80vw',
+      toolbar: [
+        "emoji",
+        "headings",
+        "bold",
+        "italic",
+        "strike",
+        "link",
+        "|",,
+        "list",
+        "ordered-list",
+        "check",
+        "outdent",
+        "indent",
+        "table",
+        "|",
+        "quote",
+        "line",
+        "code",
+        "inline-code",
+        "insert-before",
+        "insert-after", 
+        "|",
+        "undo",
+        "redo",
+        "|",
+        "fullscreen",
+        "edit-mode",
+        "both",
+        "preview",
+        "export",
+        "|",
+        "help",
+      ],
+      preview:{
+        hljs: {
+          style: 'solarized-light'
+        }
+      },
+
       after: () => {
         vditor.setValue("");
         setVd(vditor);

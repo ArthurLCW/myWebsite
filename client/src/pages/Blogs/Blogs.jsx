@@ -23,6 +23,12 @@ const Blogs = () => {
             "url":"/blogs/technology/frontend/react-parallax"}
           ]}
         />
+        <BlogCat catName="Technology - Computer Basics" 
+          catContent={[
+            {"name":"Network", 
+            "url":"/blogs/technology/basics/network"},
+          ]}
+        />
         <BlogCat catName="Music" catContent={[{"name":"Sibelius Violin Concerto", "url":"/blogs/music/sibelius"}]}/>
         <BlogCat catName="Others" catContent={[{"name":"Victoria Pride", "url":"/blogs/others/vicpride"}]}/>
       </div>
