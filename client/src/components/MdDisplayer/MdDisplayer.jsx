@@ -8,6 +8,7 @@ import network1 from '../../static/blogFiles/basics/network1.png';
 import network2 from '../../static/blogFiles/basics/network2.png';
 import network3 from '../../static/blogFiles/basics/network3.png';
 import network4 from '../../static/blogFiles/basics/network4.png';
+import network5 from '../../static/blogFiles/basics/network5.png';
 
 import javascript1 from '../../static/blogFiles/frontEnd/javascript1.png';
 
@@ -18,6 +19,7 @@ const imageMap = {
   "javascript1.png": javascript1,
   "network3.png": network3,
   "network4.png": network4,
+  "network5.png": network5,
 };
 
 const Markdown = ({ content }) => {
