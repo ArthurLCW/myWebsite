@@ -11,9 +11,8 @@ const Sibelius = () => {
       <NavBar/>
       <div className="blog-content-container">
         <h1>Sibelius: Violin Concerto in D Minor</h1>
-
         <div className="youtube">
-          <iframe id="myiframe" className="frame_video" src="https://www.youtube.com/embed/R0xpXJrbtNk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+          <iframe id="myiframe" className="frame_video" src="https://www.youtube.com/embed/zI4mLStMifw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
         </div>
 
         <div className="comments">
