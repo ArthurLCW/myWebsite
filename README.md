@@ -8,7 +8,7 @@ This website is my personal website [(https://www.changwenli.com)](https://www.c
 
 ### Technology Stack:
 
-React, Node.js, AWS.
+React, Node.js, MySQL, AWS.
 
 
 
