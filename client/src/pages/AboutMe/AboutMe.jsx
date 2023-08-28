@@ -116,7 +116,7 @@ const AboutMe = () => {
 
                         <li>
                           <Link to="https://github.com/ArthurLCW/Social-Media-Analysis-COMP90024-Project">
-                          Tweeter and Mastodon Data Analysis
+                          Tweeter and Mastodon Data Analysis and Demonstration
                           </Link>
                         </li>
 
