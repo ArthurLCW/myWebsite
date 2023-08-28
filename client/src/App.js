@@ -28,6 +28,7 @@ const VicPride = lazy(() => import("./pages/Blogs/blogContent/others/vicpride/Vi
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const BlogReact = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReact"));
+const BlogCSS = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogCSS"));
 const BlogReactParallax = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReactParallax"));
 const BlogJavaScript = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogJavaScript"));
 const BlogNetwork = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogNetwork"));
@@ -134,7 +135,13 @@ const router = createBrowserRouter([
             <BlogJavaScript/>
           </Suspense>
       },
-
+      {
+        path:"/blogs/technology/frontend/css",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogCSS/>
+          </Suspense>
+      },
       {
         path:"/blogs/technology/basics/network",
         element: 

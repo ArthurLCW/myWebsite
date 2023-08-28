@@ -19,6 +19,8 @@ const Blogs = () => {
             "url":"/blogs/technology/frontend/javascript"},
             {"name":"React", 
             "url":"/blogs/technology/frontend/react"},
+            {"name":"CSS", 
+            "url":"/blogs/technology/frontend/css"},
             {"name":"Spring Parallax", 
             "url":"/blogs/technology/frontend/react-parallax"}
           ]}
