@@ -18,11 +18,11 @@ eg. 6=="6" (T);
 
 3. **var**和**let**的区别：
 
-    使用var声明的变量，其作用域为该语句所在的函数内，且存在变量提升现象； 
+    使用var声明的变量，其**作用域为该语句所在的函数内**，且存在变量提升现象（即可以先使用变量再声明，先上车后买票）； 
 
     使用let声明的变量，其作用域为该语句所在的代码块内，不存在变量提升； 
 
-    let不允许在相同作用域内，重复声明同一个变量。 
+    let不允许在相同作用域内，重复声明同一个变量。 var可以重复声明。
 
 ### 3. 原型与原型链
 
@@ -36,11 +36,16 @@ eg. 6=="6" (T);
    String.prototype // String {'', constructor: ƒ, anchor: ƒ, at: ƒ, big: ƒ, …}
    ```
 
+   `示例.__proto__` （隐式原型）==`类.prototype`（显示原型）
+
 2. difference from class in C++/Java
 
    1. **Inheritance mechanism**: In Javascript, the object can inherit from an instance. 
-
    1. __Flexibility__: In Javascript, you can modify the class/prototype in runtime. In C++, No. 
+
+3. `xx instanceof XX` is true, if `XX` is on the prototype chain of `xx`. For instance, `array instanceof Array` is true.
+
+   Notice: `xx typeof` **only** returns the type of the data (number, string, boolean, undefined, null, object)
 
 ### 4. 异步编程
 
@@ -89,12 +94,54 @@ eg. 6=="6" (T);
 
 ### 5. 深浅拷贝
 
-万能深拷贝方法：
+#### 1. 准万能深拷贝方法：
+
+无法处理/拷贝function、undefined、原型链等
 
 ```javascript
 const list=[{myLove:'sq'}];
 const listCopy = JSON.parse(JSON.stringify(list))
 ```
+
+#### 2. 真万能深拷贝方法
+
+##### 2.1. 调包
+
+```javascript
+const _ = require('lodash');
+const clonedObject = _.cloneDeep(originalObject);
+```
+
+##### 2.2. 手写deepClone
+
+```javascript
+function deepClone(obj){
+    // 1. 判断传入的obj是不是对象，如果不是对象直接返回
+    if (typeof obj !== 'object' || obj == null){
+        return obj
+    }
+
+    // 2. 初始化返回结果（数组或者对象）
+    let result;
+    if (obj instanceof Array){
+        result = []
+    }
+    else{
+        result = {}
+    }
+
+    // 3. 遍历obj所有的key，递归调用deepClone
+    for (let key in obj){
+        if (obj.hasOwnProperty(key)){ // hasOwnProperty保证key不是原型的属性
+            result[key] = deepClone(obj[key])
+        }
+    }
+
+    return result;
+}
+```
+
+
 
 ### 6. 闭包
 
@@ -117,3 +164,40 @@ outer();
 
 ![1690627984672](javascript1.png)
 
+### 7. JavaScript导入类
+
+一般JavaScript导入方法：
+
+test1.js
+
+```javascript
+const exportClass = () => {
+    return 2;
+}
+
+// export default exportClass;
+module.exports = {
+    exportClass : exportClass
+};
+```
+
+test2.js
+
+```javascript
+const { exportClass } = require('./test1.js');
+console.log(exportClass()); // 2
+```
+
+import xxx; export default xxx; 为webpack中使用的方法
+
+### 8. [事件捕获与冒泡](https://www.bilibili.com/video/BV1m7411L7YW/?spm_id_from=333.788&vd_source=a82ddca015c3600e3ebfadd0eb69d716)
+
+#### 1. DOM事件流
+
+事件捕获阶段（自上而下）+处于目标阶段+事件冒泡阶段（自下而上）
+
+#### 2. 例子
+
+![1693208037428](javascript2.png)
+
+事件捕获优先于事件冒泡。事件捕获从上到下，所以先触发mother再触发daughter。然后再事件冒泡自下而上，先baby再grandma。

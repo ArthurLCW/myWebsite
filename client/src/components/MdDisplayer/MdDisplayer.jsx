@@ -12,12 +12,14 @@ import network5 from '../../static/blogFiles/basics/network5.png';
 import network6 from '../../static/blogFiles/basics/network6.png';
 
 import javascript1 from '../../static/blogFiles/frontEnd/javascript1.png';
+import javascript2 from '../../static/blogFiles/frontEnd/javascript2.png';
 
 // Map images
 const imageMap = {
   "network1.png": network1,
   "network2.png": network2,
   "javascript1.png": javascript1,
+  "javascript2.png": javascript2,
   "network3.png": network3,
   "network4.png": network4,
   "network5.png": network5,

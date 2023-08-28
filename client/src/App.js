@@ -31,6 +31,8 @@ const BlogReact = lazy(() => import("./pages/Blogs/blogContent/technology/fronte
 const BlogReactParallax = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReactParallax"));
 const BlogJavaScript = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogJavaScript"));
 const BlogNetwork = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogNetwork"));
+const BlogAlgorithm = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogAlgorithm"));
+const BlogProgramming = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogProgramming"));
 
 const Layout = () => {
   return (
@@ -138,6 +140,21 @@ const router = createBrowserRouter([
         element: 
           <Suspense fallback={<div>Loading...</div>}>
             <BlogNetwork/>
+          </Suspense>
+      },
+
+      {
+        path:"/blogs/technology/basics/algorithm",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogAlgorithm/>
+          </Suspense>
+      },
+      {
+        path:"/blogs/technology/basics/programming",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogProgramming/>
           </Suspense>
       },
 

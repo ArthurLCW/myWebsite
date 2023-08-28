@@ -27,6 +27,10 @@ const Blogs = () => {
           catContent={[
             {"name":"Network", 
             "url":"/blogs/technology/basics/network"},
+            {"name":"Data Structure and Algorithm", 
+            "url":"/blogs/technology/basics/algorithm"},
+            {"name":"Programming", 
+            "url":"/blogs/technology/basics/programming"},
           ]}
         />
         <BlogCat catName="Music" catContent={[{"name":"Sibelius Violin Concerto", "url":"/blogs/music/sibelius"}]}/>
