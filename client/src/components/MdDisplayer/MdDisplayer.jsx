@@ -14,6 +14,9 @@ import network6 from '../../static/blogFiles/basics/network6.png';
 import javascript1 from '../../static/blogFiles/frontEnd/javascript1.png';
 import javascript2 from '../../static/blogFiles/frontEnd/javascript2.png';
 
+import preOrder from '../../static/blogFiles/basics/preOrder.png';
+import midOrder from '../../static/blogFiles/basics/midOrder.png';
+import postOrder from '../../static/blogFiles/basics/postOrder.png';
 // Map images
 const imageMap = {
   "network1.png": network1,
@@ -23,7 +26,10 @@ const imageMap = {
   "network3.png": network3,
   "network4.png": network4,
   "network5.png": network5,
-  "network6.png": network6
+  "network6.png": network6,
+  "preOrder.png": preOrder,
+  "midOrder.png": midOrder,
+  "postOrder.png": postOrder,
 };
 
 const Markdown = ({ content }) => {

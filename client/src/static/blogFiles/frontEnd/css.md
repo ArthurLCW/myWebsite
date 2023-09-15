@@ -164,6 +164,468 @@ cssCopy codespan {
 
 上面的 CSS 会使所有`<span>`元素表现得像块级元素一样。
 
+## 3. 选择器优先级
+
+以下是 CSS 选择器的优先级从高到低的顺序：
+
+1. **内联样式**：直接在 HTML 元素上使用 `style` 属性定义的样式。
+
+   ```css
+   htmlCopy code<div style="color: red;">这是内联样式</div>
+   ```
+
+2. **ID 选择器**：使用 `#` 符号定义的选择器。
+
+   ```css
+   cssCopy code#myId {
+     color: blue;
+   }
+   ```
+
+3. **类选择器、属性选择器和伪类**：使用 `.` 符号、`[]` 符号和 `:` 符号定义的选择器。
+
+   ```css
+   cssCopy code.myClass {
+     color: green;
+   }
+   
+   [data-attribute="value"] {
+     color: yellow;
+   }
+   
+   :hover {
+     color: pink;
+   }
+   ```
+
+4. **元素选择器和伪元素**：直接使用元素名称和 `::` 符号定义的选择器。
+
+   ```css
+   cssCopy codep {
+     color: brown;
+   }
+   
+   ::before {
+     content: "伪元素";
+   }
+   ```
+
+5. **通配符选择器**：使用 `*` 符号定义的选择器。
+
+   ```css
+   cssCopy code* {
+     color: orange;
+   }
+   ```
+
+6. **继承的样式**：样式可以从父元素继承到子元素。
+
+7. **默认的浏览器样式**：如果没有任何样式被应用，浏览器会使用其默认样式。
+
+当多个选择器选择同一个元素并有冲突时，优先级更高的选择器的样式会被应用。如果优先级相同，则最后定义的样式会被应用。
+
+**例子**：
+
+考虑以下的 CSS 和 HTML：
+
+```css
+cssCopy code#myId {
+  color: blue;
+}
+
+.myClass {
+  color: green;
+}
+
+p {
+  color: brown;
+}
+htmlCopy code<p id="myId" class="myClass">这是一个段落。</p>
+```
+
+虽然这个段落被三个选择器选择，但 `#myId` 的优先级最高，所以段落的颜色会是蓝色。
+
+
+
+## 4. 伪类和伪元素
+
+伪类和伪元素都是 CSS 的特性，它们允许你为页面上的某些元素或元素的某些部分应用样式，而这些元素或部分可能并没有具体的 HTML 表示。它们都使用冒号 (`:`) 作为前缀，但伪元素使用两个冒号 (`::`)。
+
+### 1. 伪类 (Pseudo-classes)
+
+伪类用于定义元素的特殊状态。例如，当鼠标悬停在链接上时，你可以使用 `:hover` 伪类为该链接定义样式。
+
+**常见的伪类**：
+
+- `:hover`：元素被鼠标悬停时的状态。
+- `:active`：元素被激活（例如，鼠标按下一个按钮）时的状态。
+- `:focus`：元素获得焦点（例如，输入框被选中）时的状态。
+- `:nth-child()`：选择其父元素的第 n 个子元素。
+- `:first-child` 和 `:last-child`：选择其父元素的第一个或最后一个子元素。
+
+**例子**：
+
+```css
+cssCopy codea:hover {
+    color: red;
+}
+
+input:focus {
+    border-color: blue;
+}
+```
+
+### 2. 伪元素 (Pseudo-elements)
+
+伪元素用于选择元素的某一部分，这部分在 HTML 中并没有具体的表示。**一个选择器只能有一个伪元素**。例如，你可以使用 `::before` 和 `::after` 伪元素在元素的内容之前或之后插入内容。
+
+**常见的伪元素**：
+
+- `::before`：在元素的内容之前插入内容。
+- `::after`：在元素的内容之后插入内容。
+- `::first-line`：选择元素的第一行。
+- `::first-letter`：选择元素的第一个字母。
+
+**例子**：
+
+```css
+cssCopy codep::before {
+    content: "开头：";
+}
+
+p::after {
+    content: " - 结尾";
+}
+
+p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+}
+```
+
+总之，伪类和伪元素为开发者提供了强大的工具，使其能够为元素的特定状态或部分应用样式，而无需额外的 HTML 标记。
+
+
+
+## 5. padding margin border书写格式
+
+以下是关于`margin`的基本定义和使用方法：
+
+1. **方向**:
+
+   - ```
+     margin
+     ```
+
+      可以分为四个方向来定义：
+
+     - `margin-top`: 定义元素的顶部外边距。
+     - `margin-right`: 定义元素的右侧外边距。
+     - `margin-bottom`: 定义元素的底部外边距。
+     - `margin-left`: 定义元素的左侧外边距。
+
+2. **简写属性**:
+
+   - 你可以使用 
+
+     ```
+     margin
+     ```
+
+      属性的简写形式来同时为四个方向设置外边距。
+
+     - `margin: 10px;`：所有四个方向的外边距都为10px。
+     - `margin: 10px 20px;`：上下外边距为10px，左右外边距为20px。
+     - `margin: 10px 20px 30px;`：上外边距为10px，左右外边距为20px，底部外边距为30px。
+     - `margin: 10px 20px 30px 40px;`：上外边距为10px，右外边距为20px，底部外边距为30px，左外边距为40px（顺时针）。
+
+3. **值**:
+
+   - ```
+     margin
+     ```
+
+      可以接受以下类型的值：
+
+     - **固定值**：如 `px`, `em`, `rem`, `cm`, `mm` 等。
+     - **百分比值**：基于父元素的宽度。
+     - **自动值**：`auto`，通常用于水平居中块级元素。
+
+4. **外边距合并**:
+
+   - 在某些情况下，垂直方向上的外边距会合并（或称为叠加）。这意味着，***如果两个垂直相邻的块级元素的外边距相遇，它们之间的距离将是两个外边距值中的较大者，而不是它们的总和***。
+
+5. **负值**:
+
+   - `margin` 可以接受负值，这在某些布局技巧中特别有用。
+
+
+
+## 6. 选择器样式
+
+1. **元素选择器**： **Element Selector** 
+
+   - **描述**：选择所有指定的 HTML 元素。
+
+   - 示例：
+
+     ```css
+     cssCopy codep {
+         color: blue;
+     }
+     ```
+
+     所有 
+
+     ```
+     <p>
+     ```
+
+      标签的文本颜色都会变为蓝色。
+
+2. **类选择器**： **Class Selector** 
+
+   - **描述**：选择所有带有指定类名的元素。
+
+   - 示例：
+
+     ```css
+     cssCopy code.highlight {
+         background-color: yellow;
+     }
+     ```
+
+     HTML:
+
+     ```
+     htmlCopy code<p class="highlight">这段文本背景色为黄色。</p>
+     ```
+
+3. **ID 选择器**： **ID Selector** 
+
+   - **描述**：选择带有指定 ID 的元素。每个 ID 应该在页面上是唯一的。
+
+   - 示例：
+
+     ```css
+     #header {
+         background-color: gray;
+     }
+     ```
+
+     HTML:
+
+     ```html
+     <div id="header">这是一个灰色背景的头部。</div>
+     ```
+
+4. **后代选择器**： **Descendant Selector** 
+
+   - **描述**：选择指定元素的所有后代。
+
+   - 示例：
+
+     ```css
+     article p {
+         font-size: 18px;
+     }
+     ```
+
+     HTML:
+
+     ```html
+     <article>
+         <p>这段文本的字体大小为18px。</p>
+         <div><p>这段文本的字体大小也为18px，因为它是<article>的后代。</p></div>
+     </article>
+     ```
+
+5. **子元素选择器**： **Child Selector** 
+
+   - **描述**：选择指定元素的**直接**子元素。看html范例！
+
+   - 示例：
+
+     ```css
+     ul>li {
+         list-style-type: square;
+     }
+     ```
+
+     HTML:
+
+     ```html
+     <ul>
+         <li>这是一个方形的列表项。</li>
+         <li>这也是。</li>
+         <ol><li>这不是，因为它不是<ul>的直接子元素。</li></ol>
+     </ul>
+     ```
+
+6. **属性选择器**： **Attribute Selector** 
+
+   - **描述**：选择带有指定属性和值的元素。
+
+   - 示例：
+
+     ```css
+     input[type="text"] {
+         border: 1px solid black;
+     }
+     ```
+
+     HTML:
+
+     ```html
+     <input type="text" placeholder="这个输入框有黑色边框。">
+     <input type="password" placeholder="这个输入框没有特定样式。">
+     ```
+
+7. **伪类选择器**： **Pseudo-class Selector** 
+
+   - **描述**：选择元素的特定状态，如悬停、焦点、激活等。
+
+   - 示例：
+
+     ```css
+     a:hover {
+         color: red;
+     }
+     
+     li:nth-child(odd) {
+         background-color: lightgray;
+     }
+     ```
+
+     HTML:
+
+     ```html
+     <a href="#">悬停在我上面，我会变红。</a>
+     <ul>
+         <li>我是灰色背景的。</li>
+         <li>我是默认背景的。</li>
+         <li>我是灰色背景的。</li>
+     </ul>
+     ```
+
+8. **伪元素选择器**： **Pseudo-element Selector** 
+
+   - **描述**：选择元素的某一部分，如第一行、第一个字母等。
+
+   - 示例：
+
+     ```css
+     p::first-line {
+         font-weight: bold;
+     }
+     
+     p::first-letter {
+         font-size: 2em;
+     }
+     ```
+
+     HTML:
+
+     ```
+     htmlCopy code<p>这是一个长段落。只有第一行是粗体的，而第一个字母的字体大小是其他字母的两倍。</p>
+     ```
+
+9. **分组选择器**： **Grouping Selector** 
+
+   - **描述**：将多个选择器组合在一起，为所有选择器应用相同的样式。
+
+   - 示例：
+
+     ```css
+     h1, h2, h3 {
+         font-family: "Arial", sans-serif;
+     }
+     ```
+
+     HTML:
+
+     ```html
+     <h1>我是 Arial 字体。</h1>
+     <h2>我也是。</h2>
+     <h3>我同样是。</h3>
+     ```
+
+10. **通配符选择器**： **Wildcard Selector** 
+
+    - **描述**：选择页面上的所有元素。
+
+    - 示例：
+
+      ```css
+      * {
+          box-sizing: border-box;
+      }
+      ```
+
+11. **相邻兄弟选择器**： **Adjacent Sibling Selector** 
+
+    - **描述**：选择紧接在另一个元素后的元素，且两者共享同一个父元素。
+
+    - 示例：
+
+      ```css
+      h2 + p {
+          margin-top: 20px;
+      }
+      ```
+
+      HTML:
+
+      ```html
+      <h2>标题</h2>
+      <p>这段文本上边距为20px，因为它紧跟在<h2>后面。</p>
+      ```
+
+12. **通用兄弟选择器**： **General Sibling Selector** 
+
+    - **描述**：选择同一父元素下的所有兄弟元素。
+
+    - 示例：
+
+      ```css
+      h2 ~ p {
+          color: green;
+      }
+      ```
+
+      HTML:
+
+      ```html
+      <h2>标题</h2>
+      <p>我是绿色的。</p>
+      <div>我是默认颜色的。</div>
+      <p>我也是绿色的，因为我和上面的<p>都是<h2>的兄弟元素。</p>
+      ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
