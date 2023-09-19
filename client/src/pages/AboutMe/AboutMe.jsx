@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import CuhkszLogo from "../../static/figure/cuhksz_logo.png"
 import UnimelbLogo from "../../static/figure/unimelb_logo.png"
 import ResumeChi from "../../static/李昌文个人简历.pdf"
-import ResumeEng from "../../static/changwen_cv.pdf"
+import ResumeEng from "../../static/Changwen_Li_Resume.pdf"
 import Violin from "../../static/figure/violin.png"
 import JSM from "../../static/figure/jsm.png"
 import Bg from "../../static/figure/aboutmeBg.png"
