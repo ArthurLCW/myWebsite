@@ -21,8 +21,8 @@ const Blogs = () => {
             "url":"/blogs/technology/frontend/react"},
             {"name":"CSS", 
             "url":"/blogs/technology/frontend/css"},
-            {"name":"Spring Parallax", 
-            "url":"/blogs/technology/frontend/react-parallax"}
+            {"name":"Frond End Programming",
+            "url":"/blogs/technology/frontend/front-end-programming"},
           ]}
         />
         <BlogCat catName="Technology - Computer Basics" 

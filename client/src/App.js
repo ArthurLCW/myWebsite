@@ -29,8 +29,8 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const BlogReact = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReact"));
 const BlogCSS = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogCSS"));
-const BlogReactParallax = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogReactParallax"));
 const BlogJavaScript = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogJavaScript"));
+const BlogFrontEndProgramming = lazy(() => import("./pages/Blogs/blogContent/technology/frontend/BlogFrontEndProgramming"));
 const BlogNetwork = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogNetwork"));
 const BlogAlgorithm = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogAlgorithm"));
 const BlogProgramming = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogProgramming"));
@@ -122,13 +122,6 @@ const router = createBrowserRouter([
           </Suspense>
       },
       {
-        path:"/blogs/technology/frontend/react-parallax",
-        element: 
-          <Suspense fallback={<div>Loading...</div>}>
-            <BlogReactParallax/>
-          </Suspense>
-      },
-      {
         path:"/blogs/technology/frontend/javascript",
         element: 
           <Suspense fallback={<div>Loading...</div>}>
@@ -140,6 +133,13 @@ const router = createBrowserRouter([
         element: 
           <Suspense fallback={<div>Loading...</div>}>
             <BlogCSS/>
+          </Suspense>
+      },
+      {
+        path:"/blogs/technology/frontend/front-end-programming",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogFrontEndProgramming/>
           </Suspense>
       },
       {

@@ -335,17 +335,7 @@ console.log(exportClass()); // 2
 
 import xxx; export default xxx; 为webpack中使用的方法
 
-### 8. [事件捕获与冒泡](https://www.bilibili.com/video/BV1m7411L7YW/?spm_id_from=333.788&vd_source=a82ddca015c3600e3ebfadd0eb69d716)
 
-#### 1. DOM事件流
-
-事件捕获阶段（自上而下）+处于目标阶段+事件冒泡阶段（自下而上）
-
-#### 2. 例子
-
-![1693208037428](javascript2.png)
-
-事件捕获优先于事件冒泡。事件捕获从上到下，所以先触发mother再触发daughter。然后再事件冒泡自下而上，先baby再grandma。
 
 ### 9. this
 
@@ -481,122 +471,7 @@ obj.greet();  // 1秒后输出：Hello, Charlie
 
 
 
-### 10. 防抖（debounce）
-
-**原理**：如果在一个时间段内连续触发同一个事件，只执行最后一次。
-
-**常见应用场景**：搜索框实时搜索、窗口大小调整。
-
-**示例**：
-
-想象一个搜索框，用户在输入时，你希望能够实时显示搜索结果。但如果每次用户输入一个字符时都发送一个请求到服务器，服务器可能会被大量的请求淹没。使用防抖，只有当用户停止输入一段时间（例如300毫秒）后，才会发送一个请求。
-
-```javascript
-function debounce(func, delay) {
-    let timeout;
-    return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            func.apply(context, args);
-        }, delay);
-    };
-}
-
-const searchInput = document.getElementById('searchInput');
-
-searchInput.addEventListener('input', debounce(function() {
-    console.log('Sending request for:', searchInput.value);
-}, 300));
-```
-
-**难点0：流程**
-
-clearTimeout，再setTimeout。例子：设置一个按钮，点击后会100ms后触发事件。第一次点击，设置100ms后触发。99ms后第二次点击，重新计时，事件再过100ms后触发
-
-**难点1：回调函数的正确传入方式**
-
-不可以直接searchInput.addEventListener('input', debounce(func)).直接这样写会在绑定时就执行debounce(func)。正确处理办法是debounce(func) return一个匿名或者箭头函数。
-
-**难点2：闭包**
-
-不用闭包的话每次会生成一个新的timeout，不能实现防抖效果。
-
-**难点3：重新绑定**
-
-非构造非方法非匿名非箭头的函数的this值默认为global/window，这可能导致一些问题。用apply显示的修改this值。
-
-
-
-### 11.节流 (Throttle)
-
-**原理**：在一个时间段内，不管事件触发多少次，只执行一次。
-
-**常见应用场景**：滚动事件监听、持续的鼠标移动。
-
-**示例**：
-
-假设你有一个网页，当用户滚动到页面底部时，你希望加载更多的内容。用户在滚动页面时，滚动事件会非常频繁地触发。使用节流，即使用户连续滚动，你也只每隔一段时间（例如200毫秒）检查一次。
-
-```javascript
-function throttle(func, delay) {
-    let lastTime = 0;
-    return function() {
-        const now = Date.now();
-        if (now - lastTime > delay) {
-            lastTime = now;
-            func.apply(this, arguments);
-        }
-    };
-}
-
-window.addEventListener('scroll', throttle(function() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log('Load more content');
-    }
-}, 200));
-```
-
-
-
-### 12. 浏览器缓存
-
-#### 1. 强缓存
-
-- **Expires**：这是HTTP/1.0的属性，它指定了一个绝对的过期时间。例如：`Expires: Wed, 21 Oct 2020 07:28:00 GMT`。
-- **Cache-Control**：这是HTTP/1.1的属性，它提供了更多的缓存控制选项。例如：
-  - `max-age=3600`：资源会在3600秒后过期。
-  - `public`：资源可以被所有用户缓存，包括在中间代理服务器中。
-  - `private`：资源只能被浏览器缓存。
-  - `no-cache`：需要向服务器验证资源的有效性。
-  - `no-store`：不缓存资源。
-
-#### 2. 协商缓存
-
-当强缓存失效或不适用时，浏览器会尝试使用协商缓存。这涉及到与服务器的通信，以确定资源是否已更改。
-
-- **Last-Modified / If-Modified-Since**：服务器通过`Last-Modified`标头提供资源的最后修改日期。在后续的请求中，浏览器使用`If-Modified-Since`标头提供此日期，如果资源未更改，服务器会返回`304 Not Modified`状态码。
-- **ETag / If-None-Match**：`ETag`是资源的特定版本的标识符。如果资源更改，`ETag`也会更改。浏览器在后续的请求中使用`If-None-Match`标头提供此标识符，服务器会比较它，如果资源未更改，返回`304 Not Modified`状态码。
-
-#### 3. **其他缓存机制**:
-
-- **Service Workers**：这是一种在浏览器后台运行的脚本，它可以拦截和缓存网络请求，使得资源可以离线使用。
-- **Memory Cache**：浏览器的内存中的短暂缓存，主要用于当前会话。当浏览器关闭或页面刷新时，内存缓存会被清空。
-- **Disk Cache**：浏览器在硬盘上的缓存，用于长期存储。即使浏览器关闭或电脑重启，磁盘缓存也会保留。
-
-#### 4. 优化策略：
-
-1. **设置合适的缓存策略**：对于不经常更改的资源（如库、框架、图标等），使用长时间的强缓存。对于可能更改的资源，使用协商缓存。
-2. **版本控制**：当资源更改时，更改其URL（例如，通过添加查询参数或更改文件名）以确保浏览器加载新版本。
-3. **使用Service Workers**：为应用程序提供离线支持和更细粒度的缓存控制。
-4. **优先考虑内存缓存**：对于频繁使用的资源，使其保持在内存缓存中可以提供最快的加载速度。
-
-总的来说，正确地使用浏览器缓存可以显著提高网站的性能，减少服务器的负担，并为用户提供更快的加载速度。
-
-
-
-### 13. 事件循环机制
+### 10. 事件循环机制
 
 #### 1. 宏任务 (Macrotasks)
 
@@ -655,7 +530,7 @@ console.log('End');
 
 
 
-### 14. 箭头函数与匿名函数的区别
+### 11. 箭头函数与匿名函数的区别
 
 1. **`this` 绑定**: 箭头函数不绑定自己的 `this`。它继承了包围它的函数的 `this` 值。传统的匿名函数有自己的 `this` 值。
 2. **参数**: 箭头函数不绑定 `arguments` 对象。如果你在箭头函数内部引用 `arguments`，它将采用包围它的函数的 `arguments` 值。传统的匿名函数绑定其自己的 `arguments` 对象。
@@ -665,20 +540,153 @@ console.log('End');
 
 
 
-### 15. 网页性能优化
+### 12. js array
 
-#### 1. Service Worker
+1. **添加元素**:
 
-Service Worker 是一个在浏览器背景中运行的 JavaScript 脚本，它独立于主线程，因此不会因为页面的计算或渲染任务而被阻塞。这使得 Service Worker 非常适合执行那些不需要用户交互并且希望在后台运行的任务，例如推送通知和背景同步。 
+   - **push()**: 在数组的末尾添加一个或多个元素，并返回新的长度。
 
-Service Worker 的主要特点：
+     ```javascript
+     let fruits = ['apple', 'banana'];
+     fruits.push('orange');  // fruits: ['apple', 'banana', 'orange']
+     ```
 
-1. **离线访问**：Service Worker 可以拦截网络请求，从缓存中提供资源，使 web 应用在离线时仍然可用。
-2. **背景数据同步**：Service Worker 可以在后台同步数据，即使用户没有打开应用（**应用指网页，不是浏览器**）。
-3. **推送通知**：即使 web 应用未打开，Service Worker 也可以接收来自服务器的推送通知，并在用户的设备上显示它们。
-4. **网络请求代理**：Service Worker 可以拦截和缓存网络请求，从而提供更快的响应和更可靠的性能。
+   - **unshift()**: 在数组的开头添加一个或多个元素，并返回新的长度。
 
-#### 2. CDN
+     ```javascript
+     fruits.unshift('grape');  // fruits: ['grape', 'apple', 'banana', 'orange']
+     ```
 
-使用 CDN（内容分发网络）优化静态文件是提高网站性能和可靠性的常见策略。CDN 是一个分布式的服务器网络，设计用于有效地传输网页和其他 Web 内容，如图片、样式表、JavaScript 和视频，给全球的用户。
+2. **删除元素**:
 
+   - **pop()**: 删除并返回数组的最后一个元素。
+
+     ```js
+     let lastFruit = fruits.pop();  // lastFruit: 'orange'
+     ```
+
+   - **shift()**: 删除并返回数组的第一个元素。
+
+     ```javascript
+     let firstFruit = fruits.shift();  // firstFruit: 'grape'
+     ```
+
+3. **查找元素**:
+
+   - **indexOf()**: 返回元素在数组中的第一个索引，如果不存在则返回 -1。
+
+     ```javascript
+     let index = fruits.indexOf('banana');  // index: 1
+     ```
+
+   - **includes()**: 检查数组是否包含某个元素，返回 true 或 false。
+
+     ```javascript
+     let hasApple = fruits.includes('apple');  // hasApple: true
+     ```
+
+4. **遍历数组**:
+
+   - forEach()
+
+     : 对数组的每个元素执行指定的函数。
+
+     ```javascript
+     fruits.forEach(fruit => console.log(fruit));
+     ```
+
+5. **转换数组**:
+
+   - map()
+
+     : 创建一个新数组，其结果是该数组中的每个元素都调用一个函数后的返回值。
+
+     ```javascript
+     let lengths = fruits.map(fruit => fruit.length);  // lengths: [5, 6]
+     ```
+
+6. **筛选数组**:
+
+   - filter()
+
+     : 创建一个新数组，包含通过测试的所有元素。
+
+     ```javascript
+     let longFruits = fruits.filter(fruit => fruit.length > 5);  // longFruits: ['banana']
+     ```
+
+7. **排序数组**:
+
+   - **sort()**: 对数组的元素进行排序，返回更改后的原数组。
+
+     ```javascript
+     fruits.sort();  // fruits: ['apple', 'banana']
+     ```
+
+   - **reverse()**: 颠倒数组中元素的顺序，返回更改后的原数组。
+
+     ```javascript
+     fruits.reverse();  // fruits: ['banana', 'apple']
+     ```
+
+8. **连接和分割数组**:
+
+   - **join()**: 将数组的所有元素连接成一个字符串。
+
+     ```javascript
+     let fruitString = fruits.join(', ');  // fruitString: 'banana, apple'
+     ```
+
+   - **slice()**: 返回数组的一个片段。
+
+     ```javascript
+     let slicedFruits = fruits.slice(1, 3);  // slicedFruits: ['apple']
+     ```
+
+   - **splice()**: 更改原数组内容，可以添加、删除或替换元素，返回被删除元素的数组。
+
+     ```javascript
+     let fruits = ['apple', 'banana', 'cherry', 'date'];
+     
+     // 删除元素
+     let removedFruits = fruits.splice(1, 2);  // ['banana', 'cherry']
+     
+     // 添加元素
+     fruits.splice(1, 0, 'blueberry', 'citrus');  // fruits: ['apple', 'blueberry', 'citrus', 'date']
+     
+     // 替换元素
+     fruits.splice(1, 2, 'blackberry');  // fruits: ['apple', 'blackberry', 'date']
+     ```
+
+9. **合并数组**:
+
+   - concat()
+
+     : 合并两个或多个数组，返回新数组。
+
+     ```javascript
+     let moreFruits = ['orange', 'pineapple'];
+     let allFruits = fruits.concat(moreFruits);  // allFruits: ['banana', 'grape', 'apple', 'orange', 'pineapple']
+     ```
+
+10. **其他**:
+
+- **reduce()**: 对数组中的每个元素执行一个函数，并将其减少为单个值。
+
+  ```javascript
+  let sum = [1, 2, 3, 4].reduce((accumulator, currentValue) => accumulator + currentValue, 0);  // sum: 10
+  ```
+
+- **some()**: 测试数组中是否有元素满足测试函数。
+
+  ```javascript
+  let hasLargeFruit = fruits.some(fruit => fruit.length > 6);  // hasLargeFruit: false
+  ```
+
+- **every()**: 测试数组中的所有元素是否都满足测试函数。
+
+  ```javascript
+  let allFruitsAreShort = fruits.every(fruit => fruit.length < 7);  // allFruitsAreShort: true
+  ```
+
+这只是 JavaScript 数组提供的方法的一部分。数组是 JavaScript 中非常强大和灵活的数据结

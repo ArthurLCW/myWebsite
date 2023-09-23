@@ -4,7 +4,7 @@ import Footer from "../../../../../components/Footer/Footer";
 import Comments from "../../../../../components/Comments/Comments";
 import "../../BlogContent.scss"
 import MdDisplayer from "../../../../../components/MdDisplayer/MdDisplayer";
-import BlogMdFile from "../../../../../static/blogFiles/frontEnd/parallax.md";
+import BlogMdFile from "../../../../../static/blogFiles/frontEnd/frontEndProgramming.md";
 
 const BlogContent = () => {
   return (
@@ -13,7 +13,7 @@ const BlogContent = () => {
       <div className="blog-content-container">
         <MdDisplayer fileName={BlogMdFile}/>
         <Comments 
-          postname={"React Parallax Effecy with spring-react"} 
+          postname={"FrondEndProgramming"} 
           commentType={"Comments: "}
         />
       </div>

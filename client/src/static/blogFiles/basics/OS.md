@@ -73,7 +73,27 @@
   2. 那些在新生代中存活足够长时间的对象会被移动到老生代。
   3. 老生代的回收不是很频繁，但每次回收都会更加彻底。
 
+## 4. Linux操作
 
+1. **`find` 命令**: `find` 是一个非常强大的命令，用于在目录树中搜索文件。基本语法是 `find [path] [expression]`。
+
+- 寻找名为 "myfile.txt" 的文件在当前目录及其子目录中：
+
+  ```bash
+  find . -name myfile.txt
+  ```
+
+- 寻找所有 `.txt` 文件在 `/home/user` 目录及其子目录中：
+
+  ```bash
+  find /home/user -name "*.txt"
+  ```
+
+- 寻找在 `/var/log` 目录中的文件，它们在 7 天内被修改过：
+
+  ```bash
+  find /var/log -mtime -7
+  ```
 
 
 

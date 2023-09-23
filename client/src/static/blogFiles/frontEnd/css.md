@@ -156,8 +156,8 @@ sticky定位：综合相对和固定定位。滚动时是相对定位，滚动�
 
 例如：
 
-```
-cssCopy codespan {
+```css
+span {
     display: block;
 }
 ```
@@ -171,13 +171,13 @@ cssCopy codespan {
 1. **内联样式**：直接在 HTML 元素上使用 `style` 属性定义的样式。
 
    ```css
-   htmlCopy code<div style="color: red;">这是内联样式</div>
+   <div style="color: red;">这是内联样式</div>
    ```
 
 2. **ID 选择器**：使用 `#` 符号定义的选择器。
 
    ```css
-   cssCopy code#myId {
+   #myId {
      color: blue;
    }
    ```
@@ -185,7 +185,7 @@ cssCopy codespan {
 3. **类选择器、属性选择器和伪类**：使用 `.` 符号、`[]` 符号和 `:` 符号定义的选择器。
 
    ```css
-   cssCopy code.myClass {
+   .myClass {
      color: green;
    }
    
@@ -201,7 +201,7 @@ cssCopy codespan {
 4. **元素选择器和伪元素**：直接使用元素名称和 `::` 符号定义的选择器。
 
    ```css
-   cssCopy codep {
+   p {
      color: brown;
    }
    
@@ -213,7 +213,7 @@ cssCopy codespan {
 5. **通配符选择器**：使用 `*` 符号定义的选择器。
 
    ```css
-   cssCopy code* {
+   * {
      color: orange;
    }
    ```
@@ -229,7 +229,7 @@ cssCopy codespan {
 考虑以下的 CSS 和 HTML：
 
 ```css
-cssCopy code#myId {
+#myId {
   color: blue;
 }
 
@@ -240,7 +240,7 @@ cssCopy code#myId {
 p {
   color: brown;
 }
-htmlCopy code<p id="myId" class="myClass">这是一个段落。</p>
+<p id="myId" class="myClass">这是一个段落。</p>
 ```
 
 虽然这个段落被三个选择器选择，但 `#myId` 的优先级最高，所以段落的颜色会是蓝色。
@@ -266,7 +266,7 @@ htmlCopy code<p id="myId" class="myClass">这是一个段落。</p>
 **例子**：
 
 ```css
-cssCopy codea:hover {
+a:hover {
     color: red;
 }
 
@@ -289,7 +289,7 @@ input:focus {
 **例子**：
 
 ```css
-cssCopy codep::before {
+p::before {
     content: "开头：";
 }
 
@@ -370,14 +370,14 @@ p::first-letter {
    - 示例：
 
      ```css
-     cssCopy codep {
+     p {
          color: blue;
      }
      ```
 
      所有 
 
-     ```
+     ```html
      <p>
      ```
 
@@ -390,15 +390,15 @@ p::first-letter {
    - 示例：
 
      ```css
-     cssCopy code.highlight {
+     .highlight {
          background-color: yellow;
      }
      ```
 
      HTML:
 
-     ```
-     htmlCopy code<p class="highlight">这段文本背景色为黄色。</p>
+     ```html
+     <p class="highlight">这段文本背景色为黄色。</p>
      ```
 
 3. **ID 选择器**： **ID Selector** 
@@ -526,7 +526,7 @@ p::first-letter {
 
      HTML:
 
-     ```
+     ```html
      htmlCopy code<p>这是一个长段落。只有第一行是粗体的，而第一个字母的字体大小是其他字母的两倍。</p>
      ```
 
