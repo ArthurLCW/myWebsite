@@ -34,6 +34,10 @@ const BlogFrontEndProgramming = lazy(() => import("./pages/Blogs/blogContent/tec
 const BlogNetwork = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogNetwork"));
 const BlogAlgorithm = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogAlgorithm"));
 const BlogProgramming = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogProgramming"));
+const BlogOS = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogOS"));
+const BlogDatabase = lazy(() => import("./pages/Blogs/blogContent/technology/basics/BlogDatabase"));
+const BlogTesting = lazy(() => import("./pages/Blogs/blogContent/technology/testing/BlogTesting"));
+
 
 const Layout = () => {
   return (
@@ -94,6 +98,13 @@ const router = createBrowserRouter([
       },
       {
         path:"/blogs/technology/frontend",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <Blogs/>
+          </Suspense>
+      },
+      {
+        path:"/blogs/technology/testing",
         element: 
           <Suspense fallback={<div>Loading...</div>}>
             <Blogs/>
@@ -162,6 +173,28 @@ const router = createBrowserRouter([
         element: 
           <Suspense fallback={<div>Loading...</div>}>
             <BlogProgramming/>
+          </Suspense>
+      },
+      {
+        path:"/blogs/technology/basics/OS",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogOS/>
+          </Suspense>
+      },
+      {
+        path:"/blogs/technology/basics/database",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogDatabase/>
+          </Suspense>
+      },
+
+      {
+        path:"/blogs/technology/testing/testing",
+        element: 
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogTesting/>
           </Suspense>
       },
 

@@ -33,6 +33,16 @@ const Blogs = () => {
             "url":"/blogs/technology/basics/algorithm"},
             {"name":"Programming", 
             "url":"/blogs/technology/basics/programming"},
+            {"name":"OS", 
+            "url":"/blogs/technology/basics/OS"},
+            {"name":"Database", 
+            "url":"/blogs/technology/basics/database"},
+          ]}
+        />
+        <BlogCat catName="Technology - Testing" 
+          catContent={[
+            {"name":"Testing", 
+            "url":"/blogs/technology/testing/testing"},
           ]}
         />
         <BlogCat catName="Music" catContent={[{"name":"Sibelius Violin Concerto", "url":"/blogs/music/sibelius"}]}/>
