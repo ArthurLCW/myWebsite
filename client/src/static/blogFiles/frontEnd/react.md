@@ -146,3 +146,41 @@ const LazyImage = (props) => {
 export default LazyImage
 ```
 
+## 4. virtual dom
+
+### 1. 什么是 Virtual DOM？
+
+Virtual DOM（虚拟 DOM）是一个编程概念，其中一个对象可以代表实际的 DOM 对象。这个对象就像一个轻量级的 DOM 的副本，它可以快速创建和修改，而不需要实际渲染到屏幕上。
+
+### 2. 为什么需要 Virtual DOM？
+
+直接操作 DOM 通常是缓慢的，尤其是当涉及到大量的更新时。每次更新都可能导致浏览器重新计算布局、重新绘制等。Virtual DOM 允许我们在内存中进行许多更改，然后一次性更新实际的 DOM，从而提高性能。
+
+### 3. 如何工作？
+
+- **创建 Virtual DOM**: 当 JSX 被渲染时，React 会创建一个 Virtual DOM 来表示当前的 UI。
+- **更新 Virtual DOM**: 当组件的状态或属性发生变化时，React 会创建一个新的 Virtual DOM 来表示更新后的 UI。
+- **计算差异**: React 会使用 "diffing" 算法来确定原始 Virtual DOM 和新的 Virtual DOM 之间的差异。
+- **更新实际的 DOM**: 一旦计算出差异，React 会尽可能高效地更新实际的 DOM。
+- **批量更新**: React 会将多个更改批量处理，以减少对实际 DOM 的操作。
+
+### 4. 优势
+
+- **性能提升**: 通过避免不必要的 DOM 更新，React 可以提供更快的 UI 响应。
+- **开发简便**: 开发者可以编写代码，好像每次渲染都会得到一个全新的 UI，而 React 负责只更新实际更改的部分。
+- **跨平台**: Virtual DOM 的概念不仅限于浏览器的 DOM。它还可以用于其他渲染目标，如 React Native。
+
+### 5. 注意事项
+
+尽管 Virtual DOM 可以提高性能，但它并不总是比直接操作 DOM 快。在某些情况下，手动优化 DOM 操作可能更为高效。但在大多数情况下，React 和 Virtual DOM 提供的开箱即用的性能提升对开发者来说是非常有价值的。
+
+总之，React 的 Virtual DOM 提供了一种高效更新 DOM 的方法，使得开发者可以构建响应迅速的 UI，而不必担心性能问题。
+
+
+
+
+
+
+
+
+ 

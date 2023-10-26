@@ -13,15 +13,20 @@ eg. 6=="6" (T);
 ### 2. 函数作用域
 
 1. 作用域链：由里到外，先函数内（局部）再全局
+
 2. 状态提升：函数执行时，函数内的函数名、变量名会先被声明（实际声明顺序不同于代码编写的声明顺序）。
+
 3. **var**和**let**的区别：
 
     1. **作用域**：
    - **var**：声明的变量具有函数作用域。这意味着在函数内部使用 `var` 声明的变量在整个函数内部都是可见的，无论声明它的位置在哪里。
        - **let**：声明的变量具有块作用域。这意味着在花括号 `{}` 内部使用 `let` 声明的变量只在该块内部可见。
+   
 2. **变量提升**：
+   
        - **var**：变量会被提升。这意味着可以在声明之前使用变量，但此时变量的值为 `undefined`。
-       - **let**：变量不会被提升。如果在声明之前尝试使用它，会得到一个引用错误。
+           - **let**：变量不会被提升。如果在声明之前尝试使用它，会得到一个引用错误。
+   
     3. **重复声明**：
        - **var**：在同一个作用域内可以多次声明同一个变量。
        - **let**：在同一个作用域内不允许多次声明同一个变量。
@@ -269,7 +274,7 @@ function deepClone(obj){
 
 ### 6. 闭包
 
-闭包=内层函数+引用外层函数的变量
+闭包=内层函数+引用外层函数的变量+return 内层函数
 
 例子：统计某一函数发动了几次。
 
@@ -690,3 +695,97 @@ console.log('End');
   ```
 
 这只是 JavaScript 数组提供的方法的一部分。数组是 JavaScript 中非常强大和灵活的数据结
+
+
+
+### 13. js string
+
+1. **charAt()** - 返回指定位置的字符。
+
+   ```javascript
+   let str = "Hello";
+   console.log(str.charAt(1)); // "e"
+   ```
+
+2. **concat()** - 连接两个或多个字符串。
+
+   ```javascript
+   let str1 = "Hello";
+   let str2 = " World!";
+   console.log(str1.concat(str2)); // "Hello World!"
+   ```
+
+3. **includes()** - 检查字符串是否包含指定的子字符串。
+
+   ```javascript
+   let str = "Hello World!";
+   console.log(str.includes("World")); // true
+   ```
+
+4. **indexOf()** - 返回指定子字符串首次出现的位置。
+
+   ```javascript
+   let str = "Hello World!";
+   console.log(str.indexOf("World")); // 6
+   ```
+
+5. **slice()** - 提取字符串的片段并在新的字符串中返回。
+
+   ```javascript
+   let str = "Hello World!";
+   console.log(str.slice(0, 5)); // "Hello"
+   ```
+
+6. **split()** - 使用指定的分隔符字符串将一个 `String` 对象分割成字符串数组。
+
+   ```javascript
+   let str = "apple,banana,orange";
+   console.log(str.split(",")); // ["apple", "banana", "orange"]
+   ```
+
+7. **replace()** - 在字符串中用一些字符替换另一些字符。
+
+   ```JavaScript
+   let str = "Hello World!";
+   console.log(str.replace("World", "JavaScript")); // "Hello JavaScript!"
+   ```
+
+8. **toUpperCase()** - 将字符串转换为大写。
+
+   ```javascript
+   let str = "Hello";
+   console.log(str.toUpperCase()); // "HELLO"
+   ```
+
+9. **toLowerCase()** - 将字符串转换为小写。
+
+   ```javascript
+   let str = "HELLO";
+   console.log(str.toLowerCase()); // "hello"
+   ```
+
+10. **trim()** - 去除字符串两端的空白。
+
+    ```javascript
+    let str = "   Hello World!   ";
+    console.log(str.trim()); // "Hello World!"
+    ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
