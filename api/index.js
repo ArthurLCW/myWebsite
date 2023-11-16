@@ -25,7 +25,7 @@ else if (process.env.PROTOCOL==="https"){
 
 console.log('FRONTEND_ORIGIN:', process.env.FRONTEND_ORIGIN);
 app.use(cors({
-  origin: process.env.FRONTEND_ORIGIN.split(","),
+  origin: process.env.FRONTEND_ORIGIN,
   credentials: true 
 }));
 app.use(express.json());
