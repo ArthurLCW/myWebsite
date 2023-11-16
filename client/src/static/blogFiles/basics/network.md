@@ -257,7 +257,7 @@ XSS（Cross-Site Scripting）攻击是利用网站没有对用户输入进行适
 
 ### 1. 反射型XSS
 
-**描述**：攻击者通过URL或其他方式传递恶意脚本。受害者点击这个链接，脚本在受害者的浏览器中执行。
+**描述**： 攻击者构造一个包含恶意脚本的 URL，这个脚本作为请求的一部分（通常是**查询字符串？**）发送给**服务器**。  服务器接收到这个请求，处理其中的数据，并将其作为响应的一部分返回。如果服务器没有正确地清理或转义这些数据，恶意脚本就会包含在响应中。
 
 **例子**： 假设一个搜索引擎的URL结构是这样的：`http://example.com/search?q=keyword` 如果搜索引擎直接将`q`参数的值插入到HTML中，那么攻击者可以创建以下URL： `http://example.com/search?q=alert('Hacked!');` 当受害者点击这个链接时，JavaScript代码会在其浏览器中执行，弹出一个“Hacked!”的警告框。
 
@@ -269,9 +269,9 @@ XSS（Cross-Site Scripting）攻击是利用网站没有对用户输入进行适
 
 ### 3. DOM型XSS
 
-**描述**：攻击者通过修改DOM结构来执行恶意脚本，而不是直接注入到HTML中。
+**描述**： 攻击者构造一个 URL，其中包含恶意脚本，但这个脚本**不会发送给服务器**。 攻击者通过修改DOM结构来执行恶意脚本，而不是直接注入到HTML中。
 
-**例子**： 假设一个网页使用JavaScript从URL的`#`部分获取内容，并直接插入到页面中：
+**例子**： 假设一个网页使用JavaScript从URL的`#`（**哈希值/锚点，不会发给服务器**）部分获取内容，并直接插入到页面中：
 
 ```javascript
 document.getElementById('content').innerHTML = location.hash.slice(1);
@@ -286,12 +286,3 @@ document.getElementById('content').innerHTML = location.hash.slice(1);
 3. **使用内容安全策略（CSP）**：这是一个浏览器功能，可以限制页面上可以执行的脚本。
 4. **避免使用`innerHTML`**：使用`textContent`或安全的库，如DOMPurify。
 5. **更新和维护**：确保使用的所有软件、库和插件都是最新的，并及时修复已知的安全漏洞。
-
-
-
-
-
-
-
-
-

@@ -16,21 +16,28 @@ eg. 6=="6" (T);
 
 2. 状态提升：函数执行时，函数内的函数名、变量名会先被声明（实际声明顺序不同于代码编写的声明顺序）。
 
-3. **var**和**let**的区别：
+3. **var**和**let**的区别（**4个区别**！）：
 
     1. **作用域**：
-   - **var**：声明的变量具有函数作用域。这意味着在函数内部使用 `var` 声明的变量在整个函数内部都是可见的，无论声明它的位置在哪里。
-       - **let**：声明的变量具有块作用域。这意味着在花括号 `{}` 内部使用 `let` 声明的变量只在该块内部可见。
+    
+    
+     **var**：声明的变量具有函数作用域。这意味着在函数内部使用 `var` 声明的变量在整个函数内部都是可见的，无论声明它的位置在哪里。
+    
+     **let**：声明的变量具有块作用域。这意味着在花括号 `{}` 内部使用 `let` 声明的变量只在该块内部可见。
    
-2. **变量提升**：
+   2. **变量提升**：
    
-       - **var**：变量会被提升。这意味着可以在声明之前使用变量，但此时变量的值为 `undefined`。
-           - **let**：变量不会被提升。如果在声明之前尝试使用它，会得到一个引用错误。
+      **var**：变量会被提升。这意味着可以在声明之前使用变量，但此时变量的值为 `undefined`。
+   
+      **let**：变量不会被提升。如果在声明之前尝试使用它，会得到一个引用错误。
    
     3. **重复声明**：
+   
        - **var**：在同一个作用域内可以多次声明同一个变量。
        - **let**：在同一个作用域内不允许多次声明同一个变量。
+   
     4. **全局对象属性**：
+   
        - **var**：在全局作用域中使用 `var` 声明的变量会成为全局对象（通常是 `window` 对象）的属性。
        - **let**：在全局作用域中使用 `let` 声明的变量不会成为全局对象的属性。
 
@@ -65,8 +72,12 @@ eg. 6=="6" (T);
 
 4. 数据类型
 
-   1. 基本数据类型：String, Number, Boolean, Null, Undefined, Symbol (ES6引入), BigInt (ES11引入)
+   1. 基本数据类型（**5+2**）：
+
+      String, Number, Boolean, Null, Undefined, Symbol (ES6引入， 用于创建唯一的标识符 ，主要用于创建私有属性), BigInt (ES11引入，处理大整数)
+
    2. 引用数据类型：Object.  【Object是个大类，function函数、array数组、date日期...等都归属于Object】 
+
    3. 判断类型
 
    ```javascript
@@ -102,6 +113,8 @@ eg. 6=="6" (T);
 6. `xx instanceof XX` is true, if `XX` is on the prototype chain of `xx`. For instance, `array instanceof Array` is true.
 
    Notice: `xx typeof` **only** returns the type of the data (number, string, boolean, undefined, null, object)
+   
+   `typeof` 不精准，比如`typeof array`返回的是object而非数组。instanceof需要提前知道大概属于什么，值可以做验证。`Object.prototype.toString.call()`是最好的选择。
 
 ### 4. 异步编程
 
@@ -139,7 +152,9 @@ eg. 6=="6" (T);
 
    3. 链式调用：若前一个`then`返回一个非`Promise`的值，则该值作为下一个`then`的回调函数的参数。若前一个`then`返回一个`Promise`，则下一个`then`以这个`Promise`为准调用。
 
-   4. `Promise` 本身并不是异步的，但它通常与异步操作一起使用。`Promise` 的执行器函数（即传递给 `new Promise` 的函数）是同步执行的。这意味着当你创建一个 `Promise` 时，执行器函数会立即执行。
+   4. Promise的三个状态： **Pending（未决定）**、 **Fulfilled（履行）** 、 **Rejected（拒绝）** 
+
+   5. `Promise` 本身并不是异步的，但它通常与异步操作一起使用。`Promise` 的执行器函数（即传递给 `new Promise` 的函数）是同步执行的。这意味着当你创建一个 `Promise` 时，执行器函数会立即执行。
 
       异步部分是 `Promise` 的 `.then()`、`.catch()` 和 `.finally()` 方法。这些方法中的回调函数会被放入微任务队列，并在当前执行栈清空后执行。
 
@@ -161,7 +176,7 @@ eg. 6=="6" (T);
       输出顺序是：
 
       ```sql
-      codeStart
+      Start
       Executor
       End
       Then
@@ -223,25 +238,60 @@ eg. 6=="6" (T);
 
 ### 5. 深浅拷贝
 
-#### 1. 准万能深拷贝方法：
+#### 1.1 浅拷贝（Shallow Copy）
 
-无法处理/拷贝function、undefined、原型链等
+- **拷贝第一层结构**：浅拷贝会创建一个新的对象或数组，并将原始对象或数组的第一层元素复制到新的对象或数组中。
+- **对于原始类型**（如字符串、数字、布尔值），它们的值会被复制。
+- **对于引用类型**（如对象、数组），则复制的是引用（内存地址），而不是实际的对象或数组本身。这意味着如果原始对象中的某个属性是另一个对象，浅拷贝后，新对象的这个属性仍然指向同一个对象。
+
+#### 1.2. 浅比较（Shallow Comparison）
+
+- **比较引用**：在进行浅比较时，比较的是两个对象或数组的引用（内存地址），而不是它们的内容。
+- **对于原始类型**的值，浅比较会检查它们的值是否相等。
+- **对于引用类型**的值，浅比较只检查对象或数组的引用是否相同。即使两个不同的对象或数组包含完全相同的数据，如果它们在内存中的位置不同，浅比较也会认为它们是不相等的。
+
+例子
+
+```javascript
+// 浅拷贝示例
+let original = { a: 1, b: { c: 2 } };
+let shallowCopy = { ...original };
+
+shallowCopy.a = 3; // 不影响 original.a
+shallowCopy.b.c = 4; // 影响 original.b.c，因为 b 是引用类型
+
+// 浅比较示例
+let obj1 = { a: 1 };
+let obj2 = { a: 1 };
+let obj3 = obj1;
+
+console.log(obj1 === obj2); // 输出 false，即使内容相同，引用不同
+console.log(obj1 === obj3); // 输出 true，引用相同
+```
+
+在这个例子中，`shallowCopy` 是 `original` 的浅拷贝，它复制了 `original` 的第一层结构。而 `obj1 === obj2` 的比较结果为 `false`，因为尽管 `obj1` 和 `obj2` 的内容相同，它们是两个不同的对象，存储在不同的内存地址。而 `obj1 === obj3` 的比较结果为 `true`，因为 `obj3` 是 `obj1` 的一个引用。
+
+
+
+#### 2.1. 准万能深拷贝方法：
+
+无法处理/拷贝function、undefined（直接被忽略，好像不存在一样）、原型链等
 
 ```javascript
 const list=[{myLove:'sq'}];
 const listCopy = JSON.parse(JSON.stringify(list))
 ```
 
-#### 2. 真万能深拷贝方法
+#### 2.2. 真万能深拷贝方法
 
-##### 2.1. 调包
+##### 2.2.1. 调包
 
 ```javascript
 const _ = require('lodash');
 const clonedObject = _.cloneDeep(originalObject);
 ```
 
-##### 2.2. 手写deepClone
+##### 2.2.2. 手写deepClone
 
 ```javascript
 function deepClone(obj){
@@ -359,7 +409,7 @@ console.log(this === window);  // 在浏览器中输出：true
 
 #### 2. **函数调用**
 
-当一个函数被调用时（而**不是作为方法或构造函数**），`this`通常指向全局对象。
+这是因为在传统函数（非箭头函数）中，`this` 关键字通常指向调用该函数的对象。 当一个函数（包括匿名函数）被调用时（而**不是作为方法或构造函数**），`this`通常指向全局对象。
 
 ```javascript
 function test() {
@@ -509,7 +559,7 @@ obj.greet();  // 1秒后输出：Hello, Charlie
 考虑以下代码：
 
 ```javascript
-javascriptCopy codeconsole.log('Start');
+console.log('Start');
 
 setTimeout(() => {
     console.log('setTimeout');
@@ -773,9 +823,62 @@ console.log('End');
 
 
 
+## 14. Map和WeakMap
 
+### Map
 
+- **键的类型**：在 `Map` 中，键可以是任何类型的值，包括对象、原始值（如数字、字符串）、函数等。
+- **引用方式**：`Map` 对其键和值保持强引用。这意味着只要 `Map` 存在，它所引用的键和值就不会被垃圾回收器回收。
+- 特性：
+  - `Map` 保留键值对的插入顺序。
+  - 可以通过方法如 `size` 属性轻松获取 `Map` 的大小。
+  - 提供了丰富的操作方法，如 `set`、`get`、`has`、`delete` 和 `clear`。
+- **用途**：适用于需要键值对映射的场景，尤其是当键不仅仅是字符串时。
 
+### WeakMap
+
+- **键的类型**：在 `WeakMap` 中，键必须是对象，不能是原始值。
+- **引用方式**：`WeakMap` 对其键保持弱引用，这意味着如果没有其他引用指向键对象，这些对象可以被垃圾回收。`WeakMap` 的存在不会阻止其键所引用的对象被回收。
+- 特性：
+  - `WeakMap` 中的键值对不保留插入顺序。
+  - 由于其弱引用特性，`WeakMap` 不可枚举，这意味着没有方法可以获取 `WeakMap` 的内容或大小。
+  - 提供了有限的方法，如 `get`、`set`、`has` 和 `delete`，但没有 `clear` 方法。
+- **用途**：适用于当你需要与对象关联私有数据，但又不想干扰对象的垃圾回收。
+
+### 区别
+
+1. **键的类型**：
+   - `Map` 的键可以是任意类型。
+   - `WeakMap` 的键必须是对象。
+2. **引用方式**：
+   - `Map` 对键和值保持强引用。
+   - `WeakMap` 对键保持弱引用。
+3. **生命周期管理**：
+   - `Map` 的存在可能阻止其键和值被垃圾回收。
+   - `WeakMap` 的键可以随时被垃圾回收，不影响 `WeakMap` 本身。
+4. **可枚举性**：
+   - `Map` 是可枚举的，可以使用迭代器遍历。
+   - `WeakMap` 不可枚举，没有提供遍历其键或值的方法。
+
+### 示例
+
+```javascript
+// Map 示例
+let map = new Map();
+map.set('key1', 'value1');
+map.set('key2', 'value2');
+console.log(map.size); // 2
+
+// WeakMap 示例
+let weakmap = new WeakMap();
+let obj = {};
+weakmap.set(obj, 'value');
+console.log(weakmap.has(obj)); // true
+obj = null; // 移除对对象的引用
+// 此时，obj 可能会被垃圾回收，相应的键值对也会从 weakmap 中消失
+```
+
+在这些示例中，`Map` 用于存储和操作键值对，而 `WeakMap` 用于创建与对象相关联的数据，而不影响对象的生命周期。
 
 
 
