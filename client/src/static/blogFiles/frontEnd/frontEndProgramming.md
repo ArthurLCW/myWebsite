@@ -283,6 +283,202 @@ JSONP是一种较老的技术，利用`  <script>  `标签没有跨域限制的�
 
 
 
+## 10. 网站白屏的可能原因
+
+ 如果刚开始我的网页正常运行，后来用户访问的时候却出现了白屏。可能的原因有哪些 ？
+
+1. **服务器问题**：
+   - 服务器可能遇到了性能问题或崩溃，导致无法正确响应请求。
+   - 服务器上的后端服务（如数据库）可能出现故障。
+2. 前端代码bug
+3. 后端代码bug
+4. **资源加载问题**：
+   - 外部资源（如脚本、样式表、图片等）可能因为路径更改、删除或服务器问题而无法加载。
+   - CDN 服务可能出现问题，导致资源无法正确加载。
+5. **第三方服务或API问题**：
+   - 如果您的网站依赖于第三方服务或API，这些服务的不可用或更改可能导致页面无法加载。
+6. **浏览器兼容性问题**：
+   - 新代码可能在某些浏览器上不兼容，尤其是在老旧的浏览器版本上。。
+7. **网络问题**：
+   - 用户的网络连接可能出现问题，或者您的服务器网络环境发生变化。
+8. url输入错误
+
+
+
+## 11. canvas和svg
+
+Canvas 和 SVG 都是用于在网页上创建图形的技术，但它们在实现和使用上有着本质的不同。
+
+### Canvas
+
+1. **基本概念**：Canvas 是 HTML5 提供的一个元素，用于通过 JavaScript 来绘制图像（像素级操作）。它可以用来绘制图形、制作动画、游戏图形等。
+2. **如何工作**：Canvas 工作方式类似于画布，一旦图形被绘制，它就不会被保留（即绘制后这个图形就成了canvas的一部分，无法再删除/修改这个图形）。如果需要更新图形，整个场景需要重新绘制，包括任何之前绘制的图形。
+3. **优点**：
+   - 高性能：对于大型渲染，如游戏或者视频处理，Canvas 可以更高效。
+   - 像素级控制：可以精确控制每个像素，适合复杂的图像处理。
+4. **缺点**：
+   - 不支持事件处理器：Canvas 内的图形元素不能附加事件处理器。
+   - 不利于SEO：Canvas 绘制的内容不会被搜索引擎抓取。
+   - 可访问性差：需要额外工作来实现屏幕阅读器的可访问性。
+
+### SVG
+
+1. **基本概念**：SVG（Scalable Vector Graphics）是一种使用 XML 描述 2D 图形的语言。SVG 图像在放大或缩小时不会失真。
+2. **如何工作**：SVG 通过文本文件定义图形，这些文件可以被搜索、索引、脚本化或压缩。SVG 是 W3C 的一个标准，与 HTML5 完全兼容。
+3. **优点**：
+   - 可缩放性：向量图形可以无限放大或缩小，而不会失真。
+   - 可编辑性：SVG 文件是 XML 格式，可以通过文本编辑器或绘图软件编辑。
+   - 事件处理：SVG 元素可以绑定 JavaScript 事件处理器。
+   - SEO 友好：SVG 图形可以被搜索引擎索引和抓取。
+   - 更好的可访问性：支持文本标签和其他辅助功能。
+4. **缺点**：
+   - 性能问题：对于复杂的图形或大型渲染，SVG 可能不如 Canvas 高效。
+   - 兼容性问题：老旧的浏览器可能不完全支持 SVG。
+
+
+
+## 12. 如何制作动画
+
+### 1. 方法一：利用canvas和requestAnimationFrame
+
+首先，您需要在 HTML 中定义一个 `canvas` 元素：
+
+```html
+<canvas id="myCanvas" width="400" height="400"></canvas>
+```
+
+然后，在 JavaScript 中，您可以这样编写 `draw` 函数：
+
+```javascript
+// 获取 Canvas 元素及其绘图上下文
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+// 假设我们有一个动画的 x 和 y 坐标
+var x = 0;
+var y = 0;
+
+function draw() {
+    // 清除整个画布
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 绘制动画的内容
+    // 例如，绘制一个简单的矩形
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(x, y, 50, 50);
+
+    // 更新下一帧的位置
+    x += 1;
+    y += 1;
+
+    // 请求下一帧
+    requestAnimationFrame(draw);
+}
+
+// 初始调用
+draw();
+```
+
+在这个例子中，每次调用 `draw` 函数时，它首先使用 `ctx.clearRect` 清除整个 Canvas。然后，它使用 `ctx.fillRect` 在新位置绘制一个矩形。每帧我们稍微改变矩形的位置 (`x` 和 `y` 坐标)，这样就创建了一个移动的矩形的效果。最后，通过 `requestAnimationFrame(draw)` 请求下一帧，从而形成一个连续的动画循环。
+
+这个简单的例子展示了如何使用 Canvas 和 `requestAnimationFrame` 来创建基本的动画效果。您可以通过更改 `draw` 函数中的逻辑来创建更复杂和有趣的动画。
+
+### 2. 方法二：css
+
+#### 1. CSS Transitions
+
+CSS 过渡（Transitions）允许您在 CSS 属性值之间平滑过渡。这适用于在状态改变时（如伪类：`:hover`）产生的样式变化。
+
+**基本语法**：
+
+```css
+.element {
+    transition: property duration timing-function delay;
+}
+```
+
+- `property`：要过渡的 CSS 属性（如 `opacity`, `background-color`）。
+- `duration`：过渡持续时间。
+- `timing-function`：过渡的速度曲线（如 `linear`, `ease-in`, `ease-out`）。
+- `delay`：过渡开始前的延迟。
+
+**示例**：当鼠标悬停在元素上时改变颜色。
+
+```css
+div {
+    background-color: blue;
+    transition: background-color 0.5s ease-in-out;
+}
+
+div:hover {
+    background-color: red;
+}
+```
+
+#### 2. CSS Animations
+
+CSS 动画（Animations）允许您创建复杂的动画序列，通过定义**关键帧（keyframes）**来控制动画序列。
+
+**基本语法**：
+
+```css
+@keyframes animation-name {
+    from {
+        /* 开始状态 */
+    }
+    to {
+        /* 结束状态 */
+    }
+}
+
+.element {
+    animation: animation-name duration timing-function delay iteration-count direction fill-mode;
+}
+```
+
+- `animation-name`：动画的名称，对应于 `@keyframes` 定义。
+- `duration`：动画持续时间。
+- `timing-function`：动画的速度曲线。
+- `delay`：动画开始前的延迟。
+- `iteration-count`：动画播放次数（`infinite` 为无限次）。
+- `direction`：动画是否反向播放。
+- `fill-mode`：动画完成后的状态。
+
+**示例**：创建一个无限旋转的动画。
+
+```css
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+div {
+    animation: spin 2s linear infinite;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
