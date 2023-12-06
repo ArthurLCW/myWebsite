@@ -41,7 +41,7 @@ const Footer = () => {
           <SvgIcon component={GitHubIcon} style={{ color:'white',fontSize: 30 }}/>
         </Link>
 
-        <Link to='https://www.linkedin.com/in/arthur-li-048752242/'>
+        <Link to='https://www.linkedin.com/in/changwen-li/'>
           <SvgIcon component={LinkedInIcon} style={{ color:'white',fontSize: 30 }}/>
         </Link>
 
