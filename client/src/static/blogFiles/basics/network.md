@@ -277,7 +277,7 @@ XSS（Cross-Site Scripting）攻击是利用网站没有对用户输入进行适
 document.getElementById('content').innerHTML = location.hash.slice(1);
 ```
 
-攻击者可以创建以下URL： `http://example.com/page#` 当受害者访问这个链接时，恶意的``标签会尝试加载一个不存在的图片，触发`onerror`事件，从而执行`alert('Hacked!');`脚本。
+攻击者可以创建以下URL： `http://example.com/page#` 当受害者访问这个链接时，恶意的标签会尝试加载一个不存在的图片，触发`onerror`事件，从而执行`alert('Hacked!');`脚本。
 
 ### 防御措施：
 
