@@ -227,7 +227,7 @@ function MyComponent() {
 
 `useLayoutEffect` 用于在 DOM 更新之后，但页面渲染之前执行副作用操作。这意味着你可以使用 `useLayoutEffect` 来读取 DOM 布局并同步触发重渲染。由于 `useLayoutEffect` 在 DOM 更新完成后立即执行，不会等待浏览器绘制，所以它适合用于需要同步处理 DOM 的情况。
 
-### `useLayoutEffect` 与 `useEffect` 的区别
+#### `useLayoutEffect` 与 `useEffect` 的区别
 
 - `useEffect` 在所有的 DOM 变更之后异步执行，这使得它不会阻塞浏览器的绘制过程。
 - `useLayoutEffect` 在 DOM 更新之后同步执行，但在浏览器绘制之前。因此，如果你的 `useLayoutEffect` 中有大量工作，它可能会导致视觉上的延迟。
@@ -267,7 +267,7 @@ function MeasureExample() {
 - 由于 `useLayoutEffect` 在 DOM 更新后立即执行，它可以确保在页面渲染之前完成所有的测量和状态更新，避免了由于异步更新引起的任何视觉抖动。
 - `setSize` 被调用来更新组件状态，这会导致组件再次渲染，但此时我们已经有了正确的尺寸信息。
 
-### 何时使用 `useLayoutEffect`
+#### 何时使用 `useLayoutEffect`
 
 `useLayoutEffect` 应该在需要同步读取或更改 DOM，并且不希望有任何视觉延迟时使用。然而，由于它会阻塞浏览器的绘制，所以应该谨慎使用，避免在其中执行耗时的操作。大多数情况下，`useEffect` 是更好的选择，因为它不会阻塞页面渲染，更适合处理不需要同步执行的副作用。
 
@@ -518,9 +518,72 @@ const router = createBrowserRouter([
 
 
 
+## 6. Dom
+
+1. ### `render(reactNode, domNode, callback?)` 
+
+Call `render` to display a React component inside a browser DOM element.
+
+```javascript
+import { render } from 'react-dom';
+
+const domNode = document.getElementById('root');
+
+render(<App />, domNode);
+```
+
+React will display `<App />` in the `domNode`, and take over managing the DOM inside it.
+
+An app fully built with React will usually only have one `render` call with its root component. 
 
 
-## 6. 组件间的信息传递
+
+2. ### `createRoot(domNode, options?)` 
+
+Call `createRoot` to create a React root for displaying content inside a browser DOM element.
+
+```javascript
+import { createRoot } from 'react-dom/client';
+
+const domNode = document.getElementById('root');
+
+const root = createRoot(domNode);
+```
+
+React will create a root for the `domNode`, and take over managing the DOM inside it. After you’ve created a root, you need to call [`root.render`](https://react.dev/reference/react-dom/client/createRoot#root-render) to display a React component inside of it:
+
+```javascript
+root.render(<App />);
+```
+
+An app fully built with React will usually only have one `createRoot` call for its root component. A page that uses “sprinkles” of React for parts of the page may have as many separate roots as needed.
+
+3. ### `createPortal(children, domNode, key?)` 
+
+When you want to render a piece of JSX in a different part of the DOM tree that isn’t a child of your component (for example, a modal or a tooltip), use [`createPortal`](https://react.dev/reference/react-dom/createPortal) instead of `createRoot`.
+
+To create a portal, call `createPortal`, passing some JSX, and the DOM node where it should be rendered:
+
+```javascript
+export default function PortalExample() {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <>
+      <button onClick={() => setShowModal(true)}>
+        Show modal using a portal
+      </button>
+      {showModal && createPortal(
+        <ModalContent onClose={() => setShowModal(false)} />,
+        document.body
+      )}
+    </>
+  );
+}
+```
+
+
+
+## 7. 组件间的信息传递
 
 ### 1. 提升状态（Lifting State Up）
 
@@ -649,4 +712,243 @@ ReactDOM.render(
 ```
 
 这样，任何子组件都可以通过 `useSelector` 和 `useDispatch` 访问和操作 Redux store 中的状态了。
+
+### 3. Mobx
+
+1. #### 基本概念
+
+​	**State**
+
+​	**Action** (modify state)
+
+​	**Derivations**: 
+
+​		derivation1: **Computed Value**: 基于state自动变化数值
+
+​		derivation2: **Reaction**: 基于state自动产生side effect
+
+2. #### 基本API
+
+Properties, entire objects, arrays, Maps and Sets can all be made observable. The basics of making objects observable is specifying an annotation per property using `makeObservable`. The most important annotations are:
+
+- [`observable`](https://mobx.js.org/observable-state.html#observable) defines a trackable field that stores the state.
+- [`action`](https://mobx.js.org/actions.html) marks a method as an action that will modify the state.
+- [`computed`](https://mobx.js.org/computeds.html) marks a getter that will derive new facts from the state and cache its output.
+
+```javascript
+import { makeObservable, observable, action, computed } from "mobx"
+
+class Todo {
+    id = Math.random()
+    title = ""
+    finished = false
+
+    constructor(title) {
+        makeObservable(this, {
+            title: observable,
+            finished: observable,
+            toggle: action
+        })
+        this.title = title
+    }
+
+    toggle() {
+        this.finished = !this.finished
+    }
+}
+
+class TodoList {
+    todos = []
+    get unfinishedTodoCount() {
+        return this.todos.filter(todo => !todo.finished).length
+    }
+    constructor(todos) {
+        makeObservable(this, {
+            todos: observable,
+            unfinishedTodoCount: computed
+        })
+        this.todos = todos
+    }
+}
+```
+
+
+
+Reactions
+
+ [`autorun`](https://mobx.js.org/reactions.html#autorun), [`reaction`](https://mobx.js.org/reactions.html#reaction) or [`when`](https://mobx.js.org/reactions.html#when) ...
+
+```javascript
+// A function that automatically observes the state.
+autorun(() => {
+    console.log("Tasks left: " + todos.unfinishedTodoCount)
+})
+```
+
+
+
+3. #### React Integration
+
+**3.1. `observer` **
+
+The `observer` HoC automatically subscribes React components to *any observables* that are used *during rendering*. 
+
+```javascript
+import React from "react"
+import ReactDOM from "react-dom"
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react-lite"
+
+class Timer {
+    secondsPassed = 0
+
+    constructor() {
+        makeAutoObservable(this)
+    }
+
+    increaseTimer() {
+        this.secondsPassed += 1
+    }
+}
+
+const myTimer = new Timer()
+
+// A function component wrapped with `observer` will react
+// to any future change in an observable it used before.
+const TimerView = observer(({ timer }) => <span>Seconds passed: {timer.secondsPassed}</span>)
+
+ReactDOM.render(<TimerView timer={myTimer} />, document.body)
+
+setInterval(() => {
+    myTimer.increaseTimer()
+}, 1000)
+```
+
+**3.2. 两大坑点**
+
+3.2.1. Tip: Grab values from objects as late as possible
+
+`observer` works best if you pass object references around as long as possible, and **only read their properties inside the `observer` based components** that are going to render them into the DOM / low-level components. In other words, `observer` reacts to the fact that you 'dereference' a value from an object.
+
+In the above example, the `TimerView` component would **not** react to future changes if it was defined as follows, because the `.secondsPassed` is not read inside the `observer` component, but outside, and is hence *not* tracked:
+
+```javascript
+const TimerView = observer(({ secondsPassed }) => <span>Seconds passed: {secondsPassed}</span>)
+
+React.render(<TimerView secondsPassed={myTimer.secondsPassed} />, document.body)
+```
+
+如果 `TimerView` 组件接受 `secondsPassed` 作为一个 prop 而不是直接从 `MobX` 中读取它，`MobX` 就无法追踪 `secondsPassed` 的变化。这是因为 `secondsPassed` 的值是在组件外部读取的，然后作为一个普通的 prop 传递给 `TimerView`。即使这个值在 `myTimer` 中改变了，`MobX` 也不会触发 `TimerView` 的重新渲染，因为从 `MobX` 的角度看，`TimerView` 并没有直接使用（或“访问”）这个可观察状态。
+
+所以，要让 `TimerView` 组件响应 `secondsPassed` 的变化，应该直接在 `TimerView` 组件内部访问这个状态。例如，通过将整个 `myTimer` 对象作为一个 prop 传递给 `TimerView`，然后在 `TimerView` 内部访问 `timer.secondsPassed`。
+
+3.2.2. Don't pass observables into components that aren't `observer`
+
+```javascript
+class Todo {
+    title = "test"
+    done = true
+
+    constructor() {
+        makeAutoObservable(this)
+    }
+}
+
+const TodoView = observer(({ todo }: { todo: Todo }) =>
+   // WRONG: GridRow won't pick up changes in todo.title / todo.done
+   //        since it isn't an observer.
+   return <GridRow data={todo} />
+
+   // CORRECT: let `TodoView` detect relevant changes in `todo`,
+   //          and pass plain data down.
+   return <GridRow data={{
+       title: todo.title,
+       done: todo.done
+   }} />
+
+   // CORRECT: using `toJS` works as well, but being explicit is typically better.
+   return <GridRow data={toJS(todo)} />
+)
+```
+
+组件必须包裹`observer`才能相应内部`observable`的变化。
+
+如果子组件要相应`observable`的变化，则必须二选一：
+
+1. 包裹`observer`
+2. 把`observable`给拆开成具体的attribute，把他们当成props传给子组件。以上例子中，`todo`地址一般不会发生变化，而他的attribute可能变化。
+
+## 8. React-router-dom
+
+### 1. 基本概念
+
+#### 1.1. Path and URL
+
+```javascript
+<Route path="/users/:userId" component={UserComponent} />
+```
+
+当用户访问 `http://yourapp.com/users/123` 时：
+
+- `path` 是 `/users/:userId`，它是定义路由时使用的模式。
+- `url` 是 `/users/123`，它是匹配到的实际URL路径。
+
+
+
+### 2. Hook
+
+1. **`useHistory` 钩子**:
+
+   - `useHistory` 是一个钩子，它允许你访问 `history` 实例。这个实例使你能够在组件中进行导航（比如前进、后退或跳转到特定的路径）。
+
+   - 示例用法：
+
+     ```javascript
+     import { useHistory } from 'react-router-dom';
+     
+     function MyComponent() {
+       let history = useHistory();
+       // 使用 history 进行导航
+       function handleClick() {
+         history.push('/home');
+       }
+     
+       return (
+         <button onClick={handleClick}>Go to home</button>
+       );
+     }
+     ```
+
+2. **`useLocation` 钩子**:
+
+   - `useLocation` 钩子返回当前 URL 的 `location` 对象。它可以用于访问当前 URL 的路径名、查询字符串、哈希值等。
+
+   - 示例用法：
+
+     ```javascript
+     import { useLocation } from 'react-router-dom';
+     
+     function MyComponent() {
+       let location = useLocation();
+       // 使用 location 对象
+       return <div>Current URL: {location.pathname}</div>;
+     }
+     ```
+
+3. **`useRouteMatch` 钩子**:
+
+   - `useRouteMatch` 钩子用于匹配当前 URL。它类似于 `` 组件的 `match` 对象，可用于获取 URL 参数。
+
+   - 示例用法：
+
+     ```javascript
+     import { useRouteMatch } from 'react-router-dom';
+     
+     function BlogPost() {
+       let match = useRouteMatch('/blogs/:id');
+       // 使用 match 对象
+       let blogId = match.params.id;
+       return <div>Blog ID: {blogId}</div>;
+     }
+     ```
 
