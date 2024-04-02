@@ -935,9 +935,33 @@ const TodoView = observer(({ todo }: { todo: Todo }) =>
      }
      ```
 
-3. **`useRouteMatch` 钩子**:
+3.  **`useParams`**钩子
 
-   - `useRouteMatch` 钩子用于匹配当前 URL。它类似于 `` 组件的 `match` 对象，可用于获取 URL 参数。
+   `useParams` 是一个 Hook，用于从当前 URL 中提取路径参数。当你在定义路由时使用了像 `:param` 这样的动态路径部分，`useParams` 就可以帮助你获取这些路径参数的实际值。
+
+   #### 示例：
+
+   假设你的路由定义如下：
+   
+   ```javascript
+   <Route path="/post/:postId" component={Post} />
+   ```
+   
+   在 `Post` 组件中，你可以使用 `useParams` 来获取 `postId`：
+   
+   ```javascript
+   import { useParams } from 'react-router-dom';
+   
+   function Post() {
+     const { postId } = useParams();
+   
+     // 现在可以使用 postId
+   }
+   ```
+   
+4. **`useRouteMatch` 钩子**:
+
+   - `useRouteMatch` 钩子用于匹配当前 URL。它类似于组件的 `match` 对象，可用于获取 URL 参数。
 
    - 示例用法：
 
@@ -952,3 +976,69 @@ const TodoView = observer(({ todo }: { todo: Todo }) =>
      }
      ```
 
+### 3. BrowserRouter, HashRouter
+
+### BrowserRouter
+
+`BrowserRouter` 使用 HTML5 的历史 API (`pushState`, `replaceState`, `popstate`) 来保持 UI 和 URL 的同步。这意味着它创建的是常规的 URL。
+
+#### 特点：
+
+- 生成看起来像普通网页 URL 的路由（例如 `http://example.com/about`）。
+- 需要服务器正确配置，以便对所有可能的 URL 响应相同的 HTML 页面，因为应用的路由是在客户端处理的。
+- 更适用于支持 HTML5 历史 API 的现代 web 服务器。
+
+#### 示例：
+
+```javascript
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+      </div>
+    </BrowserRouter>
+  );
+}
+```
+
+### HashRouter
+
+`HashRouter` 使用 URL 的哈希部分（`window.location.hash`）来保持 UI 和 URL 的同步。这种方式不依赖于 HTML5 历史 API。
+
+#### 特点：
+
+- 生成带有 `#` 的 URL（例如 `http://example.com/#/about`）。
+- 不需要服务器端的特殊配置，因为 URL 的哈希部分永远不会发送到服务器。
+- 哈希变化可以通过 `hashchange` 事件监听到，因此可以在不支持 HTML5 历史 API 的旧浏览器中使用。
+
+#### 示例：
+
+```javascript
+import { HashRouter, Route, Link } from 'react-router-dom';
+
+function App() {
+  return (
+    <HashRouter>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+      </div>
+    </HashRouter>
+  );
+}
+```
+
+### 选择哪一个？
+
+- 如果你的服务器可以配置以响应所有路由请求，或者你使用的是像 Create React App 这样的开发工具(自动配置好响应web服务器)，那么 `BrowserRouter` 是一个更好的选择，因为它可以创建干净、标准的 URL.
+- 如果你的应用是一个静态文件服务器，不方便配置服务器来响应所有路由请求，或者需要在旧浏览器中运行，那么 `HashRouter` 会更加方便和实用。

@@ -725,7 +725,57 @@ transform: rotate(30deg) scale(1.5) translate(100px, 50px);
 
 
 
+## 10. CSS模块化技术
 
+CSS Modules 旨在解决传统 CSS 开发中的一些常见问题，如全局命名空间的冲突、重复类名等。这种技术通过在构建过程中对类名和选择器进行局部作用域处理和唯一性转换，来避免这些问题。
+
+### 基本概念
+
+1. **局部作用域**：CSS Modules 自动将所有类名和选择器变成唯一的标识符。这意味着你可以在一个模块中使用简单的类名（如 `.button`、`.menu`）而不用担心与其他文件中的同名类冲突。
+2. **显式依赖**：CSS Modules 通过 JavaScript 引入 CSS 文件，创建了一个显式的依赖关系。这种方式有助于理解和维护代码之间的关系。
+3. **组合**：在 CSS Modules 中，可以轻松地组合多个类，以创建新的样式变种。
+
+### 实现方式
+
+通常，你会有一个 `.module.css` 或 `.module.scss` 文件，里面定义了一些类。然后，在 JavaScript 组件中导入这些类，并使用它们。
+
+#### 示例
+
+假设有一个样式文件 `Button.module.css`：
+
+```css
+/* Button.module.css */
+.button {
+  background-color: blue;
+  color: white;
+}
+```
+
+在 JavaScript 组件中使用这个样式文件：
+
+```css
+import React from 'react';
+import styles from './Button.module.css';
+
+const Button = () => {
+  return <button className={styles.button}>Click me</button>;
+};
+
+export default Button;
+```
+
+在上述示例中，`.button` 类在构建时会被转换成一个唯一的标识符，例如 `Button_button__3K0xp`，这样就避免了与其他 CSS 文件中 `.button` 类的潜在冲突。
+
+### 配置
+
+为了使用 CSS Modules，你可能需要对构建系统（如 Webpack）进行相应配置。大多数现代前端框架（如 Create React App、Next.js）已经内置了对 CSS Modules 的支持。
+
+### 优势
+
+- **避免全局命名空间污染**：通过局部作用域，CSS Modules 防止了类名冲突。
+- **模块化和重用性**：CSS Modules 提高了样式的模块化程度和重用性。
+- **清晰的依赖关系**：由于 CSS 是通过 JavaScript 引入的，因此依赖关系更加清晰。
+- **易于维护**：局部作用域和清晰的依赖关系使得代码易于维护。
 
 
 
