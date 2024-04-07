@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\C#\\DotNetAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\repositories\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\repositories\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\interfaces\\icommentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\interfaces\\icommentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|e:\\c#\\dotnetapi\\dotnetapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{98646986-C988-4C23-852E-114123CB84B1}|DotNetAPI\\DotNetAPI.csproj|solutionrelative:dotnetapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Controllers\\UserController.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Controllers\\UserController.cs",
+              "RelativeToolTip": "DotNetAPI\\Controllers\\UserController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAwwDUAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T21:24:34.365Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Models\\User.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Models\\User.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Models\\User.cs",
+              "RelativeToolTip": "DotNetAPI\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T21:23:20.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "DotNetAPI\\appsettings.json",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\appsettings.json",
+              "RelativeToolTip": "DotNetAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-07T13:46:10.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Program.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Program.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Program.cs",
+              "RelativeToolTip": "DotNetAPI\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T13:34:33.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Services\\AuthenticationService.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "DotNetAPI\\Services\\AuthenticationService.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAcwDoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T14:07:37.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Controllers\\CommentController.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "DotNetAPI\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAUwFkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T19:08:27.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICommentRepository.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Interfaces\\ICommentRepository.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Interfaces\\ICommentRepository.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Interfaces\\ICommentRepository.cs",
+              "RelativeToolTip": "DotNetAPI\\Interfaces\\ICommentRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T19:06:32.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommentRepository.cs",
+              "DocumentMoniker": "E:\\C#\\DotNetAPI\\DotNetAPI\\Repositories\\CommentRepository.cs",
+              "RelativeDocumentMoniker": "DotNetAPI\\Repositories\\CommentRepository.cs",
+              "ToolTip": "E:\\C#\\DotNetAPI\\DotNetAPI\\Repositories\\CommentRepository.cs",
+              "RelativeToolTip": "DotNetAPI\\Repositories\\CommentRepository.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAiwDIAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T19:06:49.98Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
