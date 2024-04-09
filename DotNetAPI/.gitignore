@@ -1,0 +1,54 @@
+# User-specific files
+*.rsuser
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+*.vspscc
+*._sql
+*.dbproj.schemaview
+.vs/
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]es[Ss]harper
+*.DotSettings.user
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Others
+bin/
+obj/
+logs/
+packages/
+TestResults/
+*.log
+*.sql
+*.sqlite
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
