@@ -6,7 +6,7 @@
 
 ==: 做类型转换
 
-eg. 6=="6" (T);  
+eg. 6=="6" (T);
 
 6==="6" (F);
 
@@ -16,41 +16,40 @@ eg. 6=="6" (T);
 
 2. 状态提升：函数执行时，函数内的函数名、变量名会先被声明（实际声明顺序不同于代码编写的声明顺序）。
 
-3. **var**和**let**的区别（**4个区别**！）：
+3. **var**和**let**的区别（**4 个区别**！）：
 
-    1. **作用域**：
-    
-    
-     **var**：声明的变量具有函数作用域。这意味着在函数内部使用 `var` 声明的变量在整个函数内部都是可见的，无论声明它的位置在哪里。
-    
-     **let**：声明的变量具有块作用域。这意味着在花括号 `{}` 内部使用 `let` 声明的变量只在该块内部可见。
-   
+   1. **作用域**：
+
+   **var**：声明的变量具有函数作用域。这意味着在函数内部使用 `var` 声明的变量在整个函数内部都是可见的，无论声明它的位置在哪里。
+
+   **let**：声明的变量具有块作用域。这意味着在花括号 `{}` 内部使用 `let` 声明的变量只在该块内部可见。
+
    2. **变量提升**：
-   
+
       **var**：变量会被提升。这意味着可以在声明之前使用变量，但此时变量的值为 `undefined`。
-   
+
       **let**：变量不会被提升。如果在声明之前尝试使用它，会得到一个引用错误。
-   
-    3. **重复声明**：
-   
-       - **var**：在同一个作用域内可以多次声明同一个变量。
-       - **let**：在同一个作用域内不允许多次声明同一个变量。
-   
-    4. **全局对象属性**：
-   
-       - **var**：在全局作用域中使用 `var` 声明的变量会成为全局对象（通常是 `window` 对象）的属性。
-       - **let**：在全局作用域中使用 `let` 声明的变量不会成为全局对象的属性。
+
+   3. **重复声明**：
+
+      - **var**：在同一个作用域内可以多次声明同一个变量。
+      - **let**：在同一个作用域内不允许多次声明同一个变量。
+
+   4. **全局对象属性**：
+
+      - **var**：在全局作用域中使用 `var` 声明的变量会成为全局对象（通常是 `window` 对象）的属性。
+      - **let**：在全局作用域中使用 `let` 声明的变量不会成为全局对象的属性。
 
 ### 3. 原型与原型链
 
-1. `__proto__`  and `prototype`
+1. `__proto__` and `prototype`
 
-   `__proto__`  ued in instance, `prototype` used in  constructor functions (which includes classes in JavaScript) .
+   `__proto__` ued in instance, `prototype` used in constructor functions (which includes classes in JavaScript) .
 
    ```javascript
-   a = new String('abc') 
-   a.__proto__ // String {'', constructor: ƒ, anchor: ƒ, at: ƒ, big: ƒ, …}
-   String.prototype // String {'', constructor: ƒ, anchor: ƒ, at: ƒ, big: ƒ, …}
+   a = new String("abc");
+   a.__proto__; // String {'', constructor: ƒ, anchor: ƒ, at: ƒ, big: ƒ, …}
+   String.prototype; // String {'', constructor: ƒ, anchor: ƒ, at: ƒ, big: ƒ, …}
    ```
 
    `实例.__proto__` （隐式原型）==`类.prototype`（显示原型）
@@ -61,60 +60,58 @@ eg. 6=="6" (T);
 
    显示原型只存在于函数内。
 
-   f.prototype是一个对象
+   f.prototype 是一个对象
 
-   class在原型链中被视为构造函数
+   class 在原型链中被视为构造函数
 
 3. difference from class in C++/Java
 
-   1. **Inheritance mechanism**: In Javascript, the object can inherit from an instance. 
-   1. __Flexibility__: In Javascript, you can modify the class/prototype in runtime. In C++, No. 
+   1. **Inheritance mechanism**: In Javascript, the object can inherit from an instance.
+   1. **Flexibility**: In Javascript, you can modify the class/prototype in runtime. In C++, No.
 
 4. 数据类型
 
    1. 基本数据类型（**5+2**）：
 
-      String, Number, Boolean, Null, Undefined, Symbol (ES6引入， 用于创建唯一的标识符 ，主要用于创建私有属性), BigInt (ES11引入，处理大整数)
+      String, Number, Boolean, Null, Undefined, Symbol (ES6 引入， 用于创建唯一的标识符 ，主要用于创建私有属性), BigInt (ES11 引入，处理大整数)
 
-   2. 引用数据类型：Object.  【Object是个大类，function函数、array数组、date日期...等都归属于Object】 
+   2. 引用数据类型：Object. 【Object 是个大类，function 函数、array 数组、date 日期...等都归属于 Object】
 
    3. 判断类型
 
    ```javascript
    function getType(value) {
-       const type = Object.prototype.toString.call(value);
-       // call 改变 Object.prototype.toString 的this。this默认为Object.prototype
-       // toString的方法返回的是对象的内部[[Class]]属性。对于自定义的非内置对象，class为Object
-   
-       // Extract the type from the returned string, e.g., "[object Type]"
-       return type.match(/\[object (\w+)\]/)[1].toLowerCase();
-   }
-   
-   // 测试
-   console.log(getType(123));             // "number"
-   console.log(getType("hello"));         // "string"
-   console.log(getType(true));            // "boolean"
-   console.log(getType(undefined));       // "undefined"
-   console.log(getType(null));            // "null"
-   console.log(getType([]));              // "array"
-   console.log(getType({}));              // "object"
-   console.log(getType(function() {}));   // "function"
-   console.log(getType(/abc/));           // "regexp"
-   console.log(getType(new Date()));      // "date"
-   ```
+     const type = Object.prototype.toString.call(value);
+     // call 改变 Object.prototype.toString 的this。this默认为Object.prototype
+     // toString的方法返回的是对象的内部[[Class]]属性。对于自定义的非内置对象，class为Object
 
-   
+     // Extract the type from the returned string, e.g., "[object Type]"
+     return type.match(/\[object (\w+)\]/)[1].toLowerCase();
+   }
+
+   // 测试
+   console.log(getType(123)); // "number"
+   console.log(getType("hello")); // "string"
+   console.log(getType(true)); // "boolean"
+   console.log(getType(undefined)); // "undefined"
+   console.log(getType(null)); // "null"
+   console.log(getType([])); // "array"
+   console.log(getType({})); // "object"
+   console.log(getType(function () {})); // "function"
+   console.log(getType(/abc/)); // "regexp"
+   console.log(getType(new Date())); // "date"
+   ```
 
 5. difference from class in C++/Java
 
-   1. **Inheritance mechanism**: In Javascript, the object can inherit from an instance. 
-   1. __Flexibility__: In Javascript, you can modify the class/prototype in runtime. In C++, No. 
+   1. **Inheritance mechanism**: In Javascript, the object can inherit from an instance.
+   1. **Flexibility**: In Javascript, you can modify the class/prototype in runtime. In C++, No.
 
 6. `xx instanceof XX` is true, if `XX` is on the prototype chain of `xx`. For instance, `array instanceof Array` is true.
 
    Notice: `xx typeof` **only** returns the type of the data (number, string, boolean, undefined, null, object)
-   
-   `typeof` 不精准，比如`typeof array`返回的是object而非数组。instanceof需要提前知道大概属于什么，值可以做验证。`Object.prototype.toString.call()`是最好的选择。
+
+   `typeof` 不精准，比如`typeof array`返回的是 object 而非数组。instanceof 需要提前知道大概属于什么，值可以做验证。`Object.prototype.toString.call()`是最好的选择。
 
 ### 4. 异步编程
 
@@ -122,37 +119,37 @@ eg. 6=="6" (T);
 
    ```javascript
    function getAsyncData(data) {
-       return new Promise((resolve, reject) => {
-           setTimeout(() => {
-               if (typeof data === 'string') {
-                   resolve(data.toUpperCase());
-               } else {
-                   reject('输入必须是字符串');
-               }
-           }, 1000);
-       });
+     return new Promise((resolve, reject) => {
+       setTimeout(() => {
+         if (typeof data === "string") {
+           resolve(data.toUpperCase());
+         } else {
+           reject("输入必须是字符串");
+         }
+       }, 1000);
+     });
    }
-   
-   getAsyncData('hello')
-       .then(result => {
-           console.log(result); // 输出: "HELLO"
-           return getAsyncData('world');
-       })
-       .then(result => {
-           console.log(result); // 输出: "WORLD"
-       })
-       .catch(error => {
-           console.log(error);
-       });
+
+   getAsyncData("hello")
+     .then((result) => {
+       console.log(result); // 输出: "HELLO"
+       return getAsyncData("world");
+     })
+     .then((result) => {
+       console.log(result); // 输出: "WORLD"
+     })
+     .catch((error) => {
+       console.log(error);
+     });
    ```
 
-   1. `resolve(parameter)`的paramter即为`then((parameter)=>{})`中回调函数的parameter。`reject(parameter)`的paramter即为`catch((parameter)=>{})`中回调函数的parameter。
+   1. `resolve(parameter)`的 paramter 即为`then((parameter)=>{})`中回调函数的 parameter。`reject(parameter)`的 paramter 即为`catch((parameter)=>{})`中回调函数的 parameter。
 
    2. `Promise`对象中仅`resolve`和`reject`中的一个可以执行。一个执行另一个就不会执行。
 
    3. 链式调用：若前一个`then`返回一个非`Promise`的值，则该值作为下一个`then`的回调函数的参数。若前一个`then`返回一个`Promise`，则下一个`then`以这个`Promise`为准调用。
 
-   4. Promise的三个状态： **Pending（未决定）**、 **Fulfilled（履行）** 、 **Rejected（拒绝）** 
+   4. Promise 的三个状态： **Pending（未决定）**、 **Fulfilled（履行）** 、 **Rejected（拒绝）**
 
    5. `Promise` 本身并不是异步的，但它通常与异步操作一起使用。`Promise` 的执行器函数（即传递给 `new Promise` 的函数）是同步执行的。这意味着当你创建一个 `Promise` 时，执行器函数会立即执行。
 
@@ -161,16 +158,16 @@ eg. 6=="6" (T);
       看下面的例子：
 
       ```javascript
-      console.log('Start');
-      
+      console.log("Start");
+
       new Promise(function executor(resolve, reject) {
-          console.log('Executor');
-          resolve();
-      }).then(function() {
-          console.log('Then');
+        console.log("Executor");
+        resolve();
+      }).then(function () {
+        console.log("Then");
       });
-      
-      console.log('End');
+
+      console.log("End");
       ```
 
       输出顺序是：
@@ -186,30 +183,30 @@ eg. 6=="6" (T);
 
    ```javascript
    let timerId = setTimeout(() => {
-     console.log('This will not be shown');
+     console.log("This will not be shown");
    }, 2000);
-   
+
    // later (perhaps after 2000)
    clearTimeout(timerId);
    ```
 
    缺点：当需要依次进行异步操作时会产生**回调地狱（callback hell）**
 
-   setInterval(()=>{}, 3000); 与setTimeout类似，但是重复执行，每隔一段时间执行。
+   setInterval(()=>{}, 3000); 与 setTimeout 类似，但是重复执行，每隔一段时间执行。
 
 3. fetch('url request').then().then()
 
    Example:
 
    ```javascript
-   fetch('https://api.example.com/data')
-     .then(response => response.json())
-     .then(data => console.log(data))
-     .catch(error => console.error('Error:', error))
-     .finally();// finally will be executed no matter success or not
+   fetch("https://api.example.com/data")
+     .then((response) => response.json())
+     .then((data) => console.log(data))
+     .catch((error) => console.error("Error:", error))
+     .finally(); // finally will be executed no matter success or not
    ```
 
-   fetch会生成一个Promise。成功则返回Response类，失败返回错误对象。
+   fetch 会生成一个 Promise。成功则返回 Response 类，失败返回错误对象。
 
 4. Async Await
 
@@ -217,24 +214,22 @@ eg. 6=="6" (T);
 
    ```javascript
    async function myFunction() {
-     let response = await fetch('https://api.example.com/data');
+     let response = await fetch("https://api.example.com/data");
      let data = await response.json(); // execute after the line before finished
      return data;
    }
    ```
 
-   如果想要async函数内多条语句并发执行：
+   如果想要 async 函数内多条语句并发执行：
 
    ```javascript
-   let promises = await Promise.all([fetch(), fetch()])
+   let promises = await Promise.all([fetch(), fetch()]);
    ```
 
-   调用async函数：
+   调用 async 函数：
 
    1. 想要获得返回值：func().then(()=>{}).catch(...);
-   2. 不需要获得返回值：直接func(). 这种写法一般在事件处理器中较为常见（onclick）
-
-
+   2. 不需要获得返回值：直接 func(). 这种写法一般在事件处理器中较为常见（onclick）
 
 ### 5. 深浅拷贝
 
@@ -271,15 +266,13 @@ console.log(obj1 === obj3); // 输出 true，引用相同
 
 在这个例子中，`shallowCopy` 是 `original` 的浅拷贝，它复制了 `original` 的第一层结构。而 `obj1 === obj2` 的比较结果为 `false`，因为尽管 `obj1` 和 `obj2` 的内容相同，它们是两个不同的对象，存储在不同的内存地址。而 `obj1 === obj3` 的比较结果为 `true`，因为 `obj3` 是 `obj1` 的一个引用。
 
-
-
 #### 2.1. 准万能深拷贝方法：
 
-无法处理/拷贝function、undefined（直接被忽略，好像不存在一样）、原型链等
+无法处理/拷贝 function、undefined（直接被忽略，好像不存在一样）、原型链等
 
 ```javascript
-const list=[{myLove:'sq'}];
-const listCopy = JSON.parse(JSON.stringify(list))
+const list = [{ myLove: "sq" }];
+const listCopy = JSON.parse(JSON.stringify(list));
 ```
 
 #### 2.2. 真万能深拷贝方法
@@ -287,40 +280,38 @@ const listCopy = JSON.parse(JSON.stringify(list))
 ##### 2.2.1. 调包
 
 ```javascript
-const _ = require('lodash');
+const _ = require("lodash");
 const clonedObject = _.cloneDeep(originalObject);
 ```
 
-##### 2.2.2. 手写deepClone
+##### 2.2.2. 手写 deepClone
 
 ```javascript
-function deepClone(obj){
-    // 1. 判断传入的obj是不是对象，如果不是对象直接返回
-    if (typeof obj !== 'object' || obj == null){
-        return obj
-    }
+function deepClone(obj) {
+  // 1. 判断传入的obj是不是对象，如果不是对象直接返回
+  if (typeof obj !== "object" || obj == null) {
+    return obj;
+  }
 
-    // 2. 初始化返回结果（数组或者对象）
-    let result;
-    if (obj instanceof Array){
-        result = []
-    }
-    else{
-        result = {}
-    }
+  // 2. 初始化返回结果（数组或者对象）
+  let result;
+  if (obj instanceof Array) {
+    result = [];
+  } else {
+    result = {};
+  }
 
-    // 3. 遍历obj所有的key，递归调用deepClone
-    for (let key in obj){
-        if (obj.hasOwnProperty(key)){ // hasOwnProperty保证key不是原型的属性
-            result[key] = deepClone(obj[key])
-        }
+  // 3. 遍历obj所有的key，递归调用deepClone
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      // hasOwnProperty保证key不是原型的属性
+      result[key] = deepClone(obj[key]);
     }
+  }
 
-    return result;
+  return result;
 }
 ```
-
-
 
 ### 6. 闭包
 
@@ -332,7 +323,7 @@ function deepClone(obj){
 
 ![1690627984672](javascript1.png)
 
-### 7. 函数柯里化Curring
+### 7. 函数柯里化 Curring
 
 柯里化（Currying）是一种在函数式编程中常见的技术，它是将一个接受多个参数的函数转换为一系列使用一个参数的函数的过程。
 
@@ -346,66 +337,62 @@ function deepClone(obj){
 例子：
 
 ```javascript
-function curringAdd(){
-    let args = [...arguments];
-    function fn(){
-        args.push(...arguments);
-        return fn;
-    }
-    fn.toString = function(){ // 注意这里不可以直接写function toString()
-        return args.reduce((first, second)=>first+second, 0);
-    }
+function curringAdd() {
+  let args = [...arguments];
+  function fn() {
+    args.push(...arguments);
     return fn;
+  }
+  fn.toString = function () {
+    // 注意这里不可以直接写function toString()
+    return args.reduce((first, second) => first + second, 0);
+  };
+  return fn;
 }
 
-console.log(curringAdd(1)(2,3)(4,5,6).toString());
-
+console.log(curringAdd(1)(2, 3)(4, 5, 6).toString());
 ```
 
+### 8. JavaScript 导入类
 
-
-### 8. JavaScript导入类
-
-一般JavaScript导入方法：
+一般 JavaScript 导入方法：
 
 test1.js
 
 ```javascript
 const exportClass = () => {
-    return 2;
-}
+  return 2;
+};
 
 // export default exportClass;
 module.exports = {
-    exportClass : exportClass
+  exportClass: exportClass,
 };
 ```
 
 test2.js
 
 ```javascript
-const { exportClass } = require('./test1.js');
+const { exportClass } = require("./test1.js");
 console.log(exportClass()); // 2
 ```
 
-import xxx; export default xxx; 为webpack中使用的方法
-
-
+import xxx; export default xxx; 为 webpack 中使用的方法
 
 ### 9. this
 
-This在不同位置的定义：
+This 在不同位置的定义：
 
 #### 1. **全局上下文**
 
 ```javascript
-console.log(this === window);  // 在浏览器中输出：true
+console.log(this === window); // 在浏览器中输出：true
 ```
 
 在全局上下文中（不在任何函数内部），`this`引用的是全局对象。
 
 - 在浏览器中，`this`指向`window`对象。
-- 在Node.js中，`this`指向`global`对象。
+- 在 Node.js 中，`this`指向`global`对象。
 
 #### 2. **函数调用**
 
@@ -413,7 +400,7 @@ console.log(this === window);  // 在浏览器中输出：true
 
 ```javascript
 function test() {
-    console.log(this === window);  // 在浏览器中输出：true
+  console.log(this === window); // 在浏览器中输出：true
 }
 
 test();
@@ -425,13 +412,13 @@ test();
 
 ```javascript
 const obj = {
-    name: 'Alice',
-    greet: function() {
-        console.log('Hello, ' + this.name);
-    }
+  name: "Alice",
+  greet: function () {
+    console.log("Hello, " + this.name);
+  },
 };
 
-obj.greet();  // 输出：Hello, Alice
+obj.greet(); // 输出：Hello, Alice
 ```
 
 #### 4. **构造函数**
@@ -440,11 +427,11 @@ obj.greet();  // 输出：Hello, Alice
 
 ```javascript
 function Person(name) {
-    this.name = name;
+  this.name = name;
 }
 
-const alice = new Person('Alice');
-console.log(alice.name);  // 输出：Alice
+const alice = new Person("Alice");
+console.log(alice.name); // 输出：Alice
 ```
 
 #### 5. **事件处理器**
@@ -452,8 +439,8 @@ console.log(alice.name);  // 输出：Alice
 在事件处理器中，`this`通常指向触发事件的元素。
 
 ```javascript
-button.addEventListener('click', function() {
-    console.log(this === button);  // 输出：true
+button.addEventListener("click", function () {
+  console.log(this === button); // 输出：true
 });
 ```
 
@@ -468,27 +455,27 @@ button.addEventListener('click', function() {
 
 ```javascript
 function greet(msg) {
-    console.log(msg + ', ' + this.name);
+  console.log(msg + ", " + this.name);
 }
 
-const person = { name: 'Alice' };
+const person = { name: "Alice" };
 
-greet.call(person, 'Hello');  // 输出：Hello, Alice
+greet.call(person, "Hello"); // 输出：Hello, Alice
 ```
 
 ##### 6.2. `apply`
 
 - **用途**：*调用*一个函数，并为其指定`this`值和参数数组（注意与`call`不同，这里是参数**数组**）。
-- **语法**：`func.apply([thisArg[, argsArray]])` 
+- **语法**：`func.apply([thisArg[, argsArray]])`
 
 ```javascript
 function greet(msg1, msg2) {
-    console.log(msg1 + ', ' + this.name + msg2);
+  console.log(msg1 + ", " + this.name + msg2);
 }
 
-const person = { name: 'Bob' };
+const person = { name: "Bob" };
 
-greet.apply(person, ['Hello', '!']);  // 输出：Hello, Bob!
+greet.apply(person, ["Hello", "!"]); // 输出：Hello, Bob!
 ```
 
 ##### 6.3. `bind`
@@ -498,13 +485,13 @@ greet.apply(person, ['Hello', '!']);  // 输出：Hello, Bob!
 
 ```javascript
 function greet(name1, name2) {
-    console.log('Hi, ' + this.name+" "+name1+" "+name2);
+  console.log("Hi, " + this.name + " " + name1 + " " + name2);
 }
 
-const person = { name: 'Charlie' };
+const person = { name: "Charlie" };
 const boundGreet = greet.bind(person);
 
-boundGreet('arthur', 'siennna');  // 输出：Hi, Charlie arthur siennna
+boundGreet("arthur", "siennna"); // 输出：Hi, Charlie arthur siennna
 ```
 
 #### 7.**箭头函数**
@@ -513,18 +500,16 @@ boundGreet('arthur', 'siennna');  // 输出：Hi, Charlie arthur siennna
 
 ```javascript
 const obj = {
-    name: 'Charlie',
-    greet: function() {
-        setTimeout(() => {
-            console.log('Hello, ' + this.name);
-        }, 1000);
-    }
+  name: "Charlie",
+  greet: function () {
+    setTimeout(() => {
+      console.log("Hello, " + this.name);
+    }, 1000);
+  },
 };
 
-obj.greet();  // 1秒后输出：Hello, Charlie
+obj.greet(); // 1秒后输出：Hello, Charlie
 ```
-
-
 
 ### 10. 事件循环机制
 
@@ -552,24 +537,24 @@ obj.greet();  // 1秒后输出：Hello, Charlie
 1. 执行初始脚本或函数，这可以看作是第一个宏任务。
 2. 执行所有微任务。当微任务队列为空时，继续下一步。
 3. 执行下一个宏任务。
-4. 重复第2和第3步。
+4. 重复第 2 和第 3 步。
 
 #### 示例：
 
 考虑以下代码：
 
 ```javascript
-console.log('Start');
+console.log("Start");
 
 setTimeout(() => {
-    console.log('setTimeout');
+  console.log("setTimeout");
 }, 0);
 
 Promise.resolve().then(() => {
-    console.log('Promise');
+  console.log("Promise");
 });
 
-console.log('End');
+console.log("End");
 ```
 
 输出顺序是：
@@ -579,11 +564,9 @@ console.log('End');
 3. `Promise`
 4. `setTimeout`
 
-尽管`setTimeout`的延迟是0毫秒，但由于它是一个宏任务，而`Promise`的`then`是一个微任务，`Promise`的回调会在`setTimeout`的回调之前执行。
+尽管`setTimeout`的延迟是 0 毫秒，但由于它是一个宏任务，而`Promise`的`then`是一个微任务，`Promise`的回调会在`setTimeout`的回调之前执行。
 
-总之，事件循环、微任务和宏任务是JavaScript异步编程的核心概念。理解它们之间的关系和工作方式对于编写高效、非阻塞的代码至关重要。
-
-
+总之，事件循环、微任务和宏任务是 JavaScript 异步编程的核心概念。理解它们之间的关系和工作方式对于编写高效、非阻塞的代码至关重要。
 
 ### 11. 箭头函数与匿名函数的区别
 
@@ -593,8 +576,6 @@ console.log('End');
 4. **构造函数**: 箭头函数不能用作构造函数，你不能使用 `new` 关键字与它们一起使用。传统的函数可以。
 5. **原型**: 箭头函数没有 `prototype` 属性，而传统的函数有。
 
-
-
 ### 12. js array
 
 1. **添加元素**:
@@ -602,14 +583,14 @@ console.log('End');
    - **push()**: 在数组的末尾添加一个或多个元素，并返回新的长度。
 
      ```javascript
-     let fruits = ['apple', 'banana'];
-     fruits.push('orange');  // fruits: ['apple', 'banana', 'orange']
+     let fruits = ["apple", "banana"];
+     fruits.push("orange"); // fruits: ['apple', 'banana', 'orange']
      ```
 
    - **unshift()**: 在数组的开头添加一个或多个元素，并返回新的长度。
 
      ```javascript
-     fruits.unshift('grape');  // fruits: ['grape', 'apple', 'banana', 'orange']
+     fruits.unshift("grape"); // fruits: ['grape', 'apple', 'banana', 'orange']
      ```
 
 2. **删除元素**:
@@ -617,13 +598,13 @@ console.log('End');
    - **pop()**: 删除并返回数组的最后一个元素。
 
      ```js
-     let lastFruit = fruits.pop();  // lastFruit: 'orange'
+     let lastFruit = fruits.pop(); // lastFruit: 'orange'
      ```
 
    - **shift()**: 删除并返回数组的第一个元素。
 
      ```javascript
-     let firstFruit = fruits.shift();  // firstFruit: 'grape'
+     let firstFruit = fruits.shift(); // firstFruit: 'grape'
      ```
 
 3. **查找元素**:
@@ -631,13 +612,13 @@ console.log('End');
    - **indexOf()**: 返回元素在数组中的第一个索引，如果不存在则返回 -1。
 
      ```javascript
-     let index = fruits.indexOf('banana');  // index: 1
+     let index = fruits.indexOf("banana"); // index: 1
      ```
 
    - **includes()**: 检查数组是否包含某个元素，返回 true 或 false。
 
      ```javascript
-     let hasApple = fruits.includes('apple');  // hasApple: true
+     let hasApple = fruits.includes("apple"); // hasApple: true
      ```
 
 4. **遍历数组**:
@@ -647,7 +628,7 @@ console.log('End');
      : 对数组的每个元素执行指定的函数。
 
      ```javascript
-     fruits.forEach(fruit => console.log(fruit));
+     fruits.forEach((fruit) => console.log(fruit));
      ```
 
 5. **转换数组**:
@@ -657,7 +638,7 @@ console.log('End');
      : 创建一个新数组，其结果是该数组中的每个元素都调用一个函数后的返回值。
 
      ```javascript
-     let lengths = fruits.map(fruit => fruit.length);  // lengths: [5, 6]
+     let lengths = fruits.map((fruit) => fruit.length); // lengths: [5, 6]
      ```
 
 6. **筛选数组**:
@@ -667,7 +648,7 @@ console.log('End');
      : 创建一个新数组，包含通过测试的所有元素。
 
      ```javascript
-     let longFruits = fruits.filter(fruit => fruit.length > 5);  // longFruits: ['banana']
+     let longFruits = fruits.filter((fruit) => fruit.length > 5); // longFruits: ['banana']
      ```
 
 7. **排序数组**:
@@ -675,13 +656,29 @@ console.log('End');
    - **sort()**: 对数组的元素进行排序，返回更改后的原数组。
 
      ```javascript
-     fruits.sort();  // fruits: ['apple', 'banana']
+     fruits.sort(); // fruits: ['apple', 'banana']
      ```
 
    - **reverse()**: 颠倒数组中元素的顺序，返回更改后的原数组。
 
      ```javascript
-     fruits.reverse();  // fruits: ['banana', 'apple']
+     fruits.reverse(); // fruits: ['banana', 'apple']
+     ```
+
+   - **sort() logic rewrite**
+
+     The comparison function takes two arguments (often referred to as a and b). The function should return:
+
+     - negative value if a should come before b
+     - Zero if a and b are equivalent in order
+     - A positive value if a should come after b
+
+     ```javascript
+     // descending
+     let numbers = [3, 1, 4, 1, 5, 9, 2, 6];
+     numbers.sort(function (a, b) {
+       return b - a;
+     });
      ```
 
 8. **连接和分割数组**:
@@ -689,28 +686,28 @@ console.log('End');
    - **join()**: 将数组的所有元素连接成一个字符串。
 
      ```javascript
-     let fruitString = fruits.join(', ');  // fruitString: 'banana, apple'
+     let fruitString = fruits.join(", "); // fruitString: 'banana, apple'
      ```
 
    - **slice()**: 返回数组的一个片段。
 
      ```javascript
-     let slicedFruits = fruits.slice(1, 3);  // slicedFruits: ['apple']
+     let slicedFruits = fruits.slice(1, 3); // slicedFruits: ['apple']
      ```
 
    - **splice()**: 更改原数组内容，可以添加、删除或替换元素，返回被删除元素的数组。
 
      ```javascript
-     let fruits = ['apple', 'banana', 'cherry', 'date'];
-     
+     let fruits = ["apple", "banana", "cherry", "date"];
+
      // 删除元素
-     let removedFruits = fruits.splice(1, 2);  // ['banana', 'cherry']
-     
+     let removedFruits = fruits.splice(1, 2); // ['banana', 'cherry']
+
      // 添加元素
-     fruits.splice(1, 0, 'blueberry', 'citrus');  // fruits: ['apple', 'blueberry', 'citrus', 'date']
-     
+     fruits.splice(1, 0, "blueberry", "citrus"); // fruits: ['apple', 'blueberry', 'citrus', 'date']
+
      // 替换元素
-     fruits.splice(1, 2, 'blackberry');  // fruits: ['apple', 'blackberry', 'date']
+     fruits.splice(1, 2, "blackberry"); // fruits: ['apple', 'blackberry', 'date']
      ```
 
 9. **合并数组**:
@@ -720,8 +717,8 @@ console.log('End');
      : 合并两个或多个数组，返回新数组。
 
      ```javascript
-     let moreFruits = ['orange', 'pineapple'];
-     let allFruits = fruits.concat(moreFruits);  // allFruits: ['banana', 'grape', 'apple', 'orange', 'pineapple']
+     let moreFruits = ["orange", "pineapple"];
+     let allFruits = fruits.concat(moreFruits); // allFruits: ['banana', 'grape', 'apple', 'orange', 'pineapple']
      ```
 
 10. **其他**:
@@ -729,24 +726,25 @@ console.log('End');
 - **reduce()**: 对数组中的每个元素执行一个函数，并将其减少为单个值。
 
   ```javascript
-  let sum = [1, 2, 3, 4].reduce((accumulator, currentValue) => accumulator + currentValue, 0);  // sum: 10
+  let sum = [1, 2, 3, 4].reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  ); // sum: 10
   ```
 
 - **some()**: 测试数组中是否有元素满足测试函数。
 
   ```javascript
-  let hasLargeFruit = fruits.some(fruit => fruit.length > 6);  // hasLargeFruit: false
+  let hasLargeFruit = fruits.some((fruit) => fruit.length > 6); // hasLargeFruit: false
   ```
 
 - **every()**: 测试数组中的所有元素是否都满足测试函数。
 
   ```javascript
-  let allFruitsAreShort = fruits.every(fruit => fruit.length < 7);  // allFruitsAreShort: true
+  let allFruitsAreShort = fruits.every((fruit) => fruit.length < 7); // allFruitsAreShort: true
   ```
 
 这只是 JavaScript 数组提供的方法的一部分。数组是 JavaScript 中非常强大和灵活的数据结
-
-
 
 ### 13. js string
 
@@ -821,9 +819,7 @@ console.log('End');
     console.log(str.trim()); // "Hello World!"
     ```
 
-
-
-## 14. Map和WeakMap
+## 14. Map 和 WeakMap
 
 ### Map
 
@@ -865,14 +861,14 @@ console.log('End');
 ```javascript
 // Map 示例
 let map = new Map();
-map.set('key1', 'value1');
-map.set('key2', 'value2');
+map.set("key1", "value1");
+map.set("key2", "value2");
 console.log(map.size); // 2
 
 // WeakMap 示例
 let weakmap = new WeakMap();
 let obj = {};
-weakmap.set(obj, 'value');
+weakmap.set(obj, "value");
 console.log(weakmap.has(obj)); // true
 obj = null; // 移除对对象的引用
 // 此时，obj 可能会被垃圾回收，相应的键值对也会从 weakmap 中消失
@@ -880,15 +876,74 @@ obj = null; // 移除对对象的引用
 
 在这些示例中，`Map` 用于存储和操作键值对，而 `WeakMap` 用于创建与对象相关联的数据，而不影响对象的生命周期。
 
+## 15. Object
 
+### 1. Object iteration
 
+#### 1. `for...in` Loop
 
+The `for...in` loop iterates over all enumerable properties of an object, including those inherited through the prototype chain.
 
+```javascript
+const object = { a: 1, b: 2, c: 3 };
 
+for (const key in object) {
+  if (object.hasOwnProperty(key)) {  // Check to avoid inherited properties
+    console.log(key, object[key]);
+  }
+}
+```
 
+#### 2. `Object.keys()`
 
+`Object.keys()` returns an array of an object's own enumerable property names, iterated in the same order that a normal loop would. You can then iterate over these keys using array methods.
 
+```javascript
+const object = { a: 1, b: 2, c: 3 };
+const keys = Object.keys(object);
 
+keys.forEach((key) => {
+  console.log(key, object[key]);
+});
+```
 
+#### 3. `Object.values()`
 
+If you need the values from the object, you can use `Object.values()` to get an array of values and then iterate over them.
+
+```javascript
+const object = { a: 1, b: 2, c: 3 };
+const values = Object.values(object);
+
+values.forEach((value) => {
+  console.log(value);
+});
+```
+
+#### 4. `Object.entries()`
+
+`Object.entries()` returns an array of the object's own enumerable string-keyed property `[key, value]` pairs. This is useful if you need both keys and values.
+
+```javascript
+const object = { a: 1, b: 2, c: 3 };
+const entries = Object.entries(object);
+
+entries.forEach(([key, value]) => {
+  console.log(key, value);
+});
+```
+
+#### 5. Using `for...of` with `Object.entries()`
+
+If you prefer the `for...of` syntax, you can combine it with `Object.entries()`:
+
+```javascript
+const object = { a: 1, b: 2, c: 3 };
+
+for (const [key, value] of Object.entries(object)) {
+  console.log(key, value);
+}
+```
+
+Each method serves different needs, so you can choose the one that best fits your situation based on what you need to access from the object (keys, values, or both).
 
