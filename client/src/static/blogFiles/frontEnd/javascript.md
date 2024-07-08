@@ -655,6 +655,8 @@ console.log("End");
 
    - **sort()**: 对数组的元素进行排序，返回更改后的原数组。
 
+   - **注意：默认排序时会把数字变成字符串，按字符串排序。**
+
      ```javascript
      fruits.sort(); // fruits: ['apple', 'banana']
      ```
