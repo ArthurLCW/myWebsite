@@ -1,9 +1,5 @@
 ## 1. 生命周期
 
-#### 渲染
-
-在1. initial render；2. 更新state/prop；3. Change in context：React.useContext/更高级组件更新
-
 #### 抽象的生命周期
 
 1. 挂载Mount; 2. 更新Update；3. 卸载Unmount。

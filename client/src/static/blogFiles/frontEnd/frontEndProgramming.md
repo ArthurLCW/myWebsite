@@ -2,7 +2,7 @@
 
 ## 1. [事件捕获与冒泡](https://www.bilibili.com/video/BV1m7411L7YW/?spm_id_from=333.788&vd_source=a82ddca015c3600e3ebfadd0eb69d716)
 
-#### 1. DOM事件流
+#### 1. DOM 事件流
 
 事件捕获阶段（自上而下）+处于目标阶段+事件冒泡阶段（自下而上）
 
@@ -10,9 +10,7 @@
 
 ![1693208037428](javascript2.png)
 
-事件捕获优先于事件冒泡。事件捕获从上到下，所以先触发mother再触发daughter。然后再事件冒泡自下而上，先baby再grandma。
-
-
+事件捕获优先于事件冒泡。事件捕获从上到下，所以先触发 mother 再触发 daughter。然后再事件冒泡自下而上，先 baby 再 grandma。
 
 ## 2. 防抖（debounce）
 
@@ -22,43 +20,46 @@
 
 **示例**：
 
-想象一个搜索框，用户在输入时，你希望能够实时显示搜索结果。但如果每次用户输入一个字符时都发送一个请求到服务器，服务器可能会被大量的请求淹没。使用防抖，只有当用户停止输入一段时间（例如300毫秒）后，才会发送一个请求。
+想象一个搜索框，用户在输入时，你希望能够实时显示搜索结果。但如果每次用户输入一个字符时都发送一个请求到服务器，服务器可能会被大量的请求淹没。使用防抖，只有当用户停止输入一段时间（例如 300 毫秒）后，才会发送一个请求。
 
 ```javascript
 function debounce(func, delay) {
-    let timeout;
-    return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            func.apply(context, args);
-        }, delay);
-    };
+  let timeout;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      func.apply(context, args);
+    }, delay);
+  };
 }
 
-const searchInput = document.getElementById('searchInput');
+const searchInput = document.getElementById("searchInput");
 
-searchInput.addEventListener('input', debounce(function() {
-    console.log('Sending request for:', searchInput.value);
-}, 300));
+searchInput.addEventListener(
+  "input",
+  debounce(function () {
+    console.log("Sending request for:", searchInput.value);
+  }, 300)
+);
 ```
 
-**难点0：流程**
+**难点 0：流程**
 
-clearTimeout，再setTimeout。例子：设置一个按钮，点击后会100ms后触发事件。第一次点击，设置100ms后触发。99ms后第二次点击，重新计时，事件再过100ms后触发
+clearTimeout，再 setTimeout。例子：设置一个按钮，点击后会 100ms 后触发事件。第一次点击，设置 100ms 后触发。99ms 后第二次点击，重新计时，事件再过 100ms 后触发
 
-**难点1：回调函数的正确传入方式**
+**难点 1：回调函数的正确传入方式**
 
-不可以直接searchInput.addEventListener('input', debounce(func)).直接这样写会在绑定时就执行debounce(func)。正确处理办法是debounce(func) return一个匿名或者箭头函数。
+不可以直接 searchInput.addEventListener('input', debounce(func)).直接这样写会在绑定时就执行 debounce(func)。正确处理办法是 debounce(func) return 一个匿名或者箭头函数。
 
-**难点2：闭包**
+**难点 2：闭包**
 
-不用闭包的话每次会生成一个新的timeout，不能实现防抖效果。
+不用闭包的话每次会生成一个新的 timeout，不能实现防抖效果。
 
-**难点3：重新绑定**
+**难点 3：重新绑定**
 
-非构造非方法非匿名非箭头的函数的this值默认为global/window，这可能导致一些问题。用apply显示的修改this值。
+非构造非方法非匿名非箭头的函数的 this 值默认为 global/window，这可能导致一些问题。用 apply 显示的修改 this 值。
 
 ## 3.节流 (Throttle)
 
@@ -68,34 +69,37 @@ clearTimeout，再setTimeout。例子：设置一个按钮，点击后会100ms�
 
 **示例**：
 
-假设你有一个网页，当用户滚动到页面底部时，你希望加载更多的内容。用户在滚动页面时，滚动事件会非常频繁地触发。使用节流，即使用户连续滚动，你也只每隔一段时间（例如200毫秒）检查一次。
+假设你有一个网页，当用户滚动到页面底部时，你希望加载更多的内容。用户在滚动页面时，滚动事件会非常频繁地触发。使用节流，即使用户连续滚动，你也只每隔一段时间（例如 200 毫秒）检查一次。
 
 ```javascript
 function throttle(func, delay) {
-    let lastTime = 0;
-    return function() {
-        const now = Date.now();
-        if (now - lastTime > delay) {
-            lastTime = now;
-            func.apply(this, arguments);
-        }
-    };
+  let lastTime = 0;
+  return function () {
+    const now = Date.now();
+    if (now - lastTime > delay) {
+      lastTime = now;
+      func.apply(this, arguments);
+    }
+  };
 }
 
-window.addEventListener('scroll', throttle(function() {
+window.addEventListener(
+  "scroll",
+  throttle(function () {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log('Load more content');
+      console.log("Load more content");
     }
-}, 200));
+  }, 200)
+);
 ```
 
 ## 4. 浏览器缓存
 
 #### 1. 强缓存
 
-- **Expires**：这是HTTP/1.0的属性，它指定了一个绝对的过期时间。例如：`Expires: Wed, 21 Oct 2020 07:28:00 GMT`。
-- **Cache-Control**：这是HTTP/1.1的属性，它提供了更多的缓存控制选项。例如：
-  - `max-age=3600`：资源会在3600秒后过期。
+- **Expires**：这是 HTTP/1.0 的属性，它指定了一个绝对的过期时间。例如：`Expires: Wed, 21 Oct 2020 07:28:00 GMT`。
+- **Cache-Control**：这是 HTTP/1.1 的属性，它提供了更多的缓存控制选项。例如：
+  - `max-age=3600`：资源会在 3600 秒后过期。
   - `public`：资源可以被所有用户缓存，包括在中间代理服务器中。
   - `private`：资源只能被浏览器缓存。
   - `no-cache`：需要向服务器验证资源的有效性。
@@ -117,8 +121,8 @@ window.addEventListener('scroll', throttle(function() {
 #### 4. 优化策略：
 
 1. **设置合适的缓存策略**：对于不经常更改的资源（如库、框架、图标等），使用长时间的强缓存。对于可能更改的资源，使用协商缓存。
-2. **版本控制**：当资源更改时，更改其URL（例如，通过添加查询参数或更改文件名）以确保浏览器加载新版本。
-3. **使用Service Workers**：为应用程序提供离线支持和更细粒度的缓存控制。
+2. **版本控制**：当资源更改时，更改其 URL（例如，通过添加查询参数或更改文件名）以确保浏览器加载新版本。
+3. **使用 Service Workers**：为应用程序提供离线支持和更细粒度的缓存控制。
 4. **优先考虑内存缓存**：对于频繁使用的资源，使其保持在内存缓存中可以提供最快的加载速度。
 
 总的来说，正确地使用浏览器缓存可以显著提高网站的性能，减少服务器的负担，并为用户提供更快的加载速度。
@@ -128,21 +132,21 @@ window.addEventListener('scroll', throttle(function() {
 ### 5.1. 性能指标
 
 1. **加载时间（Load Time）**:
-   - 这是最直观的性能指标之一，指的是页面完全加载所需的时间。这包括所有的HTML、CSS、JavaScript、图片和其他资源的加载时间。
+   - 这是最直观的性能指标之一，指的是页面完全加载所需的时间。这包括所有的 HTML、CSS、JavaScript、图片和其他资源的加载时间。
 2. **首次内容绘制（First Contentful Paint, FCP）**:
-   - FCP指的是从页面开始加载到页面上的第一个内容元素（如文本或图像）被渲染的时间。
+   - FCP 指的是从页面开始加载到页面上的第一个内容元素（如文本或图像）被渲染的时间。
 3. **首次有意义绘制（First Meaningful Paint, FMP）**:
-   - FMP衡量的是页面主要内容开始出现在屏幕上的时间，这通常是用户认为页面“可用”的时刻。
+   - FMP 衡量的是页面主要内容开始出现在屏幕上的时间，这通常是用户认为页面“可用”的时刻。
 4. **最大内容绘制（Largest Contentful Paint, LCP）**:
-   - LCP衡量的是页面上最大内容元素（如大图像或文本块）完成渲染的时间。这是一个重要的用户体验指标。
+   - LCP 衡量的是页面上最大内容元素（如大图像或文本块）完成渲染的时间。这是一个重要的用户体验指标。
 5. **交互时间（Time to Interactive, TTI）**:
-   - TTI是指页面完全可交互所需的时间，即用户可以完全与页面上的所有元素互动的时间点。
+   - TTI 是指页面完全可交互所需的时间，即用户可以完全与页面上的所有元素互动的时间点。
 6. **阻塞时间（Blocking Time）**:
-   - 这是指在FCP和TTI之间，主线程被阻塞的总时间，导致用户无法与页面互动。
+   - 这是指在 FCP 和 TTI 之间，主线程被阻塞的总时间，导致用户无法与页面互动。
 7. **累积布局偏移（Cumulative Layout Shift, CLS）**:
-   - CLS衡量的是视觉稳定性，即页面加载过程中元素位置变化的频率和程度。较低的CLS表示更好的用户体验。
+   - CLS 衡量的是视觉稳定性，即页面加载过程中元素位置变化的频率和程度。较低的 CLS 表示更好的用户体验。
 8. **服务器响应时间（Time to First Byte, TTFB）**:
-   - TTFB是指从用户或客户端发出请求到接收到来自服务器的第一个字节所需的时间。
+   - TTFB 是指从用户或客户端发出请求到接收到来自服务器的第一个字节所需的时间。
 9. **页面大小（Page Size）**:
    - 这是指页面的总体积，包括所有的代码、图片、视频等资源。页面大小越小，通常加载速度越快。
 10. **请求数（Number of Requests）**:
@@ -152,7 +156,7 @@ window.addEventListener('scroll', throttle(function() {
 
 #### 1. Service Worker
 
-Service Worker 是一个在浏览器背景中运行的 JavaScript 脚本，它独立于主线程，因此不会因为页面的计算或渲染任务而被阻塞。这使得 Service Worker 非常适合执行那些不需要用户交互并且希望在后台运行的任务，例如推送通知和背景同步。 
+Service Worker 是一个在浏览器背景中运行的 JavaScript 脚本，它独立于主线程，因此不会因为页面的计算或渲染任务而被阻塞。这使得 Service Worker 非常适合执行那些不需要用户交互并且希望在后台运行的任务，例如推送通知和背景同步。
 
 Service Worker 的主要特点：
 
@@ -163,70 +167,64 @@ Service Worker 的主要特点：
 
 #### 2. CDN
 
-CDN是内容分发网络（Content Delivery Network）的缩写。它是一种分布式网络，旨在通过地理上分散的服务器群来优化互联网内容的传输速度和可靠性。CDN通过在多个位置缓存内容（如网页、视频、图片等），使得用户可以从最近的服务器获取内容，而不是所有的请求都回到原始服务器。这样做有几个主要的好处：
+CDN 是内容分发网络（Content Delivery Network）的缩写。它是一种分布式网络，旨在通过地理上分散的服务器群来优化互联网内容的传输速度和可靠性。CDN 通过在多个位置缓存内容（如网页、视频、图片等），使得用户可以从最近的服务器获取内容，而不是所有的请求都回到原始服务器。这样做有几个主要的好处：
 
 1. **提高速度**：用户可以从离他们最近的数据中心下载内容，从而减少延迟，提高加载速度。
-2. **减少原始服务器的负载**：由于许多请求被CDN上的服务器处理，原始服务器的负载会减少，这有助于避免过载情况的发生。
-3. **增加可用性和可靠性**：如果某个服务器或数据中心出现问题，CDN可以将流量重定向到其他健康的服务器上，从而保证内容的持续可用性。
-4. **提高安全性**：CDN可以提供额外的安全层，如DDoS攻击防护，因为它们可以分散流量，识别并阻止恶意流量。
-5. **节省带宽成本**：通过缓存内容，CDN可以减少数据中心的数据传输量，从而节省成本。
+2. **减少原始服务器的负载**：由于许多请求被 CDN 上的服务器处理，原始服务器的负载会减少，这有助于避免过载情况的发生。
+3. **增加可用性和可靠性**：如果某个服务器或数据中心出现问题，CDN 可以将流量重定向到其他健康的服务器上，从而保证内容的持续可用性。
+4. **提高安全性**：CDN 可以提供额外的安全层，如 DDoS 攻击防护，因为它们可以分散流量，识别并阻止恶意流量。
+5. **节省带宽成本**：通过缓存内容，CDN 可以减少数据中心的数据传输量，从而节省成本。
 
-总的来说，CDN是提升网站性能和用户体验的重要工具，尤其是对于有大量国际用户或需要快速内容交付的服务来说。
-
-
+总的来说，CDN 是提升网站性能和用户体验的重要工具，尤其是对于有大量国际用户或需要快速内容交付的服务来说。
 
 ## 6. 浏览器进程（五大进程）
 
-浏览器主进程、网络进程、GPU进程、渲染进程和插件进程。
+浏览器主进程、网络进程、GPU 进程、渲染进程和插件进程。
 
 每一个页面都有独立的渲染进程和插件进程，二者被放入沙箱中隔离保证安全性。
 
 1. **浏览器进程（Browser Process）**：
    - 这是主控进程，负责浏览器的用户界面，包括地址栏、书签、前进和后退按钮等。
    - 它还负责管理窗口和标签页，以及与操作系统的交互。
-2. **GPU进程（GPU Process）**：
-   - 负责处理所有的GPU相关任务。
+2. **GPU 进程（GPU Process）**：
+   - 负责处理所有的 GPU 相关任务。
    - 它用于加速网页的渲染，特别是对于图形密集型的操作和视频播放。
 3. **网络进程（Network Process）**：
    - 负责处理所有网络活动，如加载网页、下载文件等。
    - 它确保网络请求的处理不会影响到浏览器的用户界面或网页的渲染。
 4. **渲染进程（Renderer Process）**：
    - 每个标签页通常都有自己的渲染进程。
-   - 这个进程负责解析HTML、CSS和JavaScript，然后将它们转换为用户可以看到和与之交互的网页。
+   - 这个进程负责解析 HTML、CSS 和 JavaScript，然后将它们转换为用户可以看到和与之交互的网页。
    - 由于每个标签页有自己的渲染进程，因此一个标签页崩溃不会影响其他标签页。
 5. **插件进程（Plugin Process）**：
    - 每个插件一般都有自己的进程，以隔离潜在的崩溃和安全问题。
 
-
-
 ## 7.浏览器渲染
 
-1. **解析HTML**: 浏览器首先获取HTML文件，并解析文件中的标记，构建一个称为DOM（文档对象模型）的结构。DOM是页面结构的内存表示。
-2. **解析CSS**: 浏览器解析与HTML相关联的CSS文件，并根据选择器和规则生成CSSOM（CSS对象模型）。CSSOM与DOM结合，用于确定页面中每个元素的样式。
-3. **构建渲染树**: 浏览器将DOM和CSSOM结合起来，创建一个渲染树。渲染树只包含需要显示的元素及其样式信息。
+1. **解析 HTML**: 浏览器首先获取 HTML 文件，并解析文件中的标记，构建一个称为 DOM（文档对象模型）的结构。DOM 是页面结构的内存表示。
+2. **解析 CSS**: 浏览器解析与 HTML 相关联的 CSS 文件，并根据选择器和规则生成 CSSOM（CSS 对象模型）。CSSOM 与 DOM 结合，用于确定页面中每个元素的样式。
+3. **构建渲染树**: 浏览器将 DOM 和 CSSOM 结合起来，创建一个渲染树。渲染树只包含需要显示的元素及其样式信息。
 4. **布局（Reflow）**: 一旦渲染树构建完成，浏览器就会进行布局过程，也称为回流。在这个阶段，浏览器计算每个元素的确切位置和大小。
 5. **绘制（Paint）**: 布局完成后，浏览器开始绘制页面，将每个元素转换成屏幕上的实际像素。
 6. **合成（Compositing）**: 如果页面中有复杂的效果，如层叠、滤镜等，浏览器可能会将页面分成多个层并单独处理，最后将这些层合成最终的图像。
 
-在整个过程中，浏览器可能会多次重复某些步骤，特别是当页面中的元素发生变化时（例如，由于JavaScript操作或动画）。这些重复的步骤可能包括布局、绘制和合成，这些过程通常被称为浏览器的重排和重绘。
+在整个过程中，浏览器可能会多次重复某些步骤，特别是当页面中的元素发生变化时（例如，由于 JavaScript 操作或动画）。这些重复的步骤可能包括布局、绘制和合成，这些过程通常被称为浏览器的重排和重绘。
 
+js 阻塞：
 
+HTML5 为我们提供了 3 种加载和执行网页 JavaScript 代码的方式。
 
-js阻塞：
-
-HTML5为我们提供了3种加载和执行网页JavaScript代码的方式。
-
-| 属性  | 作用                                                         |
-| ----- | ------------------------------------------------------------ |
-| sync  | 主线程解析HTML过程中，如果遇到script脚本，就会停止页面的解析，并开启网络进程去加载脚本，脚本加载并执行完毕后，继续解析HTML。 |
-| async | 主线程解析HTML过程中，碰到脚本，则开启网络进程去加载脚本，主线程继续解析HTML，脚本加载完成，就立即转去执行脚本。 |
-| defer | 主线程解析HTML过程中，遇到设置了defer的脚本，则开启网络进程去加载脚本，主线程继续解析HTML，HTML解析和渲染完毕后，再执行脚本。 |
+| 属性  | 作用                                                                                                                                |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| sync  | 主线程解析 HTML 过程中，如果遇到 script 脚本，就会停止页面的解析，并开启网络进程去加载脚本，脚本加载并执行完毕后，继续解析 HTML。   |
+| async | 主线程解析 HTML 过程中，碰到脚本，则开启网络进程去加载脚本，主线程继续解析 HTML，脚本加载完成，就立即转去执行脚本。                 |
+| defer | 主线程解析 HTML 过程中，遇到设置了 defer 的脚本，则开启网络进程去加载脚本，主线程继续解析 HTML，HTML 解析和渲染完毕后，再执行脚本。 |
 
 ## 8. 同源策略与跨域问题
 
 源/域=协议+域名+端口号
 
-跨域（Cross-Origin）是指在互联网编程中，一个域下的文档或脚本尝试去请求另一个域下的资源时遇到的安全限制问题。这是一种由浏览器的同源策略（Same-Origin Policy）引起的安全机制。 
+跨域（Cross-Origin）是指在互联网编程中，一个域下的文档或脚本尝试去请求另一个域下的资源时遇到的安全限制问题。这是一种由浏览器的同源策略（Same-Origin Policy）引起的安全机制。
 
 ### 8.1. 同源策略的意义
 
@@ -234,34 +232,32 @@ HTML5为我们提供了3种加载和执行网页JavaScript代码的方式。
 
 #### 例子：跨站脚本攻击（XSS）
 
-假设 Alice 访问了一个银行网站 `bank.com` 并登录了她的账户。这个网站在她的浏览器中设置了一个包含认证信息的Cookie。如果同源策略不存在，Alice 访问另一个恶意网站 `evil.com` 时，`evil.com` 上的JavaScript脚本可以发送一个请求到 `bank.com` 并尝试获取她的个人信息或进行交易。
+假设 Alice 访问了一个银行网站 `bank.com` 并登录了她的账户。这个网站在她的浏览器中设置了一个包含认证信息的 Cookie。如果同源策略不存在，Alice 访问另一个恶意网站 `evil.com` 时，`evil.com` 上的 JavaScript 脚本可以发送一个请求到 `bank.com` 并尝试获取她的个人信息或进行交易。
 
-由于浏览器通常会自动发送与目标网站相关的Cookies，`evil.com` 的脚本可能会利用这些Cookies来模拟Alice对银行网站的请求。如果 `bank.com` 接收了这些请求，恶意网站就可能访问Alice的敏感信息或进行未经授权的操作。
+由于浏览器通常会自动发送与目标网站相关的 Cookies，`evil.com` 的脚本可能会利用这些 Cookies 来模拟 Alice 对银行网站的请求。如果 `bank.com` 接收了这些请求，恶意网站就可能访问 Alice 的敏感信息或进行未经授权的操作。
 
 ### 8.2. 跨域问题的解决方案
 
 #### 8.2.1. CORS（跨源资源共享）
 
-CORS是最常用的解决跨域问题的标准方法。它允许服务器通过设置HTTP头部来明确允许某些跨源请求。
+CORS 是最常用的解决跨域问题的标准方法。它允许服务器通过设置 HTTP 头部来明确允许某些跨源请求。
 
 - **服务器端设置**: 在服务器响应头中添加`Access-Control-Allow-Origin`（可以设置为特定的域名或`*`表示任何域名）。
-- **适用场景**: 适用于API服务器，特别是当你控制服务器时。
+- **适用场景**: 适用于 API 服务器，特别是当你控制服务器时。
 
 #### 8.2.2. JSONP（JSON with Padding）
 
-JSONP是一种较老的技术，利用`  <script>  `标签没有跨域限制的特性来绕过同源策略。
+JSONP 是一种较老的技术，利用` <script> `标签没有跨域限制的特性来绕过同源策略。
 
-- **实现方式**: 通过动态创建`  <script>  `标签并指定src为目标URL，服务器响应需要用JavaScript回调函数包裹JSON数据。
-- **限制**: 只能用于GET请求。
+- **实现方式**: 通过动态创建` <script> `标签并指定 src 为目标 URL，服务器响应需要用 JavaScript 回调函数包裹 JSON 数据。
+- **限制**: 只能用于 GET 请求。
 
 #### 8.2.3. 代理服务器
 
 在客户端和目标服务器之间设置一个代理服务器，由代理服务器转发请求和响应。
 
 - **实现方式**: 在同源的服务器上设置一个代理服务，该服务将请求转发到目标服务器，并将响应返回给客户端。
-- **适用场景**: 当你无法控制API服务器或需要隐藏目标服务器的细节时。
-
-
+- **适用场景**: 当你无法控制 API 服务器或需要隐藏目标服务器的细节时。
 
 ## 9. 像素
 
@@ -269,23 +265,19 @@ JSONP是一种较老的技术，利用`  <script>  `标签没有跨域限制的�
 
 1. **物理像素**:
    - 物理像素是指显示屏上实际存在的像素。不同设备的屏幕尺寸和分辨率不同，因此物理像素的数量和大小也不同。
-2. **逻辑像素（CSS像素）**:
-   - 在网页设计和开发中，我们通常谈论的是逻辑像素，也称为CSS像素。这是一个抽象的单位，用于在不同设备上保持一致的尺寸和布局。由于设备的物理像素密度（PPI）不同，同样数量的逻辑像素在不同设备上可能占据不同的物理空间。
+2. **逻辑像素（CSS 像素）**:
+   - 在网页设计和开发中，我们通常谈论的是逻辑像素，也称为 CSS 像素。这是一个抽象的单位，用于在不同设备上保持一致的尺寸和布局。由于设备的物理像素密度（PPI）不同，同样数量的逻辑像素在不同设备上可能占据不同的物理空间。
 3. **设备像素比（Device Pixel Ratio, DPR）**:
-   - 设备像素比是物理像素和逻辑像素之间的比率。例如，高分辨率屏幕（如Retina显示屏）可能有更高的设备像素比，意味着一个逻辑像素可能对应多个物理像素。
+   - 设备像素比是物理像素和逻辑像素之间的比率。例如，高分辨率屏幕（如 Retina 显示屏）可能有更高的设备像素比，意味着一个逻辑像素可能对应多个物理像素。
 
 ### 9.2. 像素密度和分辨率
 
 - **像素密度**（PPI，每英寸像素数）是衡量显示设备清晰度的一个重要指标。像素密度越高，图像通常看起来越清晰。
-- **分辨率**是指屏幕上物理像素的总数，通常以宽度和高度的像素数表示（例如1920x1080）。
-
-
-
-
+- **分辨率**是指屏幕上物理像素的总数，通常以宽度和高度的像素数表示（例如 1920x1080）。
 
 ## 10. 网站白屏的可能原因
 
- 如果刚开始我的网页正常运行，后来用户访问的时候却出现了白屏。可能的原因有哪些 ？
+如果刚开始我的网页正常运行，后来用户访问的时候却出现了白屏。可能的原因有哪些 ？
 
 根据问题来源分为三类：
 
@@ -293,16 +285,16 @@ JSONP是一种较老的技术，利用`  <script>  `标签没有跨域限制的�
 
 1. **服务器问题**：
    - 服务器可能遇到了性能问题或崩溃，导致无法正确响应请求。
-2. 前端代码bug
-3. 后端代码bug
+2. 前端代码 bug
+3. 后端代码 bug
 
 #### 2. 第三方服务的问题
 
 1. **资源加载问题**：
    - 外部资源（如脚本、样式表、图片等）可能因为路径更改、删除或服务器问题而无法加载。
    - CDN 服务可能出现问题，导致资源无法正确加载。
-2. **第三方服务或API问题**：
-   - 如果您的网站依赖于第三方服务或API，这些服务的不可用或更改可能导致页面无法加载。
+2. **第三方服务或 API 问题**：
+   - 如果您的网站依赖于第三方服务或 API，这些服务的不可用或更改可能导致页面无法加载。
 
 #### 3. 用户的问题
 
@@ -310,24 +302,22 @@ JSONP是一种较老的技术，利用`  <script>  `标签没有跨域限制的�
    - 新代码可能在某些浏览器上不兼容，尤其是在老旧的浏览器版本上。。
 2. **网络问题**：
    - 用户的网络连接可能出现问题，或者您的服务器网络环境发生变化。
-3. url输入错误
+3. url 输入错误
 
-
-
-## 11. canvas和svg
+## 11. canvas 和 svg
 
 Canvas 和 SVG 都是用于在网页上创建图形的技术，但它们在实现和使用上有着本质的不同。
 
 ### Canvas
 
 1. **基本概念**：Canvas 是 HTML5 提供的一个元素，用于通过 JavaScript 来绘制图像（像素级操作）。它可以用来绘制图形、制作动画、游戏图形等。
-2. **如何工作**：Canvas 工作方式类似于画布，一旦图形被绘制，它就不会被保留（即绘制后这个图形就成了canvas的一部分，无法再删除/修改这个图形）。如果需要更新图形，整个场景需要重新绘制，包括任何之前绘制的图形。
+2. **如何工作**：Canvas 工作方式类似于画布，一旦图形被绘制，它就不会被保留（即绘制后这个图形就成了 canvas 的一部分，无法再删除/修改这个图形）。如果需要更新图形，整个场景需要重新绘制，包括任何之前绘制的图形。
 3. **优点**：
    - 高性能：对于大型渲染，如游戏或者视频处理，Canvas 可以更高效。
    - 像素级控制：可以精确控制每个像素，适合复杂的图像处理。
 4. **缺点**：
    - 不支持事件处理器：Canvas 内的图形元素不能附加事件处理器。
-   - 不利于SEO：Canvas 绘制的内容不会被搜索引擎抓取。
+   - 不利于 SEO：Canvas 绘制的内容不会被搜索引擎抓取。
    - 可访问性差：需要额外工作来实现屏幕阅读器的可访问性。
 
 ### SVG
@@ -344,11 +334,9 @@ Canvas 和 SVG 都是用于在网页上创建图形的技术，但它们在实�
    - 性能问题：对于复杂的图形或大型渲染，SVG 可能不如 Canvas 高效。
    - 兼容性问题：老旧的浏览器可能不完全支持 SVG。
 
-
-
 ## 12. 如何制作动画
 
-### 1. 方法一：利用canvas和requestAnimationFrame
+### 1. 方法一：利用 canvas 和 requestAnimationFrame
 
 首先，您需要在 HTML 中定义一个 `canvas` 元素：
 
@@ -360,28 +348,28 @@ Canvas 和 SVG 都是用于在网页上创建图形的技术，但它们在实�
 
 ```javascript
 // 获取 Canvas 元素及其绘图上下文
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
 
 // 假设我们有一个动画的 x 和 y 坐标
 var x = 0;
 var y = 0;
 
 function draw() {
-    // 清除整个画布
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // 清除整个画布
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 绘制动画的内容
-    // 例如，绘制一个简单的矩形
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(x, y, 50, 50);
+  // 绘制动画的内容
+  // 例如，绘制一个简单的矩形
+  ctx.fillStyle = "blue";
+  ctx.fillRect(x, y, 50, 50);
 
-    // 更新下一帧的位置
-    x += 1;
-    y += 1;
+  // 更新下一帧的位置
+  x += 1;
+  y += 1;
 
-    // 请求下一帧
-    requestAnimationFrame(draw);
+  // 请求下一帧
+  requestAnimationFrame(draw);
 }
 
 // 初始调用
@@ -402,7 +390,7 @@ CSS 过渡（Transitions）允许您在 CSS 属性值之间平滑过渡。这适
 
 ```css
 .element {
-    transition: property duration timing-function delay;
+  transition: property duration timing-function delay;
 }
 ```
 
@@ -415,12 +403,12 @@ CSS 过渡（Transitions）允许您在 CSS 属性值之间平滑过渡。这适
 
 ```css
 div {
-    background-color: blue;
-    transition: background-color 0.5s ease-in-out;
+  background-color: blue;
+  transition: background-color 0.5s ease-in-out;
 }
 
 div:hover {
-    background-color: red;
+  background-color: red;
 }
 ```
 
@@ -432,16 +420,17 @@ CSS 动画（Animations）允许您创建复杂的动画序列，通过定义**�
 
 ```css
 @keyframes animation-name {
-    from {
-        /* 开始状态 */
-    }
-    to {
-        /* 结束状态 */
-    }
+  from {
+    /* 开始状态 */
+  }
+  to {
+    /* 结束状态 */
+  }
 }
 
 .element {
-    animation: animation-name duration timing-function delay iteration-count direction fill-mode;
+  animation: animation-name duration timing-function delay iteration-count
+    direction fill-mode;
 }
 ```
 
@@ -457,59 +446,30 @@ CSS 动画（Animations）允许您创建复杂的动画序列，通过定义**�
 
 ```css
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 div {
-    animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }
 ```
 
-## 13. url中的常见符号
+## 13. url 中的常见符号
 
 1. **`?`**：
-   - **作用**：标记***查询字符串（query string）***的开始。查询字符串是一组键值对，用于向服务器传递额外的参数和值。
-   - **格式**：跟在URL的路径部分之后，例如 `https://example.com/page?param1=value1&param2=value2`。键值对之间用 `&` 符号分隔。
-   - **应用**：常用于GET请求中，用于传递数据给服务器，例如在搜索引擎中输入查询词或在线商店中筛选产品。
+   - **作用**：标记**_查询字符串（query string）_**的开始。查询字符串是一组键值对，用于向服务器传递额外的参数和值。
+   - **格式**：跟在 URL 的路径部分之后，例如 `https://example.com/page?param1=value1&param2=value2`。键值对之间用 `&` 符号分隔。
+   - **应用**：常用于 GET 请求中，用于传递数据给服务器，例如在搜索引擎中输入查询词或在线商店中筛选产品。
 2. **`#`**：
-   - **作用**：标记***片段标识符（fragment identifier）***，指向网页的特定部分。
-   - **格式**：跟在URL的查询字符串之后，或直接跟在路径之后，例如 `https://example.com/page#section`。它后面通常是一个锚点名称。
+   - **作用**：标记**_片段标识符（fragment identifier）_**，指向网页的特定部分。
+   - **格式**：跟在 URL 的查询字符串之后，或直接跟在路径之后，例如 `https://example.com/page#section`。它后面通常是一个锚点名称。
    - **应用**：用于指向网页的特定部分（如某个标题或段落）。它不会发送到服务器，仅在浏览器端处理。
 3. **`/:`**：
-   - **作用**：在Web路由中，`/:` 通常用于指示***路径参数（path parameter）***。
+   - **作用**：在 Web 路由中，`/:` 通常用于指示**_路径参数（path parameter）_**。
    - **格式**：在路径的一部分中使用，例如 `https://example.com/user/:userId`，这里 `:userId` 是一个变量部分。
-   - **应用**：在像Express.js这样的Web框架中，路径参数用于动态匹配路由。例如，在上述URL中，`:userId` 可以被任何用户的ID替换，以指向特定用户的页面。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   - **应用**：在像 Express.js 这样的 Web 框架中，路径参数用于动态匹配路由。例如，在上述 URL 中，`:userId` 可以被任何用户的 ID 替换，以指向特定用户的页面。
