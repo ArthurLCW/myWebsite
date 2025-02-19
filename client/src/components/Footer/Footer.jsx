@@ -31,8 +31,14 @@ const handleClickEmail = async () => {
 };
 const Footer = () => {
   return (
-    <footer>
-      <div>
+    <footer
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {/* <div>
         <div>
           &copy;<b>Changwen Li</b>:{" "}
         </div>
@@ -62,7 +68,15 @@ const Footer = () => {
         </Link>
 
         <img src={WechatIcon} onClick={handleClickWeChat} alt="" />
-      </div>
+      </div> */}
+      <a
+        href="https://beian.miit.gov.cn/#/Integrated/index"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "white" }}
+      >
+        粤ICP备2025371442号-1
+      </a>
     </footer>
   );
 };

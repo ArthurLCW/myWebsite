@@ -6,7 +6,7 @@ import "./Blogs.scss";
 
 const Blogs = () => {
   useEffect(() => {
-    document.title = "Blogs";
+    document.title = "记录个人编程练习经验的网站";
   }, []);
 
   return (
@@ -14,16 +14,16 @@ const Blogs = () => {
       <NavBar />
       <div className="blog-category-list">
         <BlogCat
-          catName="Technology - Front End"
+          catName="前端"
           catContent={[
             {
               name: "JavaScript",
               url: "/blogs/technology/frontend/javascript",
             },
-            {
-              name: "TypeScript",
-              url: "/blogs/technology/frontend/typescript",
-            },
+            // {
+            //   name: "TypeScript",
+            //   url: "/blogs/technology/frontend/typescript",
+            // },
             { name: "React", url: "/blogs/technology/frontend/react" },
             { name: "CSS", url: "/blogs/technology/frontend/css" },
             {
@@ -33,7 +33,7 @@ const Blogs = () => {
           ]}
         />
         <BlogCat
-          catName="Technology - Computer Basics"
+          catName="计算机基础"
           catContent={[
             { name: "Network", url: "/blogs/technology/basics/network" },
             {
@@ -49,12 +49,12 @@ const Blogs = () => {
           ]}
         />
         <BlogCat
-          catName="Technology - Testing"
+          catName="测试开发"
           catContent={[
             { name: "Testing", url: "/blogs/technology/testing/testing" },
           ]}
         />
-        <BlogCat
+        {/* <BlogCat
           catName="Music"
           catContent={[
             { name: "Sibelius Violin Concerto", url: "/blogs/music/sibelius" },
@@ -65,7 +65,7 @@ const Blogs = () => {
           catContent={[
             { name: "Victoria Pride", url: "/blogs/others/vicpride" },
           ]}
-        />
+        /> */}
       </div>
       <Footer />
     </div>

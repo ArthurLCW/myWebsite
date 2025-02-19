@@ -2,25 +2,25 @@ import React from "react";
 import NavBar from "../../../../../components/NavBar/NavBar";
 import Footer from "../../../../../components/Footer/Footer";
 import Comments from "../../../../../components/Comments/Comments";
-import "../../BlogContent.scss"
+import "../../BlogContent.scss";
 import MdDisplayer from "../../../../../components/MdDisplayer/MdDisplayer";
 import BlogMdFile from "../../../../../static/blogFiles/testing/testing.md";
 
 const BlogContent = () => {
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <div className="blog-content-container">
         <h1>React: </h1>
-        <MdDisplayer fileName={BlogMdFile}/>
-        <Comments 
+        <MdDisplayer fileName={BlogMdFile} />
+        {/* <Comments 
           postname={"Testing"} 
           commentType={"Comments: "}
-        />
+        /> */}
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default BlogContent
+export default BlogContent;

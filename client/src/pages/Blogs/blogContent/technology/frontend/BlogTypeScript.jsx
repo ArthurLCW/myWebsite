@@ -12,7 +12,7 @@ const BlogContent = () => {
       <NavBar />
       <div className="blog-content-container">
         <MdDisplayer fileName={BlogMdFile} />
-        <Comments postname={"TypeScript"} commentType={"Comments: "} />
+        {/* <Comments postname={"TypeScript"} commentType={"Comments: "} /> */}
       </div>
       <Footer />
     </div>
